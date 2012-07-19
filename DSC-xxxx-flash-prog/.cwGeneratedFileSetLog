@@ -1,0 +1,14 @@
+Sources/main.c
+Project_Settings/Linker_Files/MC56F8014_Internal_PFlash_SDM.cmd
+Project_Settings/Startup_Code/MC56F801x_init.asm
+Project_Settings/Startup_Code/MC56F801x_vector.asm
+Project_Headers/MC56F8014.inc
+Project_Headers/MC56F801x_init.inc
+Project_Headers/derivative.h
+Project_Headers/MC56F8014.h
+Utility/DSP56800E_promxram.asm
+Utility/DSP56800E_zeroBSS.asm
+Project_Settings/Debugger/MC56F8014.tcl
+Project_Settings/Debugger/MC56F8014.mem
+.settings/com.freescale.core.ide.newprojectwizard.prefs
+ReferencedRSESystems.xml

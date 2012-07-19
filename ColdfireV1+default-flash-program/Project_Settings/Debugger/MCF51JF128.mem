@@ -1,0 +1,33 @@
+// Memory Configuration File
+//
+// Description:
+//  A memory configuration file contains commands that define the legally accessible
+//  areas of memory for your specific board. Useful for example when the debugger
+//  tries to display the content of a "char *" variable, that has not yet been initialized.
+//  In this case the debugger may try to read from a bogus address, which could cause a
+//  bus error.
+//
+//
+// Reference:
+//   MCF51JF128 Reference Manual, Rev. 0, 09/2010
+
+
+// All reserved ranges read back 0xBABA...
+reservedchar 0xBA
+
+usederivative "MCF51JF128"
+
+//         Memory Map:
+//         ----------------------------------------------------------------------
+range		0x00000000	0x0001FFFF	4 ReadWrite	// Program Flash
+reserved	0x00020000	0x001FFFFF			// Unimplemented
+range		0x00200000	0x00207FFF	4 ReadWrite	// FlexNVM space
+reserved	0x00208000	0x0027FFFF			// Unimplemented
+range		0x00280000	0x002807FF	4 ReadWrite	// FlexRAM space
+reserved	0x00288000	0x003FFFFF			// Unimplemented
+//		0x00400000	0x007FFFFF		  	// Mini-FlexBus
+range 		0x00800000	0x009FFFFF	4 ReadWrite	// RAM mirrored
+//	   	0x00A00000	0x00BFFFFF			// Mini-FlexBus
+//		0x00C00000	0x00C0000F			// IO area
+reserved  	0x00C00010	0x00FF7FFF			// Unimplemented
+//	  	0x00FF8000	0x00FFFFFF			// IO area

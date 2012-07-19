@@ -1,0 +1,32 @@
+/* This is a linker parameter file for the mc9s08qd2 */
+
+NAMES END /* CodeWarrior will pass all the needed files to the linker by command line. But here you may add your own files too. */
+
+SEGMENTS /* Here all RAM/ROM areas of the device are listed. Used in PLACEMENT below. */
+//    ROM_INFO                 =  READ_ONLY    0x0080 TO 0x008A;
+//    ZRAM                     =  PAGED        0x0080 TO 0x0089;
+    ROM                      =  READ_ONLY    0x0080 TO 0x01FF;
+    RAM                      =  READ_WRITE   0x0200 TO 0x0200;   
+//    ROM1                     =  READ_ONLY    0x0100 TO 0x01FF;
+//    ROM2                     =  READ_ONLY    0x0200 TO 0x02FF;
+//    ROM3                     =  READ_ONLY    0x0300 TO 0x03FF;
+END
+
+PLACEMENT /* Here all predefined and user segments are placed into the SEGMENTS defined above. */
+//    Information    INTO  ROM_INFO; // Information describing module    
+                   
+//    Parameters     INTO  ZRAM;     // Parameters & working storage for module
+//    Code1          INTO  ROM1;
+//    Code2          INTO  ROM2;
+//    Code3          INTO  ROM3;
+                   
+    .data          INTO  RAM;      // Not used but keep linker happy
+    .text          INTO  ROM;      // Not used but keep linker happy
+END
+
+ENTRIES /* keep the following unreferenced variables */
+infoBlock 
+END
+STACKSIZE 0
+
+VECTOR 0 entry /* Reset vector: this is the default entry point for an application. */

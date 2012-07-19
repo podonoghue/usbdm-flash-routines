@@ -1,0 +1,28 @@
+/* This is a linker parameter file for the mc9s08pt60 */
+
+NAMES END
+
+SEGMENTS
+    RAM        = READ_WRITE  0xFFFF TO 0xFFFF;
+    PSEUDO_ROM = READ_ONLY   0x0040 TO 0x103F;
+END
+
+PLACEMENT
+    .data        
+         INTO  RAM;
+
+    .rodata,
+    .init,
+    .text,
+    .common
+         INTO  PSEUDO_ROM;    
+END
+
+ENTRIES /* keep the following unreferenced variables */
+stackSpace 
+headerPtr
+END
+
+STACKSIZE 0
+//VECTOR 0 testApp
+

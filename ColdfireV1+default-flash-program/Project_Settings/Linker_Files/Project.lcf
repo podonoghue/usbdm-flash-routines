@@ -1,0 +1,32 @@
+# Sample Linker Command File for CodeWarrior for ColdFire RAM
+
+# Memory ranges
+
+MEMORY {
+   m_flashProg   (RX) : ORIGIN = 0x00800000,          LENGTH = 0x00004000
+}
+
+KEEP_SECTION { .vectortable }
+KEEP_SECTION { .stack }
+KEEP_SECTION { .flashProgramHeader }
+
+SECTIONS {
+
+.flashProg :
+{
+   ALIGNALL(4);
+   __vector_table = .;
+   * (.vectortable)
+   * (.flashProgramHeader)
+   * (.stack)
+   __stacktop = .;
+   * (.data)
+   . = ALIGN (0x8);
+   * (.init)   
+   * (.text)
+   * (.rodata)
+    __SDA_BASE = .;
+    . = ALIGN (0x4);
+} > m_flashProg
+
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<APSC_Memento>
+<host>
+<properties>
+<property key="propertySet.[cw.dbg.ct.bareboard].useNetworkGateway" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].memConfigPath" value="${ProjDirPath}/Project_Settings/Debugger/MCF51AC256A.mem"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkDebuggerAddress" value="127.0.0.1"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkMACAddress" value="**-**-**-**-**-**"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].useNetworkMACAddress" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].enableStopTransferIOModelConfig" value="true"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkNetMask" value="255.255.255.255"/>
+<property key="propertySet.[cw.ide.settingscache].hidden.HostID" value="com.freescale.cdt.debug.cw.core.ui.rse.systemtype.bareboard.hardware.system.111125143905+1100"/>
+<property key="host.defaultEncoding" value=""/>
+<property key="propertySet.[cw.ide.settingscache].hidden.TimeStamp" value="1322171558328"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].useNetworkUDPPort" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].useMemoryConfigFile" value="true"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].enableSerialIOModelConfig" value="false"/>
+<property key="host.description" value=""/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkUDPPort" value="1234"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].ethernetController" value="UEC1"/>
+<property key="propertySet.[cw.dbg.main].systemType" value="com.freescale.cw.system.coldfire.MCF51AC.MCF51AC256A"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].initPath" value=""/>
+<property key="host.promptable" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].useInitFile" value="false"/>
+<property key="propertySet.[OptionalPropertySet].enableConnectorServicesPropertyPage" value="false"/>
+<property key="host.type" value="com.freescale.cdt.debug.cw.core.ui.rse.systemtype.bareboard.hardware.system"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkTargetAddress" value="127.0.0.1"/>
+<property key="host.defaultUser" value="podonoghue"/>
+<property key="propertySet.[OptionalPropertySet].enableGenericHostPropertyPage" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].enableHSSTIOModelConfig" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].executeReset" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].noIOModelConfig" value="false"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].networkGateway" value="127.0.0.1"/>
+<property key="host.name" value="ColdfireV1-default-flash-program_MCF51AC256A_Internal_Flash_OSBDM System"/>
+<property key="propertySet.[cw.dbg.ct.bareboard].enableNetworkIOModelConfig" value="false"/>
+<property key="host.address" value=""/>
+<property key="propertySet.[cw.dbg.ct.bareboard].runOutOfReset" value="false"/>
+</properties>
+</host>
+</APSC_Memento>
