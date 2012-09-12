@@ -3,7 +3,7 @@
 extern uint8_t __RAMBAR[];
 extern uint8_t __FLASHBAR[];
 extern uint8_t _vect[];
-      
+
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
@@ -65,35 +65,35 @@ typedef struct {
 //
 //  The following combinations (amongst others) are sensible:
 //  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
-//  DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE check blank, program & verify range
 //  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
-//  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE erase and blank check
 //
-#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash 
+#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
 #define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
 #define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
 #define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
 #define DO_VERIFY_RANGE       (1<<5) // Verify range
-#define DO_TIMING_LOOP        (1<<6) // Do timing loop
 #define DO_PARTITION_FLEXNVM  (1<<7) // Program FlexNVM DFLASH/EEPROM partitioning
+#define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
 
 #define IS_COMPLETE           (1<<31)
                              
-// Capability masks          
-#define CAP_MASS_ERASE        (1<<1)
-#define CAP_ERASE_RANGE       (1<<2)
-#define CAP_BLANK_CHECK       (1<<3)
-#define CAP_PROGRAM_RANGE     (1<<4)
-#define CAP_VERIFY_RANGE      (1<<5)
-#define CAP_UNLOCK_FLASH      (1<<6)
-#define CAP_TIMING            (1<<7)
-//                           
-#define CAP_ALIGN_MASK        (3<<28)
-#define CAP_ALIGN_BYTE        (0<<28)
-#define CAP_ALIGN_2BYTE       (1<<28)
-#define CAP_ALIGN_4BYTE       (2<<28)
-#define CAP_RELOCATABLE       (1<<31)
+// Capability masks
+#define CAP_ERASE_BLOCK        (1<<1)
+#define CAP_ERASE_RANGE        (1<<2)
+#define CAP_BLANK_CHECK_RANGE  (1<<3)
+#define CAP_PROGRAM_RANGE      (1<<4)
+#define CAP_VERIFY_RANGE       (1<<5)
+#define CAP_PARTITION_FLEXNVM  (1<<7)
+#define CAP_TIMING             (1<<8)
+
+#define CAP_DSC_OVERLAY        (1<<11) // Indicates DSC code in pMEM overlays xRAM
+#define CAP_DATA_FIXED         (1<<12) // Indicates TargetFlashDataHeader is at fixed address
+                               
+#define CAP_RELOCATABLE        (1<<31)
+
+#define ADDRESS_LINEAR (1UL<<31) // Indicate address is linear
+#define ADDRESS_EEPROM (1UL<<30) // Indicate address lies within EEPROM
 
 // These error numbers are just for debugging
 typedef enum {
@@ -121,10 +121,11 @@ typedef void (*EntryPoint_t)(void);
 // Describes a block to be programmed & result
 typedef struct {
    uint32_t         flags;             // Controls actions of routine
-   FlashController *controller;        // Ptr to flash controller
-   uint32_t         frequency;         // Target frequency (kHz)
    uint16_t         errorCode;         // Error code from action
    uint16_t         sectorSize;        // Size of flash sectors (minimum erase size)
+   uint8_t         *soptAddress;       // Address of SOPT register
+   FlashController *controller;        // Ptr to flash controller
+   uint32_t         frequency;         // Target frequency (kHz)
    uint32_t         address;           // Memory address being accessed
    uint32_t         size;              // Size of memory range being accessed
    const uint32_t  *data;              // Ptr to data to program
@@ -133,12 +134,10 @@ typedef struct {
 // Timing information
 typedef struct {
    uint32_t         flags;             // Controls actions of routine
-   FlashController *controller;        // Ptr to flash controller
-   uint32_t         frequency;         // Target frequency (kHz)
    uint16_t         errorCode;         // Error code from action
    uint16_t         res1;
+   uint8_t         *soptAddress;       // Address of SOPT register
    uint32_t         timingCount;       // Timing count
-   uint32_t         res2; 
 } TimingData_t;
 
 //! Describe the flash programming code
@@ -146,10 +145,9 @@ typedef struct {
    uint32_t         loadAddress;       // Address where to load this image
    EntryPoint_t     entry;             // Ptr to entry routine
    uint32_t         capabilities;      // Capabilities of routine
-   uint32_t         reserved;
-   uint8_t         *soptAddress;       // Address of SOPT register
    FlashData_t     *flashData;         // Ptr to information about operation
 } FlashProgramHeader_t;
+
 #pragma pack(0)
 
 asm void asm_entry(void);
@@ -162,10 +160,8 @@ __declspec(flashProgramHeader)
 const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress  */ 0x00800000,        // load address of image
      /* entry        */ asm_entry,         // entry point for code
-     /* capabilities */ CAP_BLANK_CHECK|CAP_ERASE_RANGE|CAP_MASS_ERASE|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_UNLOCK_FLASH|CAP_ALIGN_4BYTE,
-     /* reserved     */ 0x0,
-     /* soptAddress  */ SOPT_ADDRESS,
-     /* flashData    */ NULL,
+     /* capabilities */ CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE,
+     /* flashData    */ NULL
 };
 
 void setErrorCode(int errorCode);
@@ -199,9 +195,9 @@ void initFlash(FlashData_t *flashData) {
    uint32_t         flashClk;
    uint32_t         frequency; /* kHz */
    
-   if ((flashData->flags&DO_INIT_FLASH) == 0)
+   if ((flashData->flags&DO_INIT_FLASH) == 0) {
       return;
-
+   }
    // Calculate FCDIV value
    frequency  = flashData->frequency;
    if (frequency < 300) {
@@ -221,9 +217,9 @@ void initFlash(FlashData_t *flashData) {
    controller->fcdiv = (uint8_t)cfmclkd;
    
    // Check if clock divider correctly set
-   if (controller->fcdiv != cfmclkd)
+   if (controller->fcdiv != cfmclkd) {
       setErrorCode(FLASH_ERR_CLKDIV);
-   
+   }
    controller->fprot = 0xFF;  // Unprotect flash
    
    flashData->flags &= ~DO_INIT_FLASH;
@@ -262,10 +258,10 @@ void eraseFlashBlock(FlashData_t *flashData) {
    } while ((fstat&(FSTAT_FCCF|FSTAT_FACCERR|FSTAT_FPVIOL)) == 0);
    if ((fstat & FSTAT_FACCERR ) != 0) {
       setErrorCode(FLASH_ERR_PROG_ACCERR);
-      }
+   }
    if ((fstat & FSTAT_FPVIOL ) != 0) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
-      }
+   }
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
@@ -433,7 +429,6 @@ void blankCheckRange(FlashData_t *flashData) {
 }
 
 
-
 //! Minimal vector table
 extern uint32_t __vector_table[];
 
@@ -449,12 +444,12 @@ extern uint32_t _stacktop[];
 void entry(void) {
    FlashData_t *flashData;  // Handle on programming data
 
-   // Disable COP
-   *gFlashProgramHeader.soptAddress = 0x03;
-   
    // Handle on programming data
    flashData = gFlashProgramHeader.flashData;
 
+   // Disable COP
+   *flashData->soptAddress = 0x03;
+   
    // Indicate not complete
    flashData->flags &= ~IS_COMPLETE;
    

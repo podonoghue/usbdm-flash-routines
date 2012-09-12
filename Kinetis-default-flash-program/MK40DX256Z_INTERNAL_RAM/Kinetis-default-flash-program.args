@@ -1,0 +1,1 @@
+-proc cortex-m4 -fp soft -little -msgstyle parseable -g3 -thumb -interworking -lavender model=ewl ,print=int ,scan=int ,io=raw "$(ProjDirPath)/Project_Settings/Linker_Files/MK40DX256Z_ram.lcf" -main asm_testApp -L"$(MCUToolsBaseDirEnv)/ARM_EABI_Support/ewl/lib" -map -map keep -srec -sreclength 36  "./Sources/main.obj" "./Sources/kinetis_sysinit.obj"

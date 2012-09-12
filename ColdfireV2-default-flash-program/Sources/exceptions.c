@@ -8,7 +8,7 @@
 void isr_default(void);
 asm void asm_testApp(void);
 extern uint8_t _stacktop[];
-extern uint8_t flashProgramHeader[];
+extern uint8_t gFlashProgramHeader[];
 
 typedef void (* vectorTableEntryType)(void);
 
@@ -17,7 +17,7 @@ typedef void (* vectorTableEntryType)(void);
 /* CF processors have 255 vector + SP_INIT in the vector table (256 entries)
 */  
 __declspec(vectortable) vectorTableEntryType _vect[256] = {   /* Interrupt vector table */
-   (vectorTableEntryType)flashProgramHeader,  /*   0 (0x000) Point to data structure      */
+   (vectorTableEntryType)gFlashProgramHeader, /*   0 (0x000) Point to data structure      */
    asm_testApp,                               /*   1 (0x004) Initial PC                 */
    isr_default,                               /*   2 (0x008) Access Error               */
    isr_default,                               /*   3 (0x00C) Address Error              */

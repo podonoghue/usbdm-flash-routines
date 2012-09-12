@@ -15,11 +15,11 @@ typedef struct {
 
 extern void isr_default(void);
 extern uint32_t __stacktop[];
-extern uint32_t flashProgramHeader[];
+extern uint32_t gFlashProgramHeader[];
 
 #pragma define_section vectortable ".vectortable" far_abs R
 static __declspec(vectortable) tVectorTable __vect_table = { /* Interrupt vector table */
-  flashProgramHeader,                                      /* 0  (0x00000000) (prior: -) */
+  gFlashProgramHeader,                                      /* 0  (0x00000000) (prior: -) */
   {
    (tIsrFunc)isr_default,                                  /* 1  (0x00000004) (prior: -) */
    (tIsrFunc)isr_default,                                  /* 2  (0x00000008) (prior: -2) */

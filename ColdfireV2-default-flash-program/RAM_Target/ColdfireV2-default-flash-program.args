@@ -1,0 +1,1 @@
+-sym full -msgstyle parseable -proc 52235 -lavender model=ewl ,print=int ,scan=int ,io=raw "$(ProjDirPath)/Project_Settings/Linker_Files/MCF52235_Internal_RAM.lcf" -m _asm_testApp -L"$(MCUToolsBaseDirEnv)/ColdFire_Support/ewl/lib" -force_active __vect -application -map -map keep -srec -sreclength 252 -sreceol dos -w on  "./Sources/main_c.obj" "./Sources/exceptions_c.obj"

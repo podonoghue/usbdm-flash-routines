@@ -19,7 +19,7 @@ FLASH_ERR_TRAP equ 7 ; USBDM error number for TRAP
    SUBROUTINE "FRelocatedVectorTable",FRelocatedVectorTable,FRelocatedVectorTableEND-FRelocatedVectorTable
 
 FRelocatedVectorTable:
-; Interrupt               ; Description                               Pri  VBA+  #
+;  Interrupt               ; Description                              Pri   VBA+  #
 ;=============================================================================================
    ;dw FflashProgramHeader ; Address of info table - done by linker
     jmp >abort             ; COP Reset Overlay - not used

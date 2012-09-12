@@ -91,39 +91,31 @@ typedef struct {
 // Operation masks
 //
 //  The following combinations (amongst others) are sensible:
-//  DO_MASS_ERASE|DO_UNLOCK_FLASH - erase all flash and program default unsecured value
-//  DO_ERASE_RANGE|DO_UNLOCK_FLASH - erase security area only and program default unsecured value
-//  DO_LOCK_FLASH - program default secured value, assuming security area has been previously erased
-//  DO_ERASE_RANGE|DO_LOCK_FLASH - erase security area and program default secured value
 //  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
 //  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
 //
-#define DO_INIT_FLASH          (1<<0) // Do initialisation of flash 
-#define DO_MASS_ERASE          (1<<1) // Mass erase flash array
-#define DO_ERASE_RANGE         (1<<2) // Erase range (including option region)
-#define DO_BLANK_CHECK_RANGE   (1<<3) // Blank check region
-#define DO_PROGRAM_RANGE       (1<<4) // Program range (including option region)
-#define DO_VERIFY_RANGE        (1<<5) // Verify range
-// 9 - 14 reserved             
+#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
+#define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
+#define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
+#define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
+#define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
+#define DO_VERIFY_RANGE       (1<<5) // Verify range
+#define DO_PARTITION_FLEXNVM  (1<<7) // Program FlexNVM DFLASH/EEPROM partitioning
+#define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
+
 #define IS_COMPLETE            (1<<15)
-                               
-// Capability masks            
-#define CAP_MASS_ERASE         (1<<1)
+                             
+// Capability masks
+#define CAP_ERASE_BLOCK        (1<<1)
 #define CAP_ERASE_RANGE        (1<<2)
-#define CAP_BLANK_CHECK        (1<<3)
+#define CAP_BLANK_CHECK_RANGE  (1<<3)
 #define CAP_PROGRAM_RANGE      (1<<4)
 #define CAP_VERIFY_RANGE       (1<<5)
-#define CAP_UNLOCK_FLASH       (1<<6)
-#define CAP_TIMING             (1<<7)
-//                             
-#define CAP_DATA_FIXED         (1<<12) // gFlashData is at fixed location
+#define CAP_PARTITION_FLEXNVM  (1<<7)
+#define CAP_TIMING             (1<<8)
 
-#define CAP_ALIGN_OFFS         (13)
-#define CAP_ALIGN_MASK         (3<<CAP_ALIGN_OFFS)
-#define CAP_ALIGN_BYTE         (0<<CAP_ALIGN_OFFS)
-#define CAP_ALIGN_2BYTE        (1<<CAP_ALIGN_OFFS)
-#define CAP_ALIGN_4BYTE        (2<<CAP_ALIGN_OFFS)
-#define CAP_ALIGN_8BYTE        (3<<CAP_ALIGN_OFFS)
+#define CAP_DSC_OVERLAY        (1<<11) // Indicates DSC code in pMEM overlays xRAM
+#define CAP_DATA_FIXED         (1<<12) // Indicates TargetFlashDataHeader is at fixed address
                                
 #define CAP_RELOCATABLE        (1<<15) // Code is relocatable
 
@@ -144,7 +136,8 @@ typedef enum {
      FLASH_ERR_PROG_FPVIOL       = (9),  // Kinetis/CFVx - Programming operation failed - FPVIOL
      FLASH_ERR_PROG_MGSTAT0      = (10), // Kinetis - Programming operation failed - MGSTAT0
      FLASH_ERR_CLKDIV            = (11), // CFVx - Clock divider not set
-     FLASH_ERR_ILLEGAL_SECURITY  = (12)  // Kinetis - Illegal value for security location
+     FLASH_ERR_ILLEGAL_SECURITY  = (12), // Kinetis/CFV1+ - Illegal value for security location
+     FLASH_ERR_UNKNOWN           = (13)  // Unspecified error
 } FlashDriverError_t;
 
 typedef void (*EntryPoint_t)(void);
@@ -164,7 +157,7 @@ typedef struct {
 
 #define ERROR_CODE_OFFSET   0
 #define FLAGS_OFFSET        2
-#define CONTROLLER_OFFSET   4
+//#define CONTROLLER_OFFSET   4
  
 //! Describe the flash programming code
 //!
@@ -172,15 +165,12 @@ typedef struct {
    uint16_t         loadAddress;    //  0: Address where to load this image
    EntryPoint_t     entry;          //  2: Ptr to entry routine
    uint16_t         capabilities;   //  4: Capabilities of routine
-   uint32_t         clockFactor;    //  8: Calibration factor for speed determination
+   uint32_t         calibFactor;    //  8: Calibration factor for speed determination
    FlashData_t     *flashData;      // 12: Ptr to information about operation
 } FlashProgramHeader_t;
 
-#define WATCHDOG_OFFSET   6
-#define FLASH_DATA_OFFSET 12
-
 //! Some stack space
-#define STACK_SIZE 23
+#define STACK_SIZE 27
 volatile uint8_t stackSpace[STACK_SIZE];
 
 // Describes a block to be programmed & result
@@ -197,8 +187,8 @@ const FlashProgramHeader_t *const headerPtr = &gFlashProgramHeader;
 const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress   */  (uint16_t)&headerPtr,  // load address of image
      /* entry         */  asm_entry,             // entry point for code
-     /* capabilities  */  CAP_BLANK_CHECK|CAP_ERASE_RANGE|CAP_MASS_ERASE|
-                          CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_ALIGN_4BYTE|
+     /* capabilities  */  CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|
+                          CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|
                           CAP_DATA_FIXED,
      /* clockFactor   */  0,
      /* flashData     */  &gFlashData,
@@ -293,20 +283,34 @@ void doFlashCommand(void) {
 //!
 void massEraseFlash(void) {
    FlashController *controller;
-   if ((gFlashData.flags&DO_MASS_ERASE) == 0) {
+   uint16_t         addressH;
+   uint16_t         addressL;
+   uint8_t          eepromFlag;
+   if ((gFlashData.flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
    controller = gFlashData.controller;
+   addressH   = (uint16_t)(gFlashData.address>>16);
+   addressL   = (uint16_t)gFlashData.address;
 
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
    
-   // Write command
-   controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_ALL_BLOCKS;
-   
+   if (((uint8_t)(addressH>>8) & (ADDRESS_EEPROM>>24)) != 0) {
+      eepromFlag = (1<<7);
+   }
+   else {
+      eepromFlag = 0;
+   }
+   // Write command & address with EEPROM modifier flag
+//   controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_ALL_BLOCKS;
+   controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_FLASH_BLOCK; 
+                            controller->fccob.b[1] = ((uint8_t)addressH)|eepromFlag;
+   controller->fccobix = 1; controller->fccob.w    = addressL;
+
    doFlashCommand();
 
-   gFlashData.flags &= ~DO_MASS_ERASE;
+   gFlashData.flags &= ~DO_ERASE_BLOCK;
 }
 
 //! Program a range of flash/EEprom from buffer

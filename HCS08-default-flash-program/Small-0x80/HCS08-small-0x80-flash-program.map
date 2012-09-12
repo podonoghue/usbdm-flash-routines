@@ -1,0 +1,149 @@
+*** EVALUATION ***
+PROGRAM "HCS08-small-0x80-flash-program.abs"
+
+*********************************************************************************************
+TARGET SECTION
+---------------------------------------------------------------------------------------------
+Processor   : Freescale HC08
+Memory Model: SMALL
+File Format : ELF\DWARF 2.0
+Linker      : SmartLinker V-5.0.48 Build 11346, Dec 13 2011
+
+*********************************************************************************************
+FILE SECTION
+---------------------------------------------------------------------------------------------
+main_asm.obj                            Model: SMALL,         Lang: Assembler
+
+*********************************************************************************************
+STARTUP SECTION
+---------------------------------------------------------------------------------------------
+Entry point: 0xC1 (massErase)
+
+*********************************************************************************************
+SECTION-ALLOCATION SECTION
+Section Name                    Size  Type     From       To       Segment
+---------------------------------------------------------------------------------------------
+.init                            184     R       0x80      0x137   ROM
+.vectSeg0_vect                     2     R     0xFFFE     0xFFFF   .vectSeg0
+
+Summary of section sizes per section type:
+READ_ONLY (R):          BA (dec:      186)
+
+*********************************************************************************************
+VECTOR-ALLOCATION SECTION
+    Address     InitValue   InitFunction
+---------------------------------------------------------------------------------------------
+     0xFFFE          0x88   entry
+
+*********************************************************************************************
+OBJECT-ALLOCATION SECTION
+     Name               Module                 Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+MODULE:                 -- main_asm.obj --
+- PROCEDURES:
+     infoBlock                                   80       1       1       0   .init       
+     params                                      81       7       7       0   .init       
+     prOLoop                                     88       0       0       0   .init       
+     entry                                       88      21      33       0   .init       
+     program                                     88       0       0       0   .init       
+     prLoop                                      A9       D      13       0   .init       
+     writePrStatus                               B6       6       6       0   .init       
+     prLoop2                                     BC       5       5       0   .init       
+     massErase                                   C1       E      14       0   .init       
+     meLoop                                      CF      15      21       0   .init       
+     isMeError                                   E4       3       3       0   .init       
+     blLoop                                      E7      16      22       0   .init       
+     writeBlStatus                               FD       3       3       0   .init       
+     seOLoop                                    100       0       0       0   .init       
+     selectiveErase                             100      21      33       0   .init       
+     seLoop                                     121      14      20       0   .init       
+     writeSeStatus                              135       3       3       0   .init       
+- VARIABLES:
+     reserved                                    86       2       2       0   .init       
+- LABELS:
+     flashAddressL                               80       0       0       9               
+     status                                      80       0       0       4               
+     controller                                  82       0       0       4               
+     dataAddress                                 84       0       0       2               
+     sectorSize                                  84       0       0       2               
+     dataSize                                    86       0       0       4               
+     sectorCount                                 86       0       0       2               
+
+*********************************************************************************************
+MODULE STATISTIC
+  Name                                      Data   Code  Const
+---------------------------------------------------------------------------------------------
+  main_asm.obj                                 0    184      0
+  other                                        0      2      0
+
+*********************************************************************************************
+SECTION USE IN OBJECT-ALLOCATION SECTION
+---------------------------------------------------------------------------------------------
+SECTION: ".init"
+  infoBlock params reserved program entry prOLoop prLoop writePrStatus prLoop2 
+  massErase meLoop isMeError blLoop writeBlStatus selectiveErase seOLoop seLoop 
+  writeSeStatus 
+
+*********************************************************************************************
+OBJECT LIST SORTED BY ADDRESS
+     Name                                      Addr   hSize   dSize     Ref    Section   RLIB
+---------------------------------------------------------------------------------------------
+     infoBlock                                   80       1       1       0   .init       
+     params                                      81       7       7       0   .init       
+     reserved                                    86       2       2       0   .init       
+     program                                     88       0       0       0   .init       
+     entry                                       88      21      33       0   .init       
+     prOLoop                                     88       0       0       0   .init       
+     prLoop                                      A9       D      13       0   .init       
+     writePrStatus                               B6       6       6       0   .init       
+     prLoop2                                     BC       5       5       0   .init       
+     massErase                                   C1       E      14       0   .init       
+     meLoop                                      CF      15      21       0   .init       
+     isMeError                                   E4       3       3       0   .init       
+     blLoop                                      E7      16      22       0   .init       
+     writeBlStatus                               FD       3       3       0   .init       
+     selectiveErase                             100      21      33       0   .init       
+     seOLoop                                    100       0       0       0   .init       
+     seLoop                                     121      14      20       0   .init       
+     writeSeStatus                              135       3       3       0   .init       
+
+*********************************************************************************************
+UNUSED-OBJECTS SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+COPYDOWN SECTION
+---------------------------------------------------------------------------------------------
+
+*********************************************************************************************
+OBJECT-DEPENDENCIES SECTION
+---------------------------------------------------------------------------------------------
+entry                     USES dataSize dataAddress flashAddressL controller 
+writePrStatus             USES status controller 
+massErase                 USES flashAddressL controller 
+isMeError                 USES status 
+blLoop                    USES dataSize flashAddressL 
+writeBlStatus             USES status 
+selectiveErase            USES sectorCount flashAddressL sectorSize controller 
+writeSeStatus             USES status 
+
+*********************************************************************************************
+DEPENDENCY TREE
+*********************************************************************************************
+ massErase           
+ | 
+ +- infoBlock           
+      
+ entry               
+ | 
+ +- infoBlock            (see above)
+    
+*********************************************************************************************
+STATISTIC SECTION
+---------------------------------------------------------------------------------------------
+
+ExeFile:
+--------
+Number of blocks to be downloaded: 2
+Total size of all blocks to be downloaded: 186
+

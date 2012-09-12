@@ -1,0 +1,1 @@
+-sym full -msgstyle parseable -proc 51JF -lavender model=ewl ,print=int ,scan=int ,io=raw -nostdlib "$(ProjDirPath)/Project_Settings/Linker_Files/Project.lcf" -m _asm_testApp -L"$(MCUToolsBaseDirEnv)/ColdFire_Support/ewl/lib" -application -map -map keep -srec -sreclength 80 -sreceol dos -w on  "./Lib/mcf51ac256a_c.obj" "./Sources/main_c.obj" "./Sources/exceptions_c.obj"

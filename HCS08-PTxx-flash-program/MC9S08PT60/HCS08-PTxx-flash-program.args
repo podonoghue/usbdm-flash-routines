@@ -1,0 +1,1 @@
+"$(ProjDirPath)/Project_Settings/Linker_Files/Project.prm" -E=entry -M -ViewHidden -WmsgFob"%f%e:%l:%k:%d %m\n" -WmsgSd1100 -WmsgSd1912  -Add("$(ProjDirPath)/MC9S08PT60/Sources/main_c.obj" "$(ProjDirPath)/MC9S08PT60/Lib/mc9s08pt60_c.obj" "$(MCUToolsBaseDirEnv)/lib/hc08c/lib/ansiis.lib")

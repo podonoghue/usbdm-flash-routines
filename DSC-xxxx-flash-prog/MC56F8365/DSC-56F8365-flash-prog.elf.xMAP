@@ -1,0 +1,39 @@
+
+
+#>00000028          STACKSIZE (linker command file)
+#>0000F1AA          INTC_VBA (linker command file)
+#>00000080          INTC_VBA_OFFSET (linker command file)
+#>000004F8          INTC_VBA_VALUE (linker command file)
+
+# .pCode
+#>0004F800          FloadAddress (linker command file)
+  0004F802 0000000A vector_table.text FRelocatedVectorTable	(VectorTable.o)
+  0004F802 00000019 vector_table.text vector_table.text	(VectorTable.o)
+  0004F80C 0000000F vector_table.text Fasm_entry	(VectorTable.o)
+  0004F81C 0000000A .const.data FflashProgramHeader	(main.o)
+  0004F826 00000009 .text   FgetHeader	(main.o)
+  0004F82F 00000009 .text   FwritePgmSpace	(main.o)
+  0004F838 00000009 .text   FreadPgmSpace	(main.o)
+  0004F841 0000000B .text   FsetErrorCode	(main.o)
+  0004F84C 00000021 .text   FinitFlash	(main.o)
+  0004F86D 0000003F .text   FmassEraseFlash	(main.o)
+  0004F8AC 00000068 .text   FprogramRange	(main.o)
+  0004F914 0000002F .text   FverifyRange	(main.o)
+  0004F943 00000069 .text   FeraseRange	(main.o)
+  0004F9AC 00000028 .text   FblankCheckRange	(main.o)
+  0004F9D4 00000005 .text   FasmTimingLoop	(main.o)
+  0004F9D9 0000000A .text   FdoTiming	(main.o)
+  0004F9E3 00000022 .text   Fentry	(main.o)
+
+# .xData
+#>00000001          FstackStart (linker command file)
+#>00000028          FflashData (linker command file)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  0004F800 0004F800 00000205 .pCode     .pRAM
+  00000000 00000000 00000028 .xData     .xRAM
+
+# Link start time: Tue Sep 11 12:25:57 2012
+# Link end time: Tue Sep 11 12:25:57 2012

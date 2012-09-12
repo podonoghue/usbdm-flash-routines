@@ -3,27 +3,32 @@
 //*******************************************************
 
 /*
-  This code is used with the following devices:
+   This code is used with the following devices:
   
-	MC56F8002/MC56F8006
-	MC56F8014
-	MC56F8245/MC56F8246/MC56F8247/MC56F8255/MC56F8256/MC56F8257
+   DSC-56F8014-flash-prog.elf.S
+      MC56F8002/MC56F8006
+      MC56F8014
+      MC56F8245/MC56F8246/MC56F8247/MC56F8255/MC56F8256/MC56F8257
 
-	MC56F8322/MC56F8122
-	MC56F8323/MC56F8123
+   DSC-56F8033-flash-program.elf.S
+      MC56F8023
+      MC56F8033
+   
+   DSC-56F8323-flash-prog.elf.S
+      MC56F8322/MC56F8122
+      MC56F8323/MC56F8123
 	
-	MC56F8365/MC56F8165
+   DSC-56F8365-flash-prog.elf.S
+	   MC56F8365/MC56F8165
 */
 
 typedef signed char int8_t;
 typedef short int   int16_t;
 typedef long int    int32_t;
 
-typedef unsigned char		uint8_t;
+typedef unsigned char		 uint8_t;
 typedef unsigned short int  uint16_t;
 typedef unsigned long int   uint32_t;
-
-//#include <stdint.h>
 
 #ifndef NULL
 #define NULL ((void*)0)
@@ -38,7 +43,7 @@ typedef unsigned long int   uint32_t;
 
 //==========================================================================================================
 // Target defines
-
+//
 #if (TARGET == MC56F8014)   
 #define CLOCK_CALIB (444039)               // 1 second count for a 4000 kHz sysclock speed MC568014 chip
 #define ISOVERLAYED (CAP_DSC_OVERLAY)
@@ -117,36 +122,29 @@ typedef struct {
 //  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
 //  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
 //
-#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash 
-#define DO_MASS_ERASE         (1<<1) // Mass erase flash array
+#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
+#define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
 #define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
 #define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
 #define DO_VERIFY_RANGE       (1<<5) // Verify range
-#define DO_UNLOCK_FLASH       (1<<6) // Unlock flash with default security options  (+mass erase if needed)
-#define DO_LOCK_FLASH         (1<<7) // Lock flash with default security options
-#define DO_TIMING_LOOP        (1<<8) // Do timing loop
+#define DO_PARTITION_FLEXNVM  (1<<7) // Program FlexNVM DFLASH/EEPROM partitioning
+#define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
 // 9 - 14 reserved
 #define IS_COMPLETE           (1<<15)
 
 // Capability masks
-#define CAP_MASS_ERASE      (1<<1)
-#define CAP_ERASE_RANGE     (1<<2)
-#define CAP_BLANK_CHECK     (1<<3)
-#define CAP_PROGRAM_RANGE   (1<<4)
-#define CAP_VERIFY_RANGE    (1<<5)
-#define CAP_UNLOCK_FLASH    (1<<6)
-#define CAP_TIMING          (1<<7)
-#define CAP_DSC_OVERLAY     (1<<8)
+#define CAP_ERASE_BLOCK        (1<<1)
+#define CAP_ERASE_RANGE        (1<<2)
+#define CAP_BLANK_CHECK_RANGE  (1<<3)
+#define CAP_PROGRAM_RANGE      (1<<4)
+#define CAP_VERIFY_RANGE       (1<<5)
+#define CAP_PARTITION_FLEXNVM  (1<<7)
+#define CAP_TIMING             (1<<8)
 
-//
-#define CAP_ALIGN_OFFS      (13)
-#define CAP_ALIGN_1         (0<<CAP_ALIGN_OFFS) // No alignment
-#define CAP_ALIGN_2         (1<<CAP_ALIGN_OFFS) // Align on even memory address
-#define CAP_ALIGN_4         (2<<CAP_ALIGN_OFFS) // Align on quad memory address
-#define CAP_ALIGN_8         (3<<CAP_ALIGN_OFFS) // Align on octal memory address
-
-#define CAP_RELOCATABLE     (1<<15)
+#define CAP_DSC_OVERLAY        (1<<11) // Indicates DSC code in pMEM overlays xRAM
+#define CAP_DATA_FIXED         (1<<12) // Indicates TargetFlashDataHeader is at fixed address
+#define CAP_RELOCATABLE        (1<<15)
 
 // These error numbers are just for debugging
 typedef enum {
@@ -208,8 +206,8 @@ extern FlashData_t flashData;
 
 extern uint16_t loadAddress[];
 
-#define CAPABILITIES (CAP_BLANK_CHECK|CAP_ERASE_RANGE|CAP_MASS_ERASE|\
-                      CAP_PROGRAM_RANGE|ISOVERLAYED|CAP_VERIFY_RANGE|CAP_ALIGN_1)
+#define CAPABILITIES (CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|\
+                      CAP_PROGRAM_RANGE|ISOVERLAYED|CAP_VERIFY_RANGE)
 
 //! Flash programming command table
 //!
@@ -327,7 +325,7 @@ void massEraseFlash(void) {
    uint16_t         fstat;
    FlashData_t     *flashData = getHeader();
    FlashController *controller = flashData->controller;
-   if ((flashData->flags&DO_MASS_ERASE) == 0) {
+   if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
    // Clear any existing errors (1 bit at a time)
@@ -358,7 +356,7 @@ void massEraseFlash(void) {
    if ((fstat & FSTAT_PVIOL ) != 0) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
    }
-   flashData->flags &= ~DO_MASS_ERASE;
+   flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
 //! Program a range of flash from buffer

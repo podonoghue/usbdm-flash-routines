@@ -4,7 +4,7 @@
 #define NULL ((void*)0)
 #endif
 
-#define DEBUG
+//#define DEBUG
 
 //==========================================================================================================
 // Target defines
@@ -77,25 +77,23 @@ typedef struct {
 // Operation masks
 //
 //  The following combinations (amongst others) are sensible:
-//  DO_MASS_ERASE|DO_UNLOCK_FLASH - erase all flash and program default unsecured value
+//  DO_ERASE_BLOCK|DO_UNLOCK_FLASH - erase all flash and program default unsecured value
 //  DO_ERASE_RANGE|DO_UNLOCK_FLASH - erase security area only and program default unsecured value
 //  DO_LOCK_FLASH - program default secured value, assuming security area has been previously erased
 //  DO_ERASE_RANGE|DO_LOCK_FLASH - erase security area and program default secured value
 //  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
 //  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
 //
-#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash 
-#define DO_MASS_ERASE         (1<<1) // Mass erase flash array
+#define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
+#define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
 #define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
 #define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
 #define DO_VERIFY_RANGE       (1<<5) // Verify range
-#define DO_UNLOCK_FLASH       (1<<6) // Unlock flash with default security options  (+mass erase if needed)
-#define DO_LOCK_FLASH         (1<<7) // Lock flash with default security options
-#define DO_MISC_OP            (1<<8) // Counting loop to determine clock speed
-#define DO_MISC_OFFSET        (4)
-#define DO_MISC_MASK          (0x1F<<DO_MISC_OFFSET)           // Bits 8..4 incl.
-#define DO_TIMING_LOOP        (DO_MISC_OP|(0<<DO_MISC_OFFSET)) // Do timing loop
+#define DO_PARTITION_FLEXNVM  (1<<7) // Not used
+#define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
+#define DO_UNLOCK_FLASH       (1<<9) // Unlock flash with default security options  (+mass erase if needed)
+#define DO_LOCK_FLASH         (1<<10)// Lock flash with default security options
 
 // 9 - 15 reserved
 // 16-23 target/family specific
@@ -103,23 +101,23 @@ typedef struct {
 #define DO_MODIFY_OPTION      (1<<16) 
 // 24-29 reserved
 
-#define NEED_RESET          (1<<30)
-#define IS_COMPLETE         (1<<31)
-
+#define NEED_RESET            (1<<30)
+#define IS_COMPLETE           (1<<31)
+                             
 // Capability masks
-#define CAP_MASS_ERASE      (1<<1)
-#define CAP_ERASE_RANGE     (1<<2)
-#define CAP_BLANK_CHECK     (1<<3)
-#define CAP_PROGRAM_RANGE   (1<<4)
-#define CAP_VERIFY_RANGE    (1<<5)
-#define CAP_UNLOCK_FLASH    (1<<6)
-#define CAP_TIMING          (1<<7)
-//
-#define CAP_ALIGN_MASK      (3<<28)
-#define CAP_ALIGN_BYTE      (0<<28)
-#define CAP_ALIGN_2BYTE     (1<<28)
-#define CAP_ALIGN_4BYTE     (2<<28)
-#define CAP_RELOCATABLE     (1<<31)
+#define CAP_ERASE_BLOCK        (1<<1)
+#define CAP_ERASE_RANGE        (1<<2)
+#define CAP_BLANK_CHECK_RANGE  (1<<3)
+#define CAP_PROGRAM_RANGE      (1<<4)
+#define CAP_VERIFY_RANGE       (1<<5)
+#define CAP_UNLOCK_FLASH       (1<<6)
+#define CAP_PARTITION_FLEXNVM  (1<<7)
+#define CAP_TIMING             (1<<8)
+
+#define CAP_DSC_OVERLAY        (1<<11) // Indicates DSC code in pMEM overlays xRAM
+#define CAP_DATA_FIXED         (1<<12) // Indicates TargetFlashDataHeader is at fixed address
+                               
+#define CAP_RELOCATABLE        (1<<31)
 
 // These error numbers are just for debugging
 typedef enum {
@@ -135,70 +133,64 @@ typedef enum {
      FLASH_ERR_PROG_FPVIOL       = (9),  // Kinetis/CFVx - Programming operation failed - FPVIOL
      FLASH_ERR_PROG_MGSTAT0      = (10), // Kinetis - Programming operation failed - MGSTAT0
      FLASH_ERR_CLKDIV            = (11), // CFVx - Clock divider not set
-     FLASH_ERR_ILLEGAL_SECURITY  = (12), // Kinetis - Illegal value for security location
-     FLASH_ERR_UNKNOWN           = (13), // Unspecified error
+     FLASH_ERR_ILLEGAL_SECURITY  = (12), // Kinetis/CFV1+ - Illegal value for security location
+     FLASH_ERR_UNKNOWN           = (13)  // Unspecified error
 } FlashDriverError_t;
 
-// This is the smallest unit of Flash that can be erased
-#define FLASH_BLOCK_SIZE  (1*(1<<10)) // 1K block size for small/medium devices
-                                      // 2K block size for large devices
 typedef void (*EntryPoint_t)(void);
 #pragma pack(2)
 // Describes a block to be programmed & result
 typedef struct {
    uint32_t         flags;             // Controls actions of routine
-   FlashController *controller;        // Ptr to flash controller
+   FlashController *controller;        // Pointer to flash controller
    uint32_t         frequency;         // Target frequency (kHz)
    uint16_t         errorCode;         // Error code from action
-   uint16_t         res1;
+   uint16_t         sectorSize;        // Size of flash sectors (minimum erase size)
    uint32_t         address;           // Memory address being accessed
-   uint32_t         size;              // Size of memory range being accessed
-   const uint16_t   *data;              // Ptr to data to program
+   uint32_t         dataSize;          // Size of memory range being accessed
+   const uint16_t  *dataAddress;       // Pointer to data to program
 } FlashData_t;
 
 //! Describe the flash programming code
 typedef struct {
    uint32_t         loadAddress;       // Address where to load this image
-   EntryPoint_t     entry;             // Ptr to entry routine
+   EntryPoint_t     entry;             // Pointer to entry routine
    uint32_t         capabilities;      // Capabilities of routine
-// uint8_t          reserved[32];      // Reserved for target specific use, values may be copied from XML
-   uint16_t         blockSize;         // Size of Flash memory blocks
-   uint8_t          reserved2[30];     // Reserved for future programmer use 
-   FlashData_t     *flashData;         // Ptr to information about operation
-   uint16_t         unsecure[8];       // Flash data for unsecure
-   uint16_t         secure[8];         // Flash data for secure
+   uint32_t         reserved1;
+   uint32_t         reserved2;
+   FlashData_t     *flashData;         // Pointer to information about operation
 } FlashProgramHeader_t;
+
 #pragma pack(0)
 
 asm void asm_entry(void);
 
 //! Flash programming command table
 //!
-const FlashProgramHeader_t flashProgramHeader = {
+const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress  */ 0x20000000,        // load address of image
      /* entry        */ asm_entry,         // entry point for code
-     /* capabilities */ CAP_BLANK_CHECK|CAP_ERASE_RANGE|CAP_MASS_ERASE|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_UNLOCK_FLASH|CAP_ALIGN_2BYTE,
-     /* blockSize    */ FLASH_BLOCK_SIZE,  // flash blockSize
-     /* reserved     */ {0x0},
+     /* capabilities */ CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE,
+     /* Reserved1    */ 0,
+     /* Reserved2    */ 0,
      /* flashData    */ NULL,
 // Reserved for target specific use, values may be copied from XML
 // STM32F100xx - option default values
 //    RDP        USER                         DATA0 DATA1 WRP0  WRP1  WRP2  WRP3
-     {RDPRT_KEY, nRST_STDBY|nRST_STOP|WDG_SW, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, // Unprotect value
-     {0,         nRST_STDBY|nRST_STOP|WDG_SW, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, // Protect values
+//     {RDPRT_KEY, nRST_STDBY|nRST_STOP|WDG_SW, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, // Unprotect value
+//     {0,         nRST_STDBY|nRST_STOP|WDG_SW, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF }, // Protect values
 };
 
-int setErrorCode(int errorCode);
-void clearErrorCode(void);
-int initFlash(FlashData_t *flashData);
-int massEraseFlash(FlashData_t *flashData);
-int programRange(FlashData_t *flashData);
-int verifyRange(FlashData_t *flashData);
-int eraseRange(FlashData_t *flashData);
-int blankCheckRange(FlashData_t *flashData);
-int unlockFlash(FlashData_t *);
-int lockFlash(FlashData_t *flashData);
-asm void asmTimingLoop(void);
+void setErrorCode(int errorCode);
+void initFlash(FlashData_t *flashData);
+void eraseFlashBlock(FlashData_t *flashData);
+void programRange(FlashData_t *flashData);
+void verifyRange(FlashData_t *flashData);
+void eraseRange(FlashData_t *flashData);
+void blankCheckRange(FlashData_t *flashData);
+//int unlockFlash(FlashData_t *);
+//int lockFlash(FlashData_t *flashData);
+//asm void asmTimingLoop(void);
 int timingLoop();
 int doMiscOperations(FlashData_t *flashData);
 void entry(void);
@@ -206,25 +198,20 @@ void isr_default(void);
 void testApp(void);
 asm void asm_testApp(void);
 
-//! Set error code to return to BDM
+//! Set error code to return to BDM & halt
 //!
-int setErrorCode(int errorCode) {
-   FlashData_t *flashData = flashProgramHeader.flashData;
-   if (flashData->errorCode == FLASH_ERR_OK) {
-      flashData->errorCode = (uint16_t)errorCode;
+void setErrorCode(int errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = (uint16_t)errorCode;
+   flashData->flags      |= IS_COMPLETE; 
+   asm {
+      bkpt  0
    }
-   return flashData->errorCode;
-}
-
-//! Set error code to OK
-//!
-void clearErrorCode(void) {
-   flashProgramHeader.flashData->errorCode = FLASH_ERR_OK;
 }
 
 //! Does any initialisation required before accessing the Flash
 //!
-int initFlash(FlashData_t *flashData) {
+void initFlash(FlashData_t *flashData) {
    // Do init flash every time
    
    if ((FLASH_CR&FLASH_CR_LOCK)!=0) {
@@ -232,251 +219,239 @@ int initFlash(FlashData_t *flashData) {
       FLASH_KEYR = FLASH_KEYR_KEY1;   
       FLASH_KEYR = FLASH_KEYR_KEY2;
    }
-   if ((FLASH_CR&FLASH_CR_LOCK)!=0)
-      return setErrorCode(FLASH_ERR_LOCKED);
-   
+   if ((FLASH_CR&FLASH_CR_LOCK)!=0) {
+      return;
+   }
    flashData->flags &= ~DO_INIT_FLASH;
-   return FLASH_ERR_OK;
 }
 
 //! Does any initialisation required before accessing the option Flash
 //!
-int initOptionFlash(FlashData_t *flashData) {
-   if ((flashData->flags&DO_MODIFY_OPTION) == 0)
-      return setErrorCode(FLASH_ERR_OK);
-   
+void initOptionFlash(FlashData_t *flashData) {
+   if ((flashData->flags&DO_MODIFY_OPTION) == 0) {
+      return;
+   }
    if ((FLASH_CR&FLASH_CR_OPTWRE)==0) {
       // Not unlocked - try to unlock
       FLASH_OPTKEYR = FLASH_KEYR_KEY1;   
       FLASH_OPTKEYR = FLASH_KEYR_KEY2;
    }
-   if ((FLASH_CR&FLASH_CR_OPTWRE)==0)
-      return setErrorCode(FLASH_ERR_LOCKED);
-
-   return FLASH_ERR_OK;
+   if ((FLASH_CR&FLASH_CR_OPTWRE)==0) {
+      setErrorCode(FLASH_ERR_LOCKED);
+   }
 }
 
-//! Erase entire flash array
+//! Erase entire flash block
 //!
-int massEraseFlash(FlashData_t *flashData) {
-   if ((flashData->flags&DO_MASS_ERASE) == 0)
-      return FLASH_ERR_OK;
-   
+void eraseFlashBlock(FlashData_t *flashData) {
+   if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
+      return;
+   }
    FLASH_CR = FLASH_CR_MER;
    FLASH_CR = FLASH_CR_MER|FLASH_CR_STRT;
    while ((FLASH_SR & FLASH_SR_BSY) != 0) {
    }
    FLASH_CR = 0;
    if ((FLASH_SR & FLASH_SR_PGERR) != 0) {
-      return setErrorCode(FLASH_ERR_PROG_FAILED);
+      setErrorCode(FLASH_ERR_PROG_FAILED);
    }
    if ((FLASH_SR & FLASH_SR_WRPRTERR) != 0) {
-      return setErrorCode(FLASH_ERR_PROG_WPROT);
+      setErrorCode(FLASH_ERR_PROG_WPROT);
    }
-   flashData->flags &= ~DO_MASS_ERASE;
-   return FLASH_ERR_OK;
+   flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
 //! Program a range of flash from buffer
 //!
-int programRange(FlashData_t *flashData) {
-   uint32_t address      = flashData->address;
-   const uint16_t *data  = flashData->data;
-   uint16_t numHalfWords = flashData->size/2;
+void programRange(FlashData_t *flashData) {
+   uint32_t         address    = flashData->address;
+   const uint16_t       *data  = flashData->dataAddress;
+   uint16_t numHalfWords       = flashData->dataSize/2;
    
-   if ((flashData->flags&DO_PROGRAM_RANGE) == 0)
-      return FLASH_ERR_OK;
-   
-   if ((address & 0x01) != 0)
-      return setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-
+   if ((flashData->flags&DO_PROGRAM_RANGE) == 0) {
+      return;
+   }
+   if ((address & 0x01) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+   }
    // Set program mode option/normal bytes
-   if (flashData->flags&DO_MODIFY_OPTION)
+   if (flashData->flags&DO_MODIFY_OPTION) {
       FLASH_CR = FLASH_CR_OPTPG|FLASH_CR_OPTWRE;
-   else
+   }
+   else {
       FLASH_CR = FLASH_CR_PG;
+   }
    while (numHalfWords-- > 0) {
       *(uint16_t *)address = *data;
       while ((FLASH_SR & FLASH_SR_BSY) != 0) {
       }
       if ((FLASH_SR & FLASH_SR_PGERR) != 0) {
          FLASH_CR = 0;
-         return setErrorCode(FLASH_ERR_PROG_FAILED);
+         setErrorCode(FLASH_ERR_PROG_FAILED);
       }
       if ((FLASH_SR & FLASH_SR_WRPRTERR) != 0) {
          FLASH_CR = 0;
-         return setErrorCode(FLASH_ERR_PROG_WPROT);
+         setErrorCode(FLASH_ERR_PROG_WPROT);
       }
       // Only try verify if not options 
       if (((flashData->flags&DO_MODIFY_OPTION) == 0) &&
           (*(uint16_t *)address != *data)) {
          FLASH_CR = 0;
-         return setErrorCode(FLASH_ERR_VERIFY_FAILED);
+         setErrorCode(FLASH_ERR_VERIFY_FAILED);
       }
       address += 2;
       data++;
    }
    FLASH_CR = 0;   
    flashData->flags &= ~DO_PROGRAM_RANGE;
-   return FLASH_ERR_OK;
 }
 
 //! Verify a range of flash against buffer
 //!
-int verifyRange(FlashData_t *flashData) {
+void verifyRange(FlashData_t *flashData) {
    uint32_t address      = flashData->address;
-   const uint16_t *data  = flashData->data;
-   uint16_t numHalfWords = flashData->size/2;
+   const uint16_t *data  = flashData->dataAddress;
+   uint16_t numHalfWords = flashData->dataSize/2;
    
-   if ((flashData->flags&DO_VERIFY_RANGE) == 0)
-      return FLASH_ERR_OK;
-
-   if ((address & 0x01) != 0)
-      return setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-
+   if ((flashData->flags&DO_VERIFY_RANGE) == 0) {
+      return;
+   }
+   if ((address & 0x01) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+   }
    // Verify words
    while (numHalfWords-- > 0) {
       if (*(uint16_t *)address != *data)
-         return setErrorCode(FLASH_ERR_VERIFY_FAILED);
+         setErrorCode(FLASH_ERR_VERIFY_FAILED);
       address += 2;
       data++;
    }
    flashData->flags &= ~DO_VERIFY_RANGE;
-   return FLASH_ERR_OK;
 }
 
 //! Erase a range of flash
 //!
-int eraseRange(FlashData_t *flashData) {
-   uint32_t address            = flashData->address;
-   uint32_t endAddress         = address + flashData->size; // Exclusive
-   uint32_t pageMask           = flashProgramHeader.blockSize-1U;
+void eraseRange(FlashData_t *flashData) {
+   uint32_t address     = flashData->address;
+   uint32_t endAddress  = address + flashData->dataSize - 1; // Inclusive
+   uint32_t pageMask    = flashData->sectorSize-1U;
    
-   if ((flashData->flags&DO_ERASE_RANGE) == 0)
-      return FLASH_ERR_OK;
-
-   // Round range to page boundaries
-   address    &= ~pageMask;
-   endAddress |= pageMask;
+   if ((flashData->flags&DO_ERASE_RANGE) == 0) {
+      return;
+   }
+   // Check for empty range before block rounding
+   if (flashData->dataSize == 0) {
+      return;
+   }
+   // Round start address to start of block (inclusive)
+      address &= ~pageMask;
+   // Round end address to end of block (inclusive)
+      endAddress |= pageMask;
    
    // Set program mode option/normal bytes
-   if (flashData->flags&DO_MODIFY_OPTION)
+   if (flashData->flags&DO_MODIFY_OPTION) {
       FLASH_CR = FLASH_CR_OPTER|FLASH_CR_OPTWRE;
-   else
+   }
+   else {
       FLASH_CR = FLASH_CR_PER;
+   }
    // Erase each block/page
-   while (address < endAddress) {
+   while (address <= endAddress) {
       // Set page erase mode
       FLASH_AR = address;
-      if (flashData->flags&DO_MODIFY_OPTION)
+      if (flashData->flags&DO_MODIFY_OPTION) {
          FLASH_CR = FLASH_CR_OPTER|FLASH_CR_OPTWRE|FLASH_CR_STRT;
-      else
+      }
+      else {
          FLASH_CR = FLASH_CR_PER|FLASH_CR_STRT;
+      }
       while ((FLASH_SR & FLASH_SR_BSY) != 0) {
       }
       if ((FLASH_SR & FLASH_SR_PGERR) != 0) {
          FLASH_CR = 0;
-         return setErrorCode(FLASH_ERR_PROG_FAILED);
+         setErrorCode(FLASH_ERR_PROG_FAILED);
       }
       if ((FLASH_SR & FLASH_SR_WRPRTERR) != 0) {
          FLASH_CR = 0;
-         return setErrorCode(FLASH_ERR_PROG_WPROT);
+         setErrorCode(FLASH_ERR_PROG_WPROT);
       }
-      address += flashProgramHeader.blockSize;
+      // Advance to start of next block
+      address += flashData->sectorSize;
    }
    FLASH_CR = 0;   
    flashData->flags &= ~DO_ERASE_RANGE;
-   return FLASH_ERR_OK;
 }
 
 //! Check that a range of flash is blank (=0xFFFF)
 //!
-int blankCheckRange(FlashData_t *flashData) {
-   uint32_t address      = flashData->address;
-   uint16_t numHalfWords = (flashData->size+1)/2;
+void blankCheckRange(FlashData_t *flashData) {
+   static const uint32_t  elementSize = 2; // Size of element verified
+   uint32_t               address     = flashData->address;
+   uint32_t               numElements = (flashData->dataSize+elementSize-1)/elementSize;
 
-   if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0)
-      return FLASH_ERR_OK;
-   
-   if ((address & 0x01) != 0)
-      return setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-
-   while (numHalfWords>0) {
-      if ((*(uint16_t *) address) != 0xFFFF)
-         return setErrorCode(FLASH_ERR_ERASE_FAILED);
-      numHalfWords--;
+   if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
+      return;
+   }
+   if ((address & (elementSize-1)) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+   }
+   while (numElements>0) {
+      if ((*(uint16_t *) address) != 0xFFFF) {
+         setErrorCode(FLASH_ERR_ERASE_FAILED);
+      }
+      numElements--;
       address += 2;
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
-   return FLASH_ERR_OK;
 }
 
-//! Unlock the flash by programming the Option Flash
-//! region to a default value (all flash unprotected)
-//!
-int unlockFlash(FlashData_t *flashData) {
-   if ((flashData->flags&DO_UNLOCK_FLASH) == 0)
-      return FLASH_ERR_OK;
-
-   // Unlock can only be combined with Mass Erase
-   if ((flashData->flags&(DO_ERASE_RANGE|DO_PROGRAM_RANGE)) != 0)
-      return setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-
-   // Simply modify the settings for later operations
-   // The required option flash values are part of the flashData
-   // so they can be modified.
-   // Always erase security area as has no collateral damage
-   flashData->address = RDP;
-   flashData->data    = flashProgramHeader.unsecure;
-   flashData->size    = sizeof(flashProgramHeader.unsecure);
-   flashData->flags  |= DO_ERASE_RANGE|DO_PROGRAM_RANGE|DO_MODIFY_OPTION;
-   flashData->flags  &= ~DO_UNLOCK_FLASH;
-
-   return FLASH_ERR_OK;
-}
-
-//! Lock the flash by programming the Option Flash
-//! region to a default secured value (all flash protected)
-//!
-int lockFlash(FlashData_t *flashData) {
-   if ((flashData->flags&DO_LOCK_FLASH) == 0)
-      return FLASH_ERR_OK;
-
-   // Unlock can only be combined with Mass Erase
-   if ((flashData->flags&(DO_ERASE_RANGE|DO_PROGRAM_RANGE)) != 0)
-      return setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-
-   // Simply modify the settings for later operations
-   // The required option flash values are part of the flashCommandTable
-   // so they can be modified.
-   // Always erase security area as has no collateral damage
-   flashData->address = RDP;
-   flashData->data    = flashProgramHeader.secure;
-   flashData->size    = sizeof(flashProgramHeader.secure);
-   flashData->flags  |= DO_ERASE_RANGE|DO_PROGRAM_RANGE|DO_MODIFY_OPTION;
-   flashData->flags  &= ~DO_LOCK_FLASH;
-
-   return FLASH_ERR_OK;
-}
-
-//! Do miscellaneous operations
-//!
-int doMiscOperations(FlashData_t *flashData) {
-   int rc;
-   if ((flashData->flags&DO_MISC_OP) == 0)
-      return FLASH_ERR_OK;
-
-   switch ((flashData->flags&DO_MISC_MASK)) {
-      default: 
-         rc = FLASH_ERR_ILLEGAL_PARAMS;
-         break;
-   }
-   if (rc != FLASH_ERR_OK)
-      return setErrorCode(rc);
-   
-   flashData->flags &= ~DO_MISC_MASK;
-   return FLASH_ERR_OK;
-}
+////! Unlock the flash by programming the Option Flash
+////! region to a default value (all flash unprotected)
+////!
+//int unlockFlash(FlashData_t *flashData) {
+//   if ((flashData->flags&DO_UNLOCK_FLASH) == 0) {
+//      return FLASH_ERR_OK;
+//   }
+//   // Unlock can only be combined with Mass Erase
+//   if ((flashData->flags&(DO_ERASE_RANGE|DO_PROGRAM_RANGE)) != 0) {
+//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+//   }
+//   // Simply modify the settings for later operations
+//   // The required option flash values are part of the flashData
+//   // so they can be modified.
+//   // Always erase security area as has no collateral damage
+//   flashData->address = RDP;
+//   flashData->data    = gFlashProgramHeader.unsecure;
+//   flashData->size    = sizeof(gFlashProgramHeader.unsecure);
+//   flashData->flags  |= DO_ERASE_RANGE|DO_PROGRAM_RANGE|DO_MODIFY_OPTION;
+//   flashData->flags  &= ~DO_UNLOCK_FLASH;
+//
+//   return FLASH_ERR_OK;
+//}
+//
+////! Lock the flash by programming the Option Flash
+////! region to a default secured value (all flash protected)
+////!
+//int lockFlash(FlashData_t *flashData) {
+//   if ((flashData->flags&DO_LOCK_FLASH) == 0)
+//      return FLASH_ERR_OK;
+//
+//   // Unlock can only be combined with Mass Erase
+//   if ((flashData->flags&(DO_ERASE_RANGE|DO_PROGRAM_RANGE)) != 0) {
+//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+//   }
+//   // Simply modify the settings for later operations
+//   // The required option flash values are part of the flashCommandTable
+//   // so they can be modified.
+//   // Always erase security area as has no collateral damage
+//   flashData->address = RDP;
+//   flashData->data    = gFlashProgramHeader.secure;
+//   flashData->size    = sizeof(gFlashProgramHeader.secure);
+//   flashData->flags  |= DO_ERASE_RANGE|DO_PROGRAM_RANGE|DO_MODIFY_OPTION;
+//   flashData->flags  &= ~DO_LOCK_FLASH;
+//
+//   return FLASH_ERR_OK;
+//}
 
 //! Minimal vector table
 extern uint32_t __vector_table[];
@@ -492,67 +467,54 @@ extern uint32_t __stacktop[];
 //!
 void entry(void) {
    FlashData_t *flashData;  // Handle on programming data
-   
+
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
    // Handle on programming data
-   flashData = flashProgramHeader.flashData;
+   flashData = gFlashProgramHeader.flashData;
 
    // Indicate not complete
    flashData->flags &= ~IS_COMPLETE;
    
    // No errors so far
-   clearErrorCode();
+   flashData->errorCode = FLASH_ERR_OK;
 
-#ifndef DEBUG
-   // Execute in order with early abort
-   // Each routine returns FLASH_ERR_OK (0) on success
-   !initFlash(flashData)          &&
-   !doMiscOperations(flashData)   &&
-   !unlockFlash(flashData)        &&
-   !lockFlash(flashData)          &&
-   !massEraseFlash(flashData)     &&
-   !initOptionFlash(flashData)    &&
-   !eraseRange(flashData)         &&
-   !blankCheckRange(flashData)    &&
-   !initOptionFlash(flashData)    &&
-   !programRange(flashData)       &&
-   !verifyRange(flashData)        ;
-#else
-   // Easier to debug
    initFlash(flashData);
-   doMiscOperations(flashData);
-   unlockFlash(flashData);
-   lockFlash(flashData);
-   massEraseFlash(flashData);
+//   unlockFlash(flashData);
+//   lockFlash(flashData);
+   eraseFlashBlock(flashData);
    initOptionFlash(flashData);
    eraseRange(flashData);
    blankCheckRange(flashData);
    initOptionFlash(flashData);
    programRange(flashData);
    verifyRange(flashData);
-#endif
+   
    // Indicate completed
-   flashData->flags |= IS_COMPLETE; 
-}
-
-//! Low level entry point
-//! 
-asm void asm_entry(void) {
-   // Setup the stack before we attempt anything else
-   lda   r0,__stacktop
-   mov   sp,r0
-   bl    entry
-   bkpt  0
+   setErrorCode(FLASH_ERR_OK);
 }
 
 //! Default unexpected interrupt handler
 //!
 void isr_default(void) {
    setErrorCode(FLASH_ERR_TRAP);
-   flashProgramHeader.flashData->flags |= IS_COMPLETE; 
-   for(;;) {}
+}
+
+//! Low level entry point
+//! 
+asm void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   lda   r0,__stacktop
+   mov   sp,r0
+   bl    entry
+   bkpt  0
+#else
+   lda   r0,entry
+   bx  r0
+   rts
+#endif
 }
 
 #ifndef DEBUG
@@ -576,7 +538,7 @@ static const FlashData_t flashdata = {
 #elif TEST == 2
 // Mass erase + Unlock flash
 static const FlashData_t flashdataA = {
-   /* flags      */ DO_INIT_FLASH|DO_UNLOCK_FLASH|DO_MASS_ERASE,
+   /* flags      */ DO_INIT_FLASH|DO_UNLOCK_FLASH|DO_ERASE_BLOCK,
    /* controller */ (0x00000000),
    /* frequency  */ 0,  /* not used */
    /* errorCode  */ 0xAA55,
@@ -596,7 +558,7 @@ static const FlashData_t flashdataA = {
 //                                        RDP       USER                        DATA0 DATA1 WRP0  WRP1  WRP2  WRP3
 static const uint16_t optionValues[] = {RDPRT_KEY, nRST_STDBY|nRST_STOP|WDG_SW, 0,    0,    0xFF, 0xFF, 0xFF, 0xFF }; 
 static const FlashData_t flashdata = {
-   /* flags     */ DO_INIT_FLASH|DO_MODIFY_OPTION|DO_MASS_ERASE|DO_ERASE_RANGE|DO_PROGRAM_RANGE,
+   /* flags     */ DO_INIT_FLASH|DO_MODIFY_OPTION|DO_ERASE_BLOCK|DO_ERASE_RANGE|DO_PROGRAM_RANGE,
    /* controller */ (0x00000000),
    /* frequency  */ 0,  /* not used */
    /* errorCode  */ 0xAA55,
@@ -609,7 +571,7 @@ static const FlashData_t flashdata = {
 
 //! Dummy test program for debugging
 void testApp(void) {
-   FlashProgramHeader_t *fph = (FlashProgramHeader_t*) &flashProgramHeader;
+   FlashProgramHeader_t *fph = (FlashProgramHeader_t*) &gFlashProgramHeader;
    
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();
@@ -622,8 +584,11 @@ void testApp(void) {
    fph->entry();
 #endif
 	for(;;) {	   
-	}
+   }
 }
+
+//!
+//!
 asm void asm_testApp(void) {
    // Setup the stack before we attempt anything else
    lda   r0,__stacktop

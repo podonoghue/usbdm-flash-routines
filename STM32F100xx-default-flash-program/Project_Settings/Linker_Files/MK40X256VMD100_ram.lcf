@@ -28,6 +28,7 @@ SECTIONS {
       * (.init)	
       * (.text)
       * (.rodata)
+      __SP_INIT = .; # Dummy
 } > m_flashProg
 
 }

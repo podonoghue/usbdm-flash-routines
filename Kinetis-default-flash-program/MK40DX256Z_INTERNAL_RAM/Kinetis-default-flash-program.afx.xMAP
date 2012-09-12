@@ -1,0 +1,65 @@
+{
+__heap_size = 0;
+_SP_INIT = __SP_INIT;
+__HEAP_START = __SP_INIT;
+__mem_limit = __HEAP_START + __heap_size;
+__stack_safety = 0;
+}
+
+
+
+# .flashProg
+#>20000000          ramBuffer (linker command file)
+#>20000000          __vector_table (linker command file)
+  20000000 00000000 .vectortable .vectortable	(kinetis_sysinit.obj)
+  20000000 00000020 .vectortable __vect_table	(kinetis_sysinit.obj)
+  20000020 00000000 .stack  .stack	(main.obj)
+  20000020 000000C8 .stack  stackSpace	(main.obj)
+#>200000E8          __stacktop (linker command file)
+#>200000E8          __SP_INIT (linker command file)
+  200000E8 00000000 .text   $t	(main.obj)
+  200000E8 00000024 .text   setErrorCode	(main.obj)
+  20000108 00000000 .text   $d	(main.obj)
+  2000010C 00000038 .text   initFlash	(main.obj)
+  2000010C 00000000 .text   $t	(main.obj)
+  20000144 00000048 .text   executeCommand	(main.obj)
+  20000144 00000000 .text   $t	(main.obj)
+  2000018C 0000003A .text   eraseFlashBlock	(main.obj)
+  2000018C 00000000 .text   $t	(main.obj)
+  200001C8 00000086 .text   programRange	(main.obj)
+  200001C8 00000000 .text   $t	(main.obj)
+  20000250 0000007A .text   verifyRange	(main.obj)
+  20000250 00000000 .text   $t	(main.obj)
+  200002CC 0000006C .text   eraseRange	(main.obj)
+  200002CC 00000000 .text   $t	(main.obj)
+  20000338 0000007E .text   blankCheckRange	(main.obj)
+  20000338 00000000 .text   $t	(main.obj)
+  200003B8 0000003C .text   programPartition	(main.obj)
+  200003B8 00000000 .text   $t	(main.obj)
+  200003F4 00000000 .text   $t	(main.obj)
+  200003F4 000000A8 .text   entry	(main.obj)
+  20000494 00000000 .text   $d	(main.obj)
+  2000049C 0000000E .text   isr_default	(main.obj)
+  2000049C 00000000 .text   $t	(main.obj)
+  200004AC 00000000 .text   $t	(main.obj)
+  200004AC 00000010 .text   asm_entry	(main.obj)
+  200004B8 00000000 .text   $d	(main.obj)
+  200004BC 00000000 .text   asm_testApp	(main.obj)
+  200004BC 00000000 .text   $t	(main.obj)
+  200004BC 00000018 .rodata gFlashProgramHeader	(main.obj)
+  200004BC 00000000 .rodata .rodata	(main.obj)
+#>00000000          __heap_size (linker command file)
+#>200000E8          _SP_INIT (linker command file)
+#>200000E8          __HEAP_START (linker command file)
+#>200000E8          __mem_limit (linker command file)
+#>00000000          __stack_safety (linker command file)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  20000000 20000000 000004D4 .flashProg m_flashProg
+  200004D4 200004D4 00000200            m_text
+  200006D4 200006D4 00002000            m_data
+
+# Link start time: Tue Sep 11 15:17:23 2012
+# Link end time: Tue Sep 11 15:17:23 2012

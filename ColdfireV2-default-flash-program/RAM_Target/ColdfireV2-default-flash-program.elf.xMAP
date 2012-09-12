@@ -1,0 +1,34 @@
+
+
+#>40000000          ___IPSBAR (linker command file)
+#>20000000          ___RAMBAR (linker command file)
+#>00000000          ___FLASHBAR (linker command file)
+
+# .flashProg
+#>20000000          __vector_table (linker command file)
+  20000000 00000400 .vectortable _vect	(exceptions_c.obj)
+  20000400 000000C8 .stack  stackSpace	(main_c.obj)
+#>200004C8          __stacktop (linker command file)
+  200004C8 0000002E .text   setErrorCode	(main_c.obj)
+  200004F8 000000F4 .text   initFlash	(main_c.obj)
+  200005EC 00000094 .text   eraseFlashBlock	(main_c.obj)
+  20000680 0000012A .text   programRange	(main_c.obj)
+  200007AC 0000009A .text   verifyRange	(main_c.obj)
+  20000848 00000100 .text   eraseRange	(main_c.obj)
+  20000948 00000080 .text   blankCheckRange	(main_c.obj)
+  200009C8 00000014 .text   asmTimingLoop	(main_c.obj)
+  200009DC 0000007E .text   entry	(main_c.obj)
+  20000A5C 0000000E .text   isr_default	(main_c.obj)
+  20000A6C 00000036 .text   asm_entry	(main_c.obj)
+  20000AA4 00000000 .text   asm_testApp	(main_c.obj)
+  20000AA4 00000016 .rodata gFlashProgramHeader	(main_c.obj)
+
+
+# Memory map:
+  v_addr   p_addr   size     name
+  20000000 20000000 00000ABA .flashProg m_flashProg
+  20000ABA 20000ABA 00000200            m_text
+  20000CBA 20000CBA 00002000            m_data
+
+# Link start time: Tue Sep 11 12:23:23 2012
+# Link end time: Tue Sep 11 12:23:23 2012

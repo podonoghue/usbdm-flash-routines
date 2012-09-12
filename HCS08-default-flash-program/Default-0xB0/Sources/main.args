@@ -1,0 +1,1 @@
+-Ms -I"$(MCUToolsBaseDirEnv)/lib/hc08c/device/asm_include" -ViewHidden -WmsgFob"%f%e:%l:%k:%d %m\n" -Cs08 

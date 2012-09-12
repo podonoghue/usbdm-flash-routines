@@ -1,0 +1,1 @@
+"$(ProjDirPath)/Project_Settings/Linker_Files/Project@0x80.prm" -E=massErase -M -ViewHidden -WmsgFob"%f%e:%l:%k:%d %m\n"  -Add("$(ProjDirPath)/Small-0x80/Sources/main_asm.obj")
