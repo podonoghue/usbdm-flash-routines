@@ -1,34 +1,28 @@
-# Minimal Linker file for RAM image
+/*
+ Minimal Linker file for RAM image
+ */
 
 MEMORY {
-   m_flashProg   (RX) : ORIGIN = 0x20000000,          LENGTH = 0x00000800
-   m_text        (RX) : ORIGIN = AFTER(m_flashProg),  LENGTH = 0x00000200
-   m_data        (RW) : ORIGIN = AFTER(m_text),       LENGTH = 0x00002000-.
+   m_flashProg (RX) : ORIGIN = 0x20000000, LENGTH = 0x1000
 }
 
 KEEP_SECTION { .vectortable }
 KEEP_SECTION { .stack }
 
 SECTIONS {
+   STACKSIZE = 200;
 
-.flashProg :
-{
-   ALIGNALL(4);
-      * (.data)
-      ramBuffer = .;
-      * (.ramBuffer)
-
-   .=ALIGN (4*32); #Alignment allows for 32 entries => 16 interrupts
-      __vector_table = .;
+   .flashProg : {
+      . = ALIGN (4*32);   /* Alignment allows for 32 entries => 16 interrupts */
+      __loadAddress = .;
       * (.vectortable)
-      * (.stack)
+      . = . + STACKSIZE;
+      . = ALIGN(4);
       __stacktop = .;
-      __SP_INIT = .;
 
-   . = ALIGN (0x8);
+      . = ALIGN (0x8);
       * (.init)   
       * (.text)
       * (.rodata)
-} > m_flashProg
-
+   } > m_flashProg
 }

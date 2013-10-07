@@ -409,8 +409,9 @@ void eraseRange(FlashData_t *flashData) {
 //! Check that a range of flash is blank (=0xFFFF)
 //!
 void blankCheckRange(FlashData_t *flashData) {
+   const int itemSize = 4;
    uint32_t address  = flashData->address;
-   uint32_t numWords = (flashData->size+3)/4;
+   uint32_t numWords = (flashData->size+itemSize-1)/itemSize;
 
    if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
       return;
@@ -419,11 +420,11 @@ void blankCheckRange(FlashData_t *flashData) {
       setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
    }
    while (numWords>0) {
-      if (*(uint16_t*)address != 0xFFFF) {
+      if (*(uint32_t*)address != 0xFFFFFFFF) {
          setErrorCode(FLASH_ERR_ERASE_FAILED);
       }
       numWords--;
-      address += 2;
+      address += itemSize;
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }

@@ -1,6 +1,6 @@
 <Analysispoints>
 	<Name>AnalysispointsManager</Name>
-	<ProjectPath>C:/Peter/Development/USBDM/CodewarriorWorkspace/Kinetis-default-flash-program</ProjectPath>
+	<ProjectPath>C:/Users/podonoghue/Development/USBDM/usbdm-flash-routines/Kinetis-default-flash-program/SaAnalysispointsManager.apconfig</ProjectPath>
 	<MaxNumberOfCores>1</MaxNumberOfCores>
 	<Comments>Analysispoints Manager</Comments>
 	<IgnoreAll>false</IgnoreAll>

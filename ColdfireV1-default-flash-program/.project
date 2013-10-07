@@ -23,7 +23,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
-					<value>${system:ECLIPSE_HOME}/../gnu/bin/mingw32-make</value>
+					<value>${GNU_Make_Install_Dir}mingw32-make</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>

@@ -10,7 +10,7 @@
 // Target defines
 
 // Vector Table Offset Register
-#define SCB_VTOR (*(uint32_t *)0xE000ED08)
+#define SCB_VTOR (*(volatile uint32_t *)0xE000ED08)
 
 #define NV_SECURITY_ADDRESS        (0x00000400)
 #define NV_FSEC_ADDRESS            (NV_SECURITY_ADDRESS+0x0C)
@@ -26,13 +26,13 @@
 #define FTFL_FSEC_SEC                   0x03
 
 #ifdef DEBUG
-#define FTFL_BASE_ADDRESS               ((FlashController *)0x40020000)
+#define FTFL_BASE_ADDRESS               ((volatile FlashController *)0x40020000)
 #endif
 
 // Cache control
-#define FMC_PFAPR                       (*(uint32_t *)0x4001F000)
-#define FMC_PFB0CR                      (*(uint32_t *)0x4001F004)
-#define FMC_PFB1CR                      (*(uint32_t *)0x4001F008)
+#define FMC_PFAPR                       (*(volatile uint32_t *)0x4001F000)
+#define FMC_PFB0CR                      (*(volatile uint32_t *)0x4001F004)
+#define FMC_PFB1CR                      (*(volatile uint32_t *)0x4001F008)
 
 #pragma pack(1)
 typedef struct {
@@ -85,18 +85,19 @@ typedef struct {
 #define F_SETRAM                        0x81
 
 #define F_USER_MARGIN                   0x01 // Use 'user' margin on flash verify
+#define F_FACTORY_MARGIN                0x02 // Use 'factory' margin on flash verify
 
-#define CRC_CRC                         (*(uint32_t *)0x40032000)
-#define CRC_GPOLY                       (*(uint32_t *)0x40032004)
-#define CRC_CTRL                        (*(uint32_t *)0x40032008)
+#define CRC_CRC                         (*(volatile uint32_t *)0x40032000)
+#define CRC_GPOLY                       (*(volatile uint32_t *)0x40032004)
+#define CRC_CTRL                        (*(volatile uint32_t *)0x40032008)
 #define CRC_CTRL_WAS                    (1<<25)
 #define CRC_CTRL_TCRC                   (1<<24)
 
 /* Address of Watchdog Unlock Register (16 bits) */
-#define WDOG_UNLOCK (*(uint16_t *)0x4005200E)
+#define WDOG_UNLOCK (*(volatile uint16_t *)0x4005200E)
 
 /* Address of Watchdog Status and Control Register High (16 bits) */
-#define WDOG_STCTRLH (*(uint16_t *)0x40052000)
+#define WDOG_STCTRLH (*(volatile uint16_t *)0x40052000)
 
 /* Unlocking Watchdog sequence words*/
 #define WDOG_UNLOCK_SEQ_1   (0xC520)
@@ -167,7 +168,7 @@ typedef void (*EntryPoint_t)(void);
 // Describes a block to be programmed & result
 typedef struct {
    uint32_t         flags;             // Controls actions of routine
-   FlashController *controller;        // Pointer to flash controller
+   volatile FlashController *controller;        // Pointer to flash controller
    uint32_t         frequency;         // Target frequency (kHz)
    uint16_t         errorCode;         // Error code from action
    uint16_t         sectorSize;        // Size of flash sectors (minimum erase size)
@@ -178,7 +179,7 @@ typedef struct {
 
 //! Describe the flash programming code
 typedef struct {
-   uint32_t         loadAddress;       // Address where to load this image
+   uint32_t        *loadAddress;       // Address where to load this image
    EntryPoint_t     entry;             // Pointer to entry routine
    uint32_t         capabilities;      // Capabilities of routine
    uint32_t         reserved1;
@@ -188,12 +189,14 @@ typedef struct {
 
 #pragma pack(0)
 
+extern uint32_t __loadAddress[];
+
 asm void asm_entry(void);
 
 //! Flash programming command table
 //!
-const FlashProgramHeader_t gFlashProgramHeader = {
-     /* loadAddress  */ 0x20000000,        // load address of image
+volatile const FlashProgramHeader_t gFlashProgramHeader = {
+     /* loadAddress  */ __loadAddress,     // load address of image
      /* entry        */ asm_entry,         // entry point for code
      /* capabilities */ CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_PARTITION_FLEXNVM,
      /* Reserved1    */ 0,
@@ -213,7 +216,7 @@ void entry(void);
 void isr_default(void);
 void testApp(void);
 asm void asm_testApp(void);
-int executeCommand(FlashController *controller);
+int executeCommand(volatile FlashController *controller);
 
 //! Set error code to return to BDM & halt
 //!
@@ -230,7 +233,7 @@ void setErrorCode(int errorCode) {
 //!
 void initFlash(FlashData_t *flashData) {
    // Do init flash every time
-   FlashController *controller = flashData->controller;
+   volatile FlashController *controller = flashData->controller;
    
    // Unprotect flash
    controller->fprot0_3 = 0xFFFFFFFF;
@@ -243,7 +246,7 @@ void initFlash(FlashData_t *flashData) {
    flashData->flags &= ~DO_INIT_FLASH;
 }
 
-int executeCommand(FlashController *controller) {
+int executeCommand(volatile FlashController *controller) {
    // Clear any existing errors
    controller->fstat = FTFL_FSTAT_ACCERR|FTFL_FSTAT_FPVIOL;
 
@@ -269,7 +272,7 @@ int executeCommand(FlashController *controller) {
 //! Erase entire flash block
 //!
 void eraseFlashBlock(FlashData_t *flashData) {
-   FlashController *controller = flashData->controller;
+   volatile FlashController *controller = flashData->controller;
    uint32_t         address    = flashData->address;
    int rc;
 
@@ -290,10 +293,10 @@ void eraseFlashBlock(FlashData_t *flashData) {
 //! to permanently lock the device
 //!
 void programRange(FlashData_t *flashData) {
-   FlashController *controller = flashData->controller;
+   volatile FlashController *controller = flashData->controller;
    uint32_t         address    = flashData->address;
    const uint32_t  *data       = flashData->dataAddress;
-   uint32_t         numWords   = flashData->dataSize/4;
+   uint32_t         numWords   = flashData->dataSize>>2;
    int              rc         = FLASH_ERR_OK;
    
    if ((flashData->flags&DO_PROGRAM_RANGE) == 0) {
@@ -317,6 +320,7 @@ void programRange(FlashData_t *flashData) {
          setErrorCode(rc);
       }
       address += 4;
+      flashData->frequency = address;
       data++;
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
@@ -325,10 +329,10 @@ void programRange(FlashData_t *flashData) {
 //! Verify a range of flash against buffer
 //!
 void verifyRange(FlashData_t *flashData) {
-   FlashController *controller   = flashData->controller;
+   volatile FlashController *controller   = flashData->controller;
    uint32_t        address       = flashData->address;
    const uint32_t *data          = flashData->dataAddress;
-   uint32_t        numLongwords  = flashData->dataSize/4;
+   uint32_t        numLongwords  = flashData->dataSize>>2;
    
    if ((flashData->flags&DO_VERIFY_RANGE) == 0) {
       return;
@@ -366,7 +370,7 @@ void verifyRange(FlashData_t *flashData) {
 //! Erase a range of flash
 //!
 void eraseRange(FlashData_t *flashData) {
-   FlashController *controller = flashData->controller;
+   volatile FlashController *controller = flashData->controller;
    uint32_t address     = flashData->address;
    uint32_t endAddress  = address + flashData->dataSize - 1; // Inclusive
    uint32_t pageMask    = flashData->sectorSize-1U;
@@ -400,11 +404,35 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
+#if 1
+//! Check that a range of flash is blank (=0xFFFF)
+//!
+void blankCheckRange(FlashData_t *flashData) {
+#define  itemSize 4
+   uint32_t *address  = (uint32_t *)(flashData->address);
+   uint32_t numItems  = (flashData->dataSize+itemSize-1)/itemSize;
+   
+   if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
+      return;
+   }
+//   if (((int)address & (itemSize-1)) != 0) {
+//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+//   }
+   while (numItems>0) {
+      if (*address != 0xFFFFFFFFUL) {
+         setErrorCode(FLASH_ERR_ERASE_FAILED);
+      }
+      numItems--;
+      address++;
+   }
+   flashData->flags &= ~DO_BLANK_CHECK_RANGE;
+}
+#else
 //! Check that a range of flash is blank (=0xFFFF)
 //!
 void blankCheckRange(FlashData_t *flashData) {
    static const uint32_t  elementSize = 8; // Size of element verified
-   FlashController       *controller  = flashData->controller;
+   volatile FlashController       *controller  = flashData->controller;
    uint32_t               address     = flashData->address;
    uint32_t               numElements = (flashData->dataSize+elementSize-1)/elementSize;
 
@@ -436,12 +464,12 @@ void blankCheckRange(FlashData_t *flashData) {
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
-
+#endif
 //! Partition FlexNVM/EEPROM 
 //!
 void programPartition(FlashData_t *flashData) {
    int rc;
-   FlashController *controller = flashData->controller;
+   volatile FlashController *controller = flashData->controller;
    if ((flashData->flags&DO_PARTITION_FLEXNVM) == 0) {
       return;
    }
@@ -458,8 +486,6 @@ void programPartition(FlashData_t *flashData) {
 extern uint32_t __vector_table[];
 
 //! Some stack space
-#pragma define_section stack ".stack" far_abs R
-static __declspec(stack) uint16_t stackSpace[100];
 extern uint32_t __stacktop[];
 
 //! Main C entry point
@@ -503,8 +529,10 @@ void entry(void) {
    programRange(flashData);
    verifyRange(flashData);
    
-   // Indicate completed
+#ifndef DEBUG
+   // Indicate completed & stop
    setErrorCode(FLASH_ERR_OK);
+#endif
 }
 
 //! Default unexpected interrupt handler
@@ -524,7 +552,7 @@ asm void asm_entry(void) {
    bkpt  0
 #else
    lda   r0,entry
-   bx  r0
+   bx    r0
    rts
 #endif
 }
@@ -705,7 +733,7 @@ static const FlashData_t flashdataA = {
 
 //! Dummy test program for debugging
 void testApp(void) {
-   gFlashProgramHeader_t *fph = (FlashProgramHeader_t*) &gFlashProgramHeader;
+	FlashProgramHeader_t *fph = (FlashProgramHeader_t*) &gFlashProgramHeader;
 
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
@@ -733,9 +761,6 @@ void testApp(void) {
    fph->flashData = (FlashData_t *)&flashdataE;
    fph->entry();
 #endif
-   asm {
-      halt
-   }
 }
 
 //!

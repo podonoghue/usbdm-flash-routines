@@ -3,11 +3,10 @@
  *                     		Kinetis ARM systems
  *    Copyright © 2010 Freescale semiConductor Inc. All Rights Reserved.
  */
-
-#include "kinetis_sysinit.h"
-#include "derivative.h"
+#include <stdint.h>
 
 typedef void (*const tIsrFunc)(void);
+
 typedef struct {
   uint32_t * __ptr;
   tIsrFunc __fun[7];

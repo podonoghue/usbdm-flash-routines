@@ -1,4 +1,4 @@
-#include <cstdint>
+#include <stdint.h>
 
 #ifndef NULL
 #define NULL ((void*)0)
@@ -473,7 +473,7 @@ void entry(void) {
    
    // Handle on programming data
    flashData = gFlashProgramHeader.flashData;
-
+   
    // Indicate not complete
    flashData->flags &= ~IS_COMPLETE;
    

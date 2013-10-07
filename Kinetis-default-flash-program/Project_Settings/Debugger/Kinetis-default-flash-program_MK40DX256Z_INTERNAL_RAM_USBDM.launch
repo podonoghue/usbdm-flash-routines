@@ -125,15 +125,22 @@
 <booleanAttribute key="forceShellDownload" value="false"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.CommandLineArgs" value=""/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.ConfigFile" value=""/>
-<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.Library" value="usbdm-arm-gdi"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.Library" value="usbdm-arm-gdi-debug"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.automaticReconnect" value="1"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.connectionSpeed" value="1500000"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.cycleTargetVddOnConnect" value="0"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.cycleTargetVddOnReset" value="0"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.cycleTargetVddonConnect" value="0"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.defaultBdmSerialNumber" value="Any connected USBDM"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.eraseMethod" value="2"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.leaveTargetPowered" value="0"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.powerOffDuration" value="1000"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.powerOnRecoveryInterval" value="1000"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.resetDuration" value="500"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.resetRecoveryInterval" value="500"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.resetReleaseInterval" value="500"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.setTargetVdd" value="1"/>
-<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.useDebugBuild" value="0"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.useDebugBuild" value="1"/>
 <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="2"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.freescale.cdt.debug.cw.arm.ArmDebugger"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value=""/>
@@ -145,7 +152,7 @@
 <booleanAttribute key="org.eclipse.cdt.launch.ENABLE_VARIABLE_BOOKKEEPING" value="false"/>
 <stringAttribute key="org.eclipse.cdt.launch.FORMAT" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&lt;contentList/&gt;"/>
 <stringAttribute key="org.eclipse.cdt.launch.GLOBAL_VARIABLES" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;globalVariableList/&gt;&#13;&#10;"/>
-<stringAttribute key="org.eclipse.cdt.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList&gt;&#13;&#10;&lt;memoryBlockExpressionItem&gt;&#13;&#10;&lt;expression text=&quot;0x200004C0&quot;/&gt;&#13;&#10;&lt;/memoryBlockExpressionItem&gt;&#13;&#10;&lt;/memoryBlockExpressionList&gt;&#13;&#10;"/>
+<stringAttribute key="org.eclipse.cdt.launch.MEMORY_BLOCKS" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;memoryBlockExpressionList/&gt;&#13;&#10;"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="MK40DX256Z_INTERNAL_RAM/Kinetis-default-flash-program.afx"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="Kinetis-default-flash-program"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="com.freescale.arm.cdt.toolchain.config.arm.release.625287188"/>
