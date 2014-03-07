@@ -10,7 +10,10 @@
 //!
 //! CPU Memory accesses are limited to 64K
 //!
-//!
+//! History
+//! =======================================================================================================
+//!  4 Mar 14 | Removed unnecessary alignment check on EEPROM                                   V4.10.6.120
+//! =======================================================================================================
 #pragma CODE_SEG code
 
 typedef unsigned long  uint32_t;
@@ -21,7 +24,12 @@ typedef unsigned char  uint8_t;
 #define NULL ((void*)0)
 #endif
 
+#define USE_ASM
+
 //#define DEBUG
+
+// Used to flag EEPROM in mass erase command etc
+#define EEPROM_ADDRESS_FLAG (1<<7)
 
 //==========================================================================================================
 // Target defines
@@ -42,7 +50,7 @@ typedef struct {
    volatile uint8_t fccobix;
    volatile uint8_t res;
    volatile uint8_t fcnfg;
-   volatile uint8_t fercngf;
+   volatile uint8_t fercnfg;
    volatile uint8_t fstat;   //!< 6 :
    volatile uint8_t ferstat;
    volatile uint8_t fprot;   //!< Flash protection
@@ -53,6 +61,8 @@ typedef struct {
    } fccob;
    volatile uint8_t  fopt;
 } FlashController;
+
+#define FSTAT_OFFSET 6
 
 typedef struct {
    volatile uint8_t  cs1;
@@ -72,7 +82,14 @@ typedef struct {
 #define FSTAT_MGBUSY              (1<<3)  //!< Memory controller busy 
 #define FSTAT_MGSTAT1             (1<<1)  //!< Command completion status
 #define FSTAT_MGSTAT0             (1<<0)  
-                                 
+
+#define FSTAT_CCIF_OFF            (7)
+#define FSTAT_ACCERR_OFF          (5)
+#define FSTAT_FPVIOL_OFF          (4)
+#define FSTAT_MGBUSY_OFF          (3)
+#define FSTAT_MGSTAT1_OFF         (1)
+#define FSTAT_MGSTAT0_OFF         (0)
+
 #define CFMCLKD_DIVLD             (1<<7)
 #define CFMCLKD_PRDIV8            (1<<6)
 #define CFMCLKD_FDIV              (0x3F)
@@ -119,7 +136,7 @@ typedef struct {
                                
 #define CAP_RELOCATABLE        (1<<15) // Code is relocatable
 
-#define ADDRESS_LINEAR (1UL<<31) // Indicate address is linear
+//#define ADDRESS_LINEAR (1UL<<31) // Indicate address is linear
 #define ADDRESS_EEPROM (1UL<<30) // Indicate address lies within EEPROM
 
 // These error numbers are just for debugging
@@ -140,6 +157,9 @@ typedef enum {
      FLASH_ERR_UNKNOWN           = (13)  // Unspecified error
 } FlashDriverError_t;
 
+#define FLASH_ERR_PROG_ACCERR_NUM 8
+#define FLASH_ERR_PROG_FPVIOL_NUM 9
+
 typedef void (*EntryPoint_t)(void);
 
 // Describes a block to be programmed & result
@@ -157,7 +177,7 @@ typedef struct {
 
 #define ERROR_CODE_OFFSET   0
 #define FLAGS_OFFSET        2
-//#define CONTROLLER_OFFSET   4
+#define CONTROLLER_OFFSET   4
  
 //! Describe the flash programming code
 //!
@@ -212,12 +232,10 @@ void  testApp(void);
 #pragma NO_ENTRY
 #pragma NO_EXIT
 #pragma NO_RETURN
-#pragma MESSAGE DISABLE C1404
-#pragma MESSAGE DISABLE C5703
 void setErrorCode(uint8_t errorCode) {
+   (void)errorCode;
    // ENTRY : A = errorCode
    asm {
-      nop
       ldhx  #@gFlashData
       clr   ERROR_CODE_OFFSET,x
       sta   ERROR_CODE_OFFSET+1,x
@@ -227,8 +245,6 @@ void setErrorCode(uint8_t errorCode) {
       bgnd
    }
 }
-#pragma MESSAGE DEFAULT C1404
-#pragma MESSAGE DEFAULT C5703
 
 //! Does any initialisation required before accessing the Flash
 //!
@@ -256,20 +272,56 @@ void initFlash(void) {
    gFlashData.flags  &= ~DO_INIT_FLASH;
 }
 
+#ifdef USE_ASM
+//! Launch & wait for Flash command to complete
+//!
+#pragma NO_ENTRY
+#pragma NO_EXIT
+#pragma NO_RETURN
+void doFlashCommand(void) {
+   asm {
+      // HX=FlashController
+      ldhx  gFlashData:CONTROLLER_OFFSET
+      
+      // Launch command
+      lda   #FSTAT_CCIF
+      sta   FSTAT_OFFSET,x
+      
+      // Wait for command complete
+   loop:
+      lda   FSTAT_OFFSET,x
+      and   #FSTAT_CCIF|FSTAT_ACCERR|FSTAT_FPVIOL
+      beq   loop
+      
+      // Check for errors
+      bit   FSTAT_ACCERR_OFF
+      beq   next1
+      lda   #FLASH_ERR_PROG_ACCERR_NUM
+      jmp   setErrorCode
+      
+   next1:
+      bit   FSTAT_FPVIOL_OFF
+      beq   next2
+      lda   #FLASH_ERR_PROG_FPVIOL_NUM
+      jmp   setErrorCode
+      
+      // All done
+   next2:
+      rts
+   }
+}
+#else
 //! Launch & wait for Flash command to complete
 //!
 void doFlashCommand(void) {
-   volatile uint8_t *pFstat;
    uint8_t           fstat;
-   
-   pFstat = &gFlashData.controller->fstat;
-   
+      
    // Launch command
-   *pFstat = FSTAT_CCIF;
+   gFlashData.controller->fstat = FSTAT_CCIF;
 
    // Wait for command complete
    do {
-      fstat = *pFstat;
+      fstat = gFlashData.controller->fstat;
    } while ((fstat&(FSTAT_CCIF|FSTAT_ACCERR|FSTAT_FPVIOL)) == 0);
    if ((fstat & FSTAT_ACCERR) != 0) {
       setErrorCode(FLASH_ERR_PROG_ACCERR);
@@ -278,35 +330,33 @@ void doFlashCommand(void) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
    }
 }
+#endif
 
 //! Erase an entire flash array
 //!
 void massEraseFlash(void) {
    FlashController *controller;
    uint16_t         addressH;
-   uint16_t         addressL;
    uint8_t          eepromFlag;
    if ((gFlashData.flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
    controller = gFlashData.controller;
    addressH   = (uint16_t)(gFlashData.address>>16);
-   addressL   = (uint16_t)gFlashData.address;
 
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
    
    if (((uint8_t)(addressH>>8) & (ADDRESS_EEPROM>>24)) != 0) {
-      eepromFlag = (1<<7);
+      eepromFlag = EEPROM_ADDRESS_FLAG;
    }
    else {
       eepromFlag = 0;
    }
    // Write command & address with EEPROM modifier flag
-//   controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_ALL_BLOCKS;
    controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_FLASH_BLOCK; 
                             controller->fccob.b[1] = ((uint8_t)addressH)|eepromFlag;
-   controller->fccobix = 1; controller->fccob.w    = addressL;
+   controller->fccobix = 1; controller->fccob.w    = (uint16_t)gFlashData.address;
 
    doFlashCommand();
 
@@ -329,17 +379,18 @@ void programRange(void) {
    addressL   = (uint16_t)gFlashData.address;
    data       = gFlashData.data;
 
-   if ((addressL & 0x3) != 0) {
-      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-   }
-   if ((gFlashData.size & 0x3) != 0) {
-      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-   }
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
 
    if (((uint8_t)(addressH>>8) & (ADDRESS_EEPROM>>24)) == 0) {
       uint16_t numPhrases = gFlashData.size/4;
+      // Flash requires a multiple of longwords (4-byte)
+      if ((addressL & 0x3) != 0) {
+         setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+      }
+      if ((gFlashData.size & 0x3) != 0) {
+         setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+      }
       // Program 1 to 2 Flash phrases (2 words)
       while (numPhrases-- > 0) {
          // Write command
@@ -367,15 +418,19 @@ void programRange(void) {
          controller->fccobix = 0; controller->fccob.b[0] = FCMD_PROGRAM_EEPROM; 
                                   controller->fccob.b[1] = (uint8_t)addressH;
          controller->fccobix = 1; controller->fccob.w    = addressL;
+         // 1st byte
          controller->fccobix = 2; controller->fccob.b[1] = (uint8_t)((*data)>>8);
          if (numBytes > 0) {
             numBytes--;
+            // 2nd byte
             controller->fccobix = 3; controller->fccob.b[1] = (uint8_t)(*data++);
             if (numBytes > 0) {
                numBytes--;
+               // 3rd byte
                controller->fccobix = 4; controller->fccob.b[1] = (uint8_t)((*data)>>8);
                if (numBytes > 0) {
                   numBytes--;
+                  // 4th byte
                   controller->fccobix = 5; controller->fccob.b[1] = (uint8_t)(*data++);
                }
             }

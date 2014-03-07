@@ -5,8 +5,8 @@
 ;  HCS08-default-flash-program.abs.s19 - other targets (supports usual EEPAGE/PPAGE paging)
 ;
 
-; defined on command line
-;PAGED_ADDRESSES    - support for paged addresses (use of ppage register)
+; define (uncomment) to produce small version
+;SMALL_RAM:  equ  1   
 
 ; export symbols
             XDEF infoBlock,entry,selectiveErase,massErase,program
@@ -58,65 +58,43 @@ FCMD_BURST_PROGRAM      equ   ($25)
 FCMD_PAGE_ERASE         equ   ($40)
 FCMD_MASS_ERASE         equ   ($41)
             
-; Used to indicate to program loader capabilities or requirements
-OPT_SMALL_CODE           equ   ($80)
-OPT_PAGED_ADDRESSES      equ   ($40)
-OPT_WDOG_ADDRESS         equ   ($20)
+OPT_SMALL_CODE          equ   ($80)
 
 ; typedef struct {
-;    uint8_t  flags;
-;    uint8_t  program;
-;    uint8_t  massErase;
-;    uint8_t  blankCheck;
-;    uint8_t  selectiveErase;
-;    uint8_t  verify;
+;    uint8_t   flags;
+;    uint16_t  program;
+;    uint16_t  massErase;
+;    uint16_t  blankCheck;
+;    uint16_t  selectiveErase;
+;    uint16_t  verify;
 ; } infoBlock;
 
-Code: SECTION  
-   ifdef PAGED_ADDRESSES
-OPTIONS: equ   OPT_SMALL_CODE|OPT_PAGED_ADDRESSES
-   else
-OPTIONS: equ   OPT_SMALL_CODE
-   endif
+; Note using verify 
+Information: SECTION   
+infoBlock:   dc.b     OPT_SMALL_CODE
+params:      dc.w     program,massErase,blankCheck,selectiveErase,status
+fill:        dc.b     0
 
-infoBlock:   dc.b     OPTIONS
-params:      dc.b     program-infoBlock,massErase-infoBlock,blankCheck-infoBlock,selectiveErase-infoBlock,0
-   ifdef PAGED_ADDRESSES
-reserved:    ds.b     11-6
-   else
-reserved:    ds.b     8-6
-   endif
 ; typedef struct {
+;    volatile uint8_t   status;
+;    volatile uint8_t   pageNum;
 ;    volatile uint16_t  flashAddressL;
 ;    volatile uint16_t  controller;
 ;    volatile uint16_t  dataAddress_sectorSize;
-;    volatile uint16_t  dataSize_sectorCount;
-;    -----------------------------------
-;    volatile uint16_t  ppageAddress;
-;    volatile uint8_t   pageNum;
+;    volatile uint16_t  bufferSize_sectorCount;
 ; } controlBlock;
-
-; ENTRY                                                        ;   | mass | erase | prog  | ver |
-flashAddressL: equ infoBlock+0  ; flash address being accessed     |  X   |   X   |   X   |  X  |
-controller:    equ infoBlock+2  ; address of flash controller      |  X   |   X   |   X   |  X  |
-              
-dataAddress:   equ infoBlock+4  ; ram data buffer address /        |      |       |   X   |  X  |
-sectorSize:    equ infoBlock+4  ; size of sector for stride        |      |   X   |       |     |
-              
-dataSize:      equ infoBlock+6  ; size of ram buffer /             |      |       |   X   |  X  |
-sectorCount:   equ infoBlock+6  ; number of sectors to erase       |      |   X   |       |     |
-   ifdef PAGED_ADDRESSES
-ppageAddress:  equ infoBlock+8  ; address of PPAGE/EPAGE reg       |  X   |   X   |   X   |  X  |
-pageNum:       equ infoBlock+10 ; page number                      |  X   |   X   |   X   |  X  |
-   endif
-   
-; typedef struct {
-;    volatile uint16_t   status;
-; } controlBlock;
-
-; RETURN
+                                                               ;   | mass | erase | prog  | ver |
 status:        equ infoBlock+0  ; status                           |  X   |   X   |   X   |  X  |
-
+pageNum:       equ infoBlock+1  ; page number                      |  X   |   X   |   X   |  X  |
+flashAddressL: equ infoBlock+2  ; flash address being accessed     |  X   |   X   |   X   |  X  |
+controller:    equ infoBlock+4  ; address of flash controller      |  X   |   X   |   X   |  X  |
+              
+dataAddress:   equ infoBlock+6  ; ram data buffer address /        |      |       |   X   |  X  |
+sectorSize:    equ infoBlock+6  ; size of sector for stride        |      |   X   |       |     |
+              
+dataSize:      equ infoBlock+8  ; size of ram buffer /             |      |       |   X   |  X  |
+sectorCount:   equ infoBlock+8  ; number of sectors to erase       |      |   X   |       |     |
+ppageAddress:  equ infoBlock+10 ; address of PPAGE/EPRAGE reg      |  X   |   X   |   X   |  X  |
 ; code sections
            
 ;==============================================
@@ -124,7 +102,7 @@ status:        equ infoBlock+0  ; status                           |  X   |   X 
 Code: SECTION
 entry:
 program:
-   ifdef PAGED_ADDRESSES
+   ifndef SMALL_RAM
       ldhx   <ppageAddress
       lda    <pageNum
       sta    0,x
@@ -182,7 +160,7 @@ prLoop2:
 ; Mass erase flash
 Code: SECTION 
 massErase:
-   ifdef PAGED_ADDRESSES
+   ifndef SMALL_RAM
       ldhx   <ppageAddress
       lda    <pageNum
       sta    0,x
@@ -226,10 +204,11 @@ isMeError:
 ; Blank check flash
 Code: SECTION
 blankCheck:
-   ifdef PAGED_ADDRESSES
-      ldhx   <ppageAddress
-      lda    <pageNum
+   ifndef SMALL_RAM
+      ldhx   ppageAddress
+      lda    pageNum
       sta    0,x
+   else      
    endif      
 blLoop: 
       ldhx   <dataSize       ; complete?
@@ -254,7 +233,7 @@ writeBlStatus:
 ; Selective erase flash
 Code: SECTION 
 selectiveErase:
-   ifdef PAGED_ADDRESSES
+   ifndef SMALL_RAM
       ldhx   <ppageAddress
       lda    <pageNum
       sta    0,x
@@ -305,39 +284,6 @@ writeSeStatus:
       bgnd
 
       if 0 
-;==============================================
-; Verify flash
-Code: SECTION
-verify:
-   ifdef PAGED_ADDRESSES
-      ldhx   <ppageAddress
-      lda    <pageNum
-      sta    0,x
-   endif      
-veLoop: 
-      ldhx   <dataSize     ; complete?
-      beq    writeVeStatus
-      aix    #-1           ; dataSize--
-      sthx   <dataSize
-
-      ldhx   <dataAddress  ; *flashAddressL++ == *dataAddress ?
-      lda    0,x
-      aix    #1
-      sthx   <dataAddress
-      ldhx   <flashAddressL
-      cmp    0,x
-      bne    writeVeFail
-      aix    #1
-      sthx   <flashAddressL
-      bra    veLoop
-
-writeVeFail:
-      ldhx   #FLASH_ERR_VERIFY_FAILED
-      
-writeVeStatus:
-      sthx   <status
-      bgnd
-
       endif
 
 .text SECTION
