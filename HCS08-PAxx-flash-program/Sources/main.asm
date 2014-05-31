@@ -4,6 +4,15 @@
 ;  HCS08-small-flash-program.abs.s19   - for small targets (for restricted RAM targets, no paging support)
 ;  HCS08-default-flash-program.abs.s19 - other targets (supports usual EEPAGE/PPAGE paging)
 ;
+;  Specific to PA2 & PA4 targets
+
+;=========================================================================
+; WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING   WARNING 
+;  
+; The WDOG address is hard-coded in this routine due to size constraints
+;
+;=========================================================================
+; WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING   WARNING 
 
 ; defined on command line
 ;FLASH_PROGRAMMING  - build for Flash programming
@@ -40,6 +49,7 @@ FLASH_BUSY                 equ (1<<7) ; Command complete
 ;   volatile uint16_t win;    // 6
 ;} WatchDog;
 
+WATCHDOG             equ   $3030
 WATCHDOG_CS1_OFF     equ   0
 WATCHDOG_CS2_OFF     equ   1
 WATCHDOG_CNT_OFF     equ   2
@@ -173,15 +183,14 @@ status:        equ infoBlock+0  ; status                           |  X   |   X 
 Code: SECTION
 entry:
 program:    
-      ; Disable watchdog
-      ldhx  <watchDog
-      stx   WATCHDOG_TOVAL_OFF,X
-      stx   WATCHDOG_TOVAL_OFF+1,X
-      clra
-      sta   WATCHDOG_CS2_OFF,x
-      sta   WATCHDOG_CS1_OFF,x
 
 programOuterLoop: 
+      ; Refresh watchdog
+      ldhx  #$A602
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 1st refresh word
+      ldhx  #$B480
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 2nd refresh word
+
       ldhx   <dataSize      ; complete?
       beq    writeProgramStatus
    ifdef EEPROM_PROGRAMMING
@@ -210,8 +219,7 @@ programOuterLoop:
       lda    <pageNum
       sta    FCCOBL_OFF,X
 
-      lda    #1
-      sta    FCCOBIX_OFF,X
+      inc    FCCOBIX_OFF,X
       lda    <flashAddress+0
       sta    FCCOBH_OFF,X
       lda    <flashAddress+1
@@ -236,8 +244,7 @@ programOuterLoop:
       sthx   <dataAddress
 
       ldhx   <controller
-      lda    #2
-      sta    FCCOBIX_OFF,X
+      inc    FCCOBIX_OFF,X
       lda    <scratchH
    ifdef FLASH_PROGRAMMING
       sta    FCCOBH_OFF,X
@@ -253,8 +260,7 @@ programOuterLoop:
       sthx   <dataAddress
 
       ldhx   <controller
-      lda    #3
-      sta    FCCOBIX_OFF,X
+      inc    FCCOBIX_OFF,X
       lda    <scratchH
       sta    FCCOBH_OFF,X
       lda    <scratchL
@@ -287,13 +293,11 @@ writeProgramStatus:
 ; Mass erase flash
 Code: SECTION 
 massErase:
-      ; Disable watchdog
-      ldhx  <watchDog
-      stx   WATCHDOG_TOVAL_OFF,X
-      stx   WATCHDOG_TOVAL_OFF+1,X
-      clra
-      sta   WATCHDOG_CS2_OFF,x
-      sta   WATCHDOG_CS1_OFF,x
+      ; Refresh watchdog
+      ldhx  #$A602
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 1st refresh word
+      ldhx  #$B480
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 2nd refresh word
 
       ldhx   <controller
 
@@ -315,8 +319,7 @@ massErase:
       ora    <pageNum
       sta    FCCOBL_OFF,X
 
-      lda    #1
-      sta    FCCOBIX_OFF,X
+      inc    FCCOBIX_OFF,X
       lda    <flashAddress+0
       sta    FCCOBH_OFF,X
       lda    <flashAddress+1
@@ -351,13 +354,19 @@ writeMassEraseStatus:
 Code: SECTION
 blankCheck:
       ; Disable watchdog
-      ldhx  <watchDog
-      stx   WATCHDOG_TOVAL_OFF,X
-      stx   WATCHDOG_TOVAL_OFF+1,X
-      clr   WATCHDOG_CS2_OFF,x
-      clr   WATCHDOG_CS1_OFF,x
+      ;ldhx  <watchDog
+      ;stx   WATCHDOG_TOVAL_OFF,X
+      ;stx   WATCHDOG_TOVAL_OFF+1,X
+      ;clr   WATCHDOG_CS2_OFF,x
+      ;clr   WATCHDOG_CS1_OFF,x
 
 blLoop: 
+      ; Refresh watchdog
+      ldhx  #$A602
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 1st refresh word
+      ldhx  #$B480
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 2nd refresh word
+
       ldhx   <dataSize       ; complete?
       beq    writeBlankCheckStatus
       aix    #-1             ; dataSize--
@@ -381,14 +390,22 @@ writeBlankCheckStatus:
 Code: SECTION 
 selectiveErase:
       ; Disable watchdog
-      ldhx  <watchDog
-      stx   WATCHDOG_TOVAL_OFF,X
-      stx   WATCHDOG_TOVAL_OFF+1,X
-      clra
-      sta   WATCHDOG_CS2_OFF,x
-      sta   WATCHDOG_CS1_OFF,x
+;      ldhx  <watchDog
+;      stx   WATCHDOG_TOVAL_OFF,X
+;      stx   WATCHDOG_TOVAL_OFF+1,X
+;      clra
+;      sta   WATCHDOG_CS2_OFF,x
+;      sta   WATCHDOG_CS1_OFF,x
+      
+      
 
 selectiveEraseOuterLoop:
+      ; Refresh watchdog
+      ldhx  #$A602
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 1st refresh word
+      ldhx  #$B480
+      sthx  (WATCHDOG+WATCHDOG_CNT_OFF)  ; write the 2nd refresh word
+
       ldhx   <sectorCount     ; complete?
       beq    writeSelectiveEraseStatus
       aix    #-1              ; count this sector
@@ -413,8 +430,7 @@ selectiveEraseOuterLoop:
       lda    <pageNum
       sta    FCCOBL_OFF,X
 
-      lda    #1
-      sta    FCCOBIX_OFF,X
+      inc    FCCOBIX_OFF,X
 
       lda    <flashAddress+0
       sta    FCCOBH_OFF,X
@@ -462,7 +478,7 @@ verify:
       clra
       sta   WATCHDOG_CS2_OFF,x
       sta   WATCHDOG_CS1_OFF,x
-
+      
 veLoop: 
       ldhx   <dataSize     ; complete?
       beq    writeVerifyStatus

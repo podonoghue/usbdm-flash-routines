@@ -14,7 +14,7 @@ SECTIONS {
    STACKSIZE = 200;
 
    .flashProg : {
-      . = ALIGN (4*32);   /* Alignment allows for 32 entries => 16 interrupts */
+      . = ALIGN (4*4);   /* Alignment allows for 32 entries => 16 interrupts */
       __loadAddress = .;
       KEEP(*(.data.__vector_table));
       . = . + STACKSIZE;

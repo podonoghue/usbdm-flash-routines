@@ -1,0 +1,1873 @@
+!SESSION 2014-04-15 19:29:03.210 -----------------------------------------------
+eclipse.buildId=I20070613-1755
+java.version=1.6.0_15
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+This is a continuation of log file C:\Users\podonoghue\Development\USBDM\usbdm-flash-routines\.metadata\.bak_0.log
+Created Time: 2014-04-15 19:29:45.139
+
+!ENTRY com.freescale.core.ide.wizard.ui 2 0 2014-04-15 19:29:45.140
+!MESSAGE External elements location 'C:\Apps\Freescale\CW MCU v10.5\eclipse\../MCU/lib/wizard_data/mqx/4.0/patches' does not exist
+
+!ENTRY com.freescale.core.ide.wizard.ui 2 0 2014-04-15 19:29:45.850
+!MESSAGE External elements location 'C:\Apps\Freescale\CW MCU v10.5\eclipse\../MCU/lib/wizard_data/mqx/4.1/patches' does not exist
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:49.180
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.dsc.updatesite.zip!/.
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.011
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.013
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.114
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.115
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.116
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.117
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.118
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.119
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.121
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.121
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.122
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.123
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.124
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.202
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.203
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.203
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.204
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.205
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.206
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.206
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.207
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.208
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.209
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.210
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.211
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.269
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.270
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.272
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.272
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.273
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.274
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.275
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.276
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.277
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.341
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.341
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.342
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.343
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.343
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.344
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.345
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.346
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.346
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.347
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.406
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.407
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.408
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.408
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.409
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.410
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.411
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.412
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.412
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.413
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.414
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.414
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.416
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.489
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.490
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.491
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.492
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.492
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.493
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.498
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.499
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.500
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-15 19:29:50.500
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:51.400
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.coldfire.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:51.484
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.hcs08_rs08.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:51.580
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.e200.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:51.664
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.kinetis.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-15 19:29:51.739
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.s12z.updatesite.zip!/.
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 19:36:59.334
+!MESSAGE NLS unused message: trace_trigger_dv_error_title in: com.freescale.sa.mcu.analysispoints.nls.ui
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 19:36:59.334
+!MESSAGE NLS unused message: trace_trigger_dv_error_message in: com.freescale.sa.mcu.analysispoints.nls.ui
+
+!ENTRY org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1a95c64,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1a95c64,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1f0d31e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1f0d31e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1b47a71,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1b47a71,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1d2b477,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1d2b477,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.MakeHandlersGo@461784,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.MakeHandlersGo@461784,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1b217c5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1b217c5,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@136c1da,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@136c1da,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1f0e874,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1f0e874,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-15 19:36:59.915
+!MESSAGE A conflict occurred for CTRL+SHIFT+H:
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@12d18aa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@12d18aa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+
+!ENTRY com.freescale.core.debugger.cdt 4 16777218 2014-04-15 19:39:15.743
+!MESSAGE Error launching xxxx_FLASH_USBDM
+!STACK 1
+org.eclipse.core.runtime.CoreException: ARM GDI Protocol Adapter : Can't connect. USB connection with BDM has failed
+	at com.freescale.cdt.debug.cw.core.DebugErrorUtils.handleDebugCoreError(DebugErrorUtils.java:281)
+	at com.freescale.cdt.launch.cw.DownloadLaunchDelegate.cwDoLaunch(DownloadLaunchDelegate.java:542)
+	at com.freescale.cdt.launch.cw.BaseLaunchDelegate.doLaunch(BaseLaunchDelegate.java:203)
+	at com.freescale.cdt.launch.cw.DownloadLaunchDelegate.launchDebug(DownloadLaunchDelegate.java:276)
+	at com.freescale.cdt.launch.cw.DownloadLaunchDelegate.launch(DownloadLaunchDelegate.java:123)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:862)
+	at org.eclipse.debug.internal.core.LaunchConfiguration.launch(LaunchConfiguration.java:704)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin.buildAndLaunch(DebugUIPlugin.java:1047)
+	at org.eclipse.debug.internal.ui.DebugUIPlugin$8.run(DebugUIPlugin.java:1251)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+!SUBENTRY 1 com.freescale.core.debugger.cdt 4 16777218 2014-04-15 19:39:15.744
+!MESSAGE ARM GDI Protocol Adapter : Can't connect. USB connection with BDM has failed
+
+!ENTRY com.freescale.core.debugger.cdt 4 16777218 2014-04-15 19:39:30.305
+!MESSAGE Failed to resume target process.
+!STACK 1
+org.eclipse.core.runtime.CoreException: Downloading binary to target...
+	at com.freescale.cdt.debug.cw.core.DebugErrorUtils.handleDebugCoreError(DebugErrorUtils.java:281)
+	at com.freescale.cdt.debug.cw.core.cdi.model.Target.launchComplete(Target.java:4610)
+	at com.freescale.cdt.debug.cw.CWCallback.NotifyTargetLaunchComplete(CWCallback.java:631)
+	at cwdbg.DebuggerCallbackPOA._invoke(DebuggerCallbackPOA.java:399)
+	at com.sun.corba.se.impl.protocol.CorbaServerRequestDispatcherImpl.dispatchToServant(Unknown Source)
+	at com.sun.corba.se.impl.protocol.CorbaServerRequestDispatcherImpl.dispatch(Unknown Source)
+	at com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl.handleRequestRequest(Unknown Source)
+	at com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl.handleRequest(Unknown Source)
+	at com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl.handleInput(Unknown Source)
+	at com.sun.corba.se.impl.protocol.giopmsgheaders.RequestMessage_1_2.callback(Unknown Source)
+	at com.sun.corba.se.impl.protocol.CorbaMessageMediatorImpl.handleRequest(Unknown Source)
+	at com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl.dispatch(Unknown Source)
+	at com.sun.corba.se.impl.transport.SocketOrChannelConnectionImpl.doWork(Unknown Source)
+	at com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolImpl$WorkerThread.performWork(Unknown Source)
+	at com.sun.corba.se.impl.orbutil.threadpool.ThreadPoolImpl$WorkerThread.run(Unknown Source)
+!SUBENTRY 1 com.freescale.core.debugger.cdt 4 16777218 2014-04-15 19:39:30.306
+!MESSAGE Downloading binary to target...
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.016
+!MESSAGE NLS unused message: NewProjectCreator_coreException1 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.016
+!MESSAGE NLS unused message: NewProjectCreator_coreException2 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.017
+!MESSAGE NLS unused message: NewProjectCreator_coreException3 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.017
+!MESSAGE NLS unused message: NewProjectCreator_exception1 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.017
+!MESSAGE NLS unused message: NewProjectCreator_wizardException1 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.018
+!MESSAGE NLS unused message: NewProjectCreator_wizardException2 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.018
+!MESSAGE NLS unused message: NewProjectCreator_wizardException3 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.019
+!MESSAGE NLS unused message: NewProjectCreator_wizardException4 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.019
+!MESSAGE NLS unused message: NewProjectCreator_wizardException5 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.019
+!MESSAGE NLS unused message: NewProjectCreator_wizardException6 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.020
+!MESSAGE NLS unused message: NewProjectCreator_wizardException7 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.020
+!MESSAGE NLS unused message: NewProjectCreator_wizardException8 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.021
+!MESSAGE NLS unused message: NewProjectCreator_wizardException9 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.021
+!MESSAGE NLS unused message: NewProjectCreator_logError1 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.022
+!MESSAGE NLS unused message: NewProjectCreator_logError2 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.022
+!MESSAGE NLS unused message: NewProjectCreator_logError3 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.022
+!MESSAGE NLS unused message: NewProjectCreator_logError4 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.023
+!MESSAGE NLS unused message: NewProjectCreator_multiProjType in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.023
+!MESSAGE NLS unused message: NewProjectCreator_typeNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.024
+!MESSAGE NLS unused message: NewProjectCreator_saveOptions in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.025
+!MESSAGE NLS unused message: NewProjectCreator_cantLocateType in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.025
+!MESSAGE NLS unused message: NewProjectCreator_addNature in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.026
+!MESSAGE NLS unused message: NewProjectCreator_addBuilder in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.027
+!MESSAGE NLS unused message: NewProjectCreator_settingNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.027
+!MESSAGE NLS unused message: NewProjectCreator_optionNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.028
+!MESSAGE NLS unused message: NewProjectCreator_unknownOption in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.028
+!MESSAGE NLS unused message: NewProjectCreator_configNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.029
+!MESSAGE NLS unused message: NewProjectCreator_varContainsOpenBrace in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.029
+!MESSAGE NLS unused message: NewProjectCreator_endlessVarLoop in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.030
+!MESSAGE NLS unused message: NewProjectCreator_userFilesNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.030
+!MESSAGE NLS unused message: NewProjectCreator_warningTitleFilesNotFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.031
+!MESSAGE NLS unused message: ExtensionLoader_loadexception in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.031
+!MESSAGE NLS unused message: ExtensionLoader_wizardException in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.032
+!MESSAGE NLS unused message: ExtensionLoader_unknown in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.032
+!MESSAGE NLS unused message: ExtensionLoader_illElement in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.032
+!MESSAGE NLS unused message: CWWizard_windowTitle in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.033
+!MESSAGE NLS unused message: CWWizard_description in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.033
+!MESSAGE NLS unused message: CWWizard_pageTitle in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.034
+!MESSAGE NLS unused message: CWWizard_pageDescription in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.034
+!MESSAGE NLS unused message: CWWizard_errorTitle in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.034
+!MESSAGE NLS unused message: CWWizard_errorMsg in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.035
+!MESSAGE NLS unused message: CWWizard_classicImporter_pageTitle in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.035
+!MESSAGE NLS unused message: CWWizard_classicImporter_pageDescription in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.036
+!MESSAGE NLS unused message: WizardInfo_wizardException0 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.036
+!MESSAGE NLS unused message: WizardInfo_wizardException1 in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.037
+!MESSAGE NLS unused message: ApplySetting_noChildFound in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.037
+!MESSAGE NLS unused message: ApplySetting_attrNotAllowed in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.038
+!MESSAGE NLS unused message: ApplySetting_childNotAllowed in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.039
+!MESSAGE NLS unused message: ApplySetting_attrNotSpecified in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.039
+!MESSAGE NLS unused message: ApplySetting_errValueType in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.040
+!MESSAGE NLS unused message: ApplySetting_illSettingType in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.040
+!MESSAGE NLS unused message: ApplySetting_illSettingMode in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.041
+!MESSAGE NLS unused message: ProjectNamePage_stepFormat in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.042
+!MESSAGE NLS unused message: ProjectNamePage_collisionWarn in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.042
+!MESSAGE NLS unused message: ProjectName_error in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 20:01:11.043
+!MESSAGE NLS unused message: ProjectLocation_error in: com.freescale.core.ide.newprojectwizard.messages
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.807
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.808
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.808
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.809
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.809
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.810
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.810
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:11.811
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:42.885
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:42.886
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:42.887
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:42.887
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.737
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256Z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.738
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.747
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.family.hc08
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.755
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.5
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.756
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.6
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.758
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5208evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.759
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5211demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.759
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5213evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.760
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52210demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.760
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52211evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.761
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52221demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.761
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52223evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.761
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52233demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.762
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52235evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.762
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.763
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.763
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52277evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.764
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5253evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.764
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m53015evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.764
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m5329evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.765
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v4.m54455evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.817
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.818
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_CONSOLE_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.818
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTFLASH
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.829
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_SDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.830
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_LDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copytoproject.cfv1
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.dontcopytoproject
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.abs
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copyelf.pa
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.arm
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.dsc
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.s12z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.bb.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.kd.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.888
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.app.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:01:49.889
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.flt
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-04-15 20:03:27.826
+!MESSAGE Indexed 'xxx' (4 sources, 29 headers) in 1.35 sec: 706 declarations; 1,109 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.975
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.975
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.976
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.976
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.977
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.977
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.978
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:40.978
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:50.896
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:50.896
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:50.897
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:04:50.898
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.843
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256Z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.844
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.852
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.family.hc08
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.860
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.5
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.861
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.6
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.863
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5208evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.864
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5211demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.864
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5213evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.865
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52210demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.866
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52211evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.868
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52221demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.869
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52223evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.870
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52233demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.871
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52235evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.871
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.872
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.872
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52277evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.873
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5253evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.874
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m53015evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.875
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m5329evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.875
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v4.m54455evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.924
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.925
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_CONSOLE_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.925
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTFLASH
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.927
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_SDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.928
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_LDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.970
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copytoproject.cfv1
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.971
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.dontcopytoproject
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.972
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.abs
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.972
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copyelf.pa
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.973
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.arm
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.973
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.dsc
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.974
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.s12z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.975
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.bb.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.975
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.kd.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.976
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.app.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.977
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.flt
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:00.977
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.arm.setPnEAttribute.STARTUP_USE_SWD
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-04-15 20:05:03.861
+!MESSAGE Indexed 'xxx' (4 sources, 29 headers) in 0.76 sec: 706 declarations; 1,109 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.331
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.331
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.332
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.332
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.333
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.333
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.333
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:15.334
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:26.175
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:26.176
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:26.176
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:26.177
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.261
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256Z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.262
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.270
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.family.hc08
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.278
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.5
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.278
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.6
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.281
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5208evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.282
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5211demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.282
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5213evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.283
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52210demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.283
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52211evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.284
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52221demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.284
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52223evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.285
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52233demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.285
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52235evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.286
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.286
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.287
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52277evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.287
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5253evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.288
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m53015evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.288
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m5329evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.289
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v4.m54455evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.334
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.334
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_CONSOLE_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.335
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTFLASH
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.337
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_SDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.337
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_LDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.377
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copytoproject.cfv1
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.377
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.dontcopytoproject
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.378
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.abs
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.378
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copyelf.pa
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.379
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.arm
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.379
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.dsc
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.380
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.s12z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.380
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.bb.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.381
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.kd.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.381
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.app.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:05:31.382
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.flt
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-04-15 20:05:32.381
+!MESSAGE Indexed 'xxx' (4 sources, 29 headers) in 0.72 sec: 706 declarations; 1,109 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.371
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.372
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.372
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.373
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.board.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.374
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v2
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.374
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v3
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.375
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:02.376
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.twrboard.family.v4e
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:10.574
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:10.575
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke14d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:10.575
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_36
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:10.576
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.kinetis_e.ke1x.subfamily.ke15d_72
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.503
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256Z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.504
+!MESSAGE Unknown condition ID: mcu.projectwizard.chip.k10d_100.ID_CHIP_MK60DN256
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.511
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.family.hc08
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.517
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.5
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.518
+!MESSAGE Unknown condition ID: com.processorexpert.configuration.6
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.520
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5208evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.520
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5211demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.521
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5213evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.522
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52210demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.522
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52211evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.522
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52221demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.523
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52223evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.524
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52233demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.524
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52235evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.525
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259demo
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.525
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52259evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.526
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m52277evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.527
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v2.m5253evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.527
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m53015evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.528
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v3.m5329evbe
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.528
+!MESSAGE Unknown UI Element ID: mcu.projectwizard.chip.v4.m54455evb
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.578
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.578
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_CONSOLE_EXTRAM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.579
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.cf_v2v4.ID_TARGET_EXTFLASH
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.581
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_SDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.581
+!MESSAGE Unknown condition ID: mcu.projectwizard.condition.dsc.ID_TARGET_EXTERNAL_RAM_LDM
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.622
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copytoproject.cfv1
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.623
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.dontcopytoproject
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.624
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.abs
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.624
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copyelf.pa
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.625
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.arm
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.625
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.dsc
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.625
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.elf.s12z
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.626
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.bb.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.626
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.kd.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.627
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.app.elf
+
+!ENTRY com.freescale.core.ide.wizard.ui 4 0 2014-04-15 20:08:23.627
+!MESSAGE Unknown condition ID: mcu.elfimporter.condition.copy.flt
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-04-15 20:08:26.481
+!MESSAGE Indexed 'xxx' (4 sources, 29 headers) in 0.70 sec: 706 declarations; 1,109 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0.00%)
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 21:28:29.972
+!MESSAGE NLS missing message: BuildStepsTab_BehaviourTab in: org.eclipse.cdt.managedbuilder.internal.ui.Messages
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-15 21:28:29.973
+!MESSAGE NLS missing message: ToolChainEditTab_18 in: org.eclipse.cdt.managedbuilder.internal.ui.Messages
+!SESSION 2014-04-16 11:49:34.206 -----------------------------------------------
+eclipse.buildId=I20070613-1755
+java.version=1.6.0_15
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-04-16 11:49:38.419
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Apps/Freescale/CW%20MCU%20v10.5/eclipse/dropins/usbdm/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:96)
+	at org.eclipse.equinox.internal.p2.metadata.repository.MetadataRepositoryManager.loadRepository(MetadataRepositoryManager.java:92)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.loadMetadataRepository(Activator.java:99)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.getMetadataRepository(DropinsRepositoryListener.java:233)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.addRepository(DropinsRepositoryListener.java:122)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.added(DropinsRepositoryListener.java:96)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.processFile(DirectoryWatcher.java:197)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.scanDirectories(DirectoryWatcher.java:160)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.poll(DirectoryWatcher.java:108)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.watchDropins(Activator.java:535)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.start(Activator.java:172)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1176)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+!SUBENTRY 1 org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:49:38.419
+!MESSAGE No repository found at file:/C:/Apps/Freescale/CW%20MCU%20v10.5/eclipse/dropins/usbdm/.
+
+!ENTRY org.eclipse.equinox.p2.core 4 0 2014-04-16 11:49:38.431
+!MESSAGE Provisioning exception
+!STACK 1
+org.eclipse.equinox.p2.core.ProvisionException: No repository found at file:/C:/Apps/Freescale/CW%20MCU%20v10.5/eclipse/dropins/usbdm/.
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.fail(AbstractRepositoryManager.java:393)
+	at org.eclipse.equinox.internal.p2.repository.helpers.AbstractRepositoryManager.loadRepository(AbstractRepositoryManager.java:675)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:104)
+	at org.eclipse.equinox.internal.p2.artifact.repository.ArtifactRepositoryManager.loadRepository(ArtifactRepositoryManager.java:100)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.loadArtifactRepository(Activator.java:142)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.getArtifactRepository(DropinsRepositoryListener.java:260)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.addRepository(DropinsRepositoryListener.java:123)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.DropinsRepositoryListener.added(DropinsRepositoryListener.java:96)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.processFile(DirectoryWatcher.java:197)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.scanDirectories(DirectoryWatcher.java:160)
+	at org.eclipse.equinox.internal.provisional.p2.directorywatcher.DirectoryWatcher.poll(DirectoryWatcher.java:108)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.watchDropins(Activator.java:535)
+	at org.eclipse.equinox.internal.p2.reconciler.dropins.Activator.start(Activator.java:172)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl$1.run(BundleContextImpl.java:711)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.startActivator(BundleContextImpl.java:702)
+	at org.eclipse.osgi.framework.internal.core.BundleContextImpl.start(BundleContextImpl.java:683)
+	at org.eclipse.osgi.framework.internal.core.BundleHost.startWorker(BundleHost.java:381)
+	at org.eclipse.osgi.framework.internal.core.AbstractBundle.resume(AbstractBundle.java:390)
+	at org.eclipse.osgi.framework.internal.core.Framework.resumeBundle(Framework.java:1176)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:559)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.resumeBundles(StartLevelManager.java:544)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.incFWSL(StartLevelManager.java:457)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.doSetStartLevel(StartLevelManager.java:243)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:438)
+	at org.eclipse.osgi.framework.internal.core.StartLevelManager.dispatchEvent(StartLevelManager.java:1)
+	at org.eclipse.osgi.framework.eventmgr.EventManager.dispatchEvent(EventManager.java:230)
+	at org.eclipse.osgi.framework.eventmgr.EventManager$EventThread.run(EventManager.java:340)
+!SUBENTRY 1 org.eclipse.equinox.p2.artifact.repository 4 1000 2014-04-16 11:49:38.431
+!MESSAGE No repository found at file:/C:/Apps/Freescale/CW%20MCU%20v10.5/eclipse/dropins/usbdm/.
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-16 11:49:48.063
+!MESSAGE NLS missing message: ContentTypes_errorDialogAlreadyExists in: org.eclipse.ui.internal.messages
+
+!ENTRY com.freescale.processorexpert.core 1 0 2014-04-16 11:49:48.841
+!MESSAGE Plugin com.freescale.processorexpert.core.service ProcessorExpertServiceProvider
+
+!ENTRY com.freescale.core.ide.cdt.toolchain 4 0 2014-04-16 11:49:57.592
+!MESSAGE Environment Variable Dependency not resolved for 'ARMGNUDirEnv'.
+
+!ENTRY com.freescale.core.ide.cdt.toolchain 4 0 2014-04-16 11:49:57.592
+!MESSAGE Environment Variable Dependency not resolved for 'ARMSummonDirEnv'.
+
+!ENTRY com.freescale.core.ide.cdt.toolchain 4 0 2014-04-16 11:49:57.592
+!MESSAGE Environment Variable Dependency not resolved for 'ARMYagartoDirEnv'.
+
+!ENTRY com.freescale.core.ide.cdt.toolchain 4 0 2014-04-16 11:49:57.592
+!MESSAGE Environment Variable Dependency not resolved for 'ARMdevkitProDirEnv'.
+
+!ENTRY org.eclipse.ui 4 0 2014-04-16 11:49:59.445
+!MESSAGE Unhandled event loop exception
+!STACK 0
+org.eclipse.swt.SWTException: Failed to execute runnable (java.lang.NullPointerException)
+	at org.eclipse.swt.SWT.error(SWT.java:4361)
+	at org.eclipse.swt.SWT.error(SWT.java:4276)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:158)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:4159)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3772)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$9.run(PartRenderingEngine.java:1053)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:942)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:86)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:588)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:332)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:543)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:124)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:353)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:180)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:630)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:585)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1439)
+Caused by: java.lang.NullPointerException
+	at com.freescale.targettaskframework.arrangements.TaskGroupArrangement$1.run(TaskGroupArrangement.java:864)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:155)
+	... 23 more
+
+!ENTRY com.freescale.core.ide.wizard.ui 2 0 2014-04-16 11:49:59.525
+!MESSAGE External elements location 'C:\Apps\Freescale\CW MCU v10.5\eclipse\../MCU/lib/wizard_data/mqx/4.0/patches' does not exist
+
+!ENTRY com.freescale.core.ide.wizard.ui 2 0 2014-04-16 11:50:00.282
+!MESSAGE External elements location 'C:\Apps\Freescale\CW MCU v10.5\eclipse\../MCU/lib/wizard_data/mqx/4.1/patches' does not exist
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.351
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.352
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.353
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.354
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:05.416
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.dsc.updatesite.zip!/.
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.461
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.462
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.463
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.464
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.465
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.466
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.467
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.467
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.468
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.536
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.536
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.551
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.551
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.551
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.568
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.569
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.644
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.646
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.649
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.650
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.652
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.654
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.655
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.730
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.736
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.738
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.739
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.743
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.744
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.745
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.748
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.749
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.812
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.813
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.814
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.815
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.817
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.818
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.823
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.903
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.904
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.905
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.906
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.906
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.907
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.908
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.909
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.910
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.998
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.998
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:05.999
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.000
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.001
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.002
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.003
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.004
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.005
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.006
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.096
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.097
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.098
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.099
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.ddd 1 0 2014-04-16 11:50:06.100
+!MESSAGE leaking DDD object - com.freescale.cdt.debug.cw.core.ddd.DebugContext
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.431
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.438
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.440
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.440
+!MESSAGE Missing connection type in RSE host: xxx_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.478
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.480
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.480
+!MESSAGE Missing connection type in RSE host: xxx_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.482
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.483
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.484
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.484
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.485
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.486
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.496
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.497
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.497
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 11:50:06.498
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 11:50:06.499
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:08.258
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.coldfire.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:08.320
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.hcs08_rs08.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:08.382
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.e200.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:08.441
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.kinetis.updatesite.zip!/.
+
+!ENTRY org.eclipse.equinox.p2.metadata.repository 4 1000 2014-04-16 11:50:08.518
+!MESSAGE No repository found at jar:file:C:%5CUsers%5Cpodonoghue%5CDownloads%5CCW%20for%20MCU%2010.5%5Ccom.freescale.mcu10_5.s12z.updatesite.zip!/.
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-16 11:50:10.872
+!MESSAGE NLS unused message: trace_trigger_dv_error_title in: com.freescale.sa.mcu.analysispoints.nls.ui
+
+!ENTRY org.eclipse.osgi 2 1 2014-04-16 11:50:10.873
+!MESSAGE NLS unused message: trace_trigger_dv_error_message in: com.freescale.sa.mcu.analysispoints.nls.ui
+
+!ENTRY org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for ALT+CTRL+I:
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1a82ca8,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+I,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.include.browser,Open Include Browser,
+		Open an include browser on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1a82ca8,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for F4:
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@bf16c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F4,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.type.hierarchy,Open Type Hierarchy,
+		Open a type hierarchy on the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@bf16c,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1718aa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.opentype,Open Element,
+		Open an element in an Editor,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@1718aa,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for F3:
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@544b33,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(F3,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.opendecl,Open Declaration,
+		Open an editor on the selected element's declaration(s),
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@544b33,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for ALT+SHIFT+R:
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.MakeHandlersGo@153efc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+SHIFT+R,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.text.rename.element,Rename - Refactoring ,
+		Rename the selected element,
+		Category(org.eclipse.cdt.ui.category.refactoring,Refactor - C++,C/C++ Refactorings,true),
+		org.eclipse.ui.internal.MakeHandlersGo@153efc,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@da46bf,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Search for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@da46bf,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for CTRL+SHIFT+G:
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5ae5a2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.findrefs,References,
+		Search for references to the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.MakeHandlersGo@5ae5a2,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for ALT+CTRL+H:
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@19a1f13,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(ALT+CTRL+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.edit.open.call.hierarchy,Open Call Hierarchy,
+		Open the call hierarchy for the selected element,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@19a1f13,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+!SUBENTRY 1 org.eclipse.jface 2 0 2014-04-16 11:50:11.006
+!MESSAGE A conflict occurred for CTRL+SHIFT+H:
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@16e29a1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+SHIFT+H,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.navigate.open.type.in.hierarchy,Open Type in Hierarchy,
+		Open a type in the type hierarchy view,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.MakeHandlersGo@16e29a1,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cViewScope,,,system)
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 12:52:40.189
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 12:52:40.191
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 12:52:40.192
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 12:52:40.194
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 12:52:40.195
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 12:52:40.196
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:19:39.217
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:19:39.218
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:19:39.218
+!MESSAGE Missing connection type in RSE host: Kinetis-FTMRH-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:25:54.318
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:25:54.322
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:25:54.326
+!MESSAGE Missing connection type in RSE host: Kinetis-KLxx-flash-program_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:25:54.343
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:25:54.344
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:25:54.345
+!MESSAGE Missing connection type in RSE host: Kinetis-KLxx-flash-program_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:14.395
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:14.396
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:26:14.397
+!MESSAGE Missing connection type in RSE host: Kinetis-default-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:14.398
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:14.398
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:26:14.399
+!MESSAGE Missing connection type in RSE host: Kinetis-default-flash-program-gcc_FLASH_USBDM
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:48.148
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 1 0 2014-04-16 13:26:48.151
+!MESSAGE Unknown connection type id: net.sourceforge.usbdm.connections.usbdm.arm
+
+!ENTRY com.freescale.core.debugger.cdt 2 0 2014-04-16 13:26:48.151
+!MESSAGE Missing connection type in RSE host: Kinetis-default-flash-program-gcc_FLASH_USBDM

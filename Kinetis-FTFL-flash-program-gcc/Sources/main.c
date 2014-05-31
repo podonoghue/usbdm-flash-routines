@@ -6,7 +6,6 @@
 // 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
 //---------------------------------------------------------------------------------------------
 
-
 #include <cstdint>
 
 #ifndef NULL
@@ -115,7 +114,7 @@ typedef struct {
 /* Word to be written in in STCTRLH after unlocking sequence in order to disable the Watchdog */
 #define WDOG_DISABLED_CTRL  0x0012
 
-//==========================================================================================================
+//=================================================================================================
 // Operation masks
 //
 //  The following combinations (amongst others) are sensible:
@@ -286,7 +285,7 @@ void executeCommand(volatile FlashController *controller) {
  * 
  */
 uint32_t fixAddress(uint32_t address) {
-   // Any address above this is assumed to be DFLASH
+   // Any address above this is assumed to be DFLASH and require A23=1
    const uint32_t DFLASH_START_ADDRESS  = 0x10000000;
 
    if (address>=DFLASH_START_ADDRESS) {

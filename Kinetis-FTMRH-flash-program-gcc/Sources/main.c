@@ -1,6 +1,8 @@
 //=======================================================================================
 // History
 //---------------------------------------------------------------------------------------
+// 16 Apr 2014 - Added disabling Flash cache
+//=======================================================================================
 
 
 #include <cstdint>
@@ -30,13 +32,13 @@ typedef struct {
    volatile uint8_t res;
    volatile uint8_t fcnfg;
    volatile uint8_t fercngf;
-   volatile uint8_t fstat;   //!< 6 :
+   volatile uint8_t fstat;
    volatile uint8_t ferstat;
    volatile uint8_t fprot;   //!< Flash protection
    volatile uint8_t eeprot;  //!< EEprom protection
-   union {
-      volatile uint16_t w;
-      volatile uint8_t  b[2];
+   volatile struct {
+         uint8_t  high;
+         uint8_t  low;
    } fccob;
    volatile uint8_t  fopt;
 } FlashController;
@@ -65,8 +67,6 @@ typedef struct {
 
 #pragma pack(0)
 
-#define FSTAT_OFFSET              6
-
 #define fclkdiv_FDIVLD            (1<<7)
                                  
 #define FSTAT_CCIF                (1<<7)  //!< Command complete
@@ -89,6 +89,15 @@ typedef struct {
 
 #define FCMD_ERASE_FLASH_SECTOR   (0x0A)
 #define FCMD_ERASE_EEPROM_SECTOR  (0x12)
+
+#define MCM_PLACR  (*(volatile uint32_t*) 0xF000300C) 
+#define MCM_PLACR_ESFC  (1<<16)
+#define MCM_PLACR_DFCS  (1<<15)
+#define MCM_PLACR_EFDS  (1<<14)
+#define MCM_PLACR_DFCC  (1<<13)
+#define MCM_PLACR_DFCIC (1<<12)
+#define MCM_PLACR_DFCDA (1<<11)
+#define MCM_PLACR_CFCC  (1<<10)
 
 //==========================================================================================================
 // Operation masks
@@ -222,17 +231,9 @@ void initFlash(FlashData_t *flashData) {
    controller->fclkdiv = 0x0F;  // Approximate divider for 16MHz clock out of reset
    controller->fprot   = 0xFF;  // Unprotect Flash
    controller->eeprot  = 0xFF;  // Unprotect EEprom
+
+   MCM_PLACR = (MCM_PLACR_DFCS|MCM_PLACR_DFCC|MCM_PLACR_DFCIC|MCM_PLACR_DFCDA|MCM_PLACR_CFCC);
    
-//	WDOG_TOVAL = 0xE803; // setting timeout value
-//	WDOG_CS2 = WDOG_CS2_CLK_MASK; // setting 1-kHz clock source
-//	WDOG_CS1 = 0x23; // Watchdog disabled, 
-//					 // Watchdog interrupts are disabled. Watchdog resets are not delayed, 
-//					 // Updates allowed. Software can modify the watchdog configuration registers within 128 bus clocks after performing the unlock write sequence,
-//					 // Watchdog test mode disabled,
-//					 // Watchdog disabled in chip debug mode,
-//					 // Watchdog enabled in chip wait mode,
-//					 // Watchdog enabled in chip stop mode.
-//
    flashData->flags &= ~DO_INIT_FLASH;
 }
 
@@ -275,11 +276,11 @@ void eraseFlashBlock(FlashData_t *flashData) {
       // Global address [23] selects between flash (0) or EEPROM (1) block.
       address |= (1<<23); 
    }
-   // Write command & address with EEPROM modifier flag
-   controller->fccobix = 0; controller->fccob.b[0] = FCMD_ERASE_FLASH_BLOCK; 
-                            controller->fccob.b[1] = ((uint8_t)(address>>16));//|eepromFlag;
-   controller->fccobix = 1; controller->fccob.b[0] =  (uint8_t)(address>>8);
-                            controller->fccob.b[1] =  (uint8_t)(address);
+   // Write command & address
+   controller->fccobix = 0; controller->fccob.high = FCMD_ERASE_FLASH_BLOCK; 
+                            controller->fccob.low  = ((uint8_t)(address>>16));
+   controller->fccobix = 1; controller->fccob.high =  (uint8_t)(address>>8);
+                            controller->fccob.low  =  (uint8_t)(address);
    executeCommand(controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
@@ -308,23 +309,23 @@ void programRange(FlashData_t *flashData) {
       while (numPhrases-- > 0) {
          uint32_t dataValue;
          // Write command
-         controller->fccobix = 0; controller->fccob.b[0] = FCMD_PROGRAM_FLASH; 
-                                  controller->fccob.b[1] = (uint8_t)(address>>16);
-         controller->fccobix = 1; controller->fccob.b[0] = (uint8_t)(address>>8);
-                                  controller->fccob.b[1] = (uint8_t)(address);
+         controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_FLASH; 
+                                  controller->fccob.low  = (uint8_t)(address>>16);
+         controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
+                                  controller->fccob.low  = (uint8_t)(address);
          // 1st phrase
          dataValue = *data++; 
-         controller->fccobix = 2; controller->fccob.b[0]    = (uint8_t)(dataValue>>8);
-                                  controller->fccob.b[1]    = (uint8_t)(dataValue);
-         controller->fccobix = 3; controller->fccob.b[0]    = (uint8_t)(dataValue>>24);
-                                  controller->fccob.b[1]    = (uint8_t)(dataValue>>16);
+         controller->fccobix = 2; controller->fccob.high    = (uint8_t)(dataValue>>8);
+                                  controller->fccob.low     = (uint8_t)(dataValue);
+         controller->fccobix = 3; controller->fccob.high    = (uint8_t)(dataValue>>24);
+                                  controller->fccob.low     = (uint8_t)(dataValue>>16);
          if (numPhrases > 0) {
             // 2nd phrase
             dataValue = *data++; 
-            controller->fccobix = 4; controller->fccob.b[0]    = (uint8_t)(dataValue>>8);
-                                     controller->fccob.b[1]    = (uint8_t)(dataValue);
-            controller->fccobix = 5; controller->fccob.b[0]    = (uint8_t)(dataValue>>24);
-                                     controller->fccob.b[1]    = (uint8_t)(dataValue>>16);
+            controller->fccobix = 4; controller->fccob.high    = (uint8_t)(dataValue>>8);
+                                     controller->fccob.low     = (uint8_t)(dataValue);
+            controller->fccobix = 5; controller->fccob.high    = (uint8_t)(dataValue>>24);
+                                     controller->fccob.low     = (uint8_t)(dataValue>>16);
             numPhrases--;
            }
          executeCommand(controller);
@@ -337,20 +338,20 @@ void programRange(FlashData_t *flashData) {
       while (numBytes-- > 0) {
          uint32_t dataValue = *data++;
          // Write command
-         controller->fccobix = 0; controller->fccob.b[0] = FCMD_PROGRAM_EEPROM; 
-                                  controller->fccob.b[1] = (uint8_t)(address>>16);
-		   controller->fccobix = 1; controller->fccob.b[0] = (uint8_t)(address>>8);
-		                            controller->fccob.b[1] = (uint8_t)(address);
-         controller->fccobix = 2; controller->fccob.b[1] = (uint8_t)(dataValue);
+         controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_EEPROM; 
+                                  controller->fccob.low  = (uint8_t)(address>>16);
+		   controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
+		                            controller->fccob.low  = (uint8_t)(address);
+         controller->fccobix = 2; controller->fccob.low  = (uint8_t)(dataValue);
          if (numBytes > 0) {
             numBytes--;
-            controller->fccobix = 3; controller->fccob.b[1] = (uint8_t)(dataValue>>8);
+            controller->fccobix = 3; controller->fccob.low  = (uint8_t)(dataValue>>8);
             if (numBytes > 0) {
                numBytes--;
-               controller->fccobix = 4; controller->fccob.b[1] = (uint8_t)(dataValue>>16);
+               controller->fccobix = 4; controller->fccob.low  = (uint8_t)(dataValue>>16);
                if (numBytes > 0) {
                   numBytes--;
-                  controller->fccobix = 5; controller->fccob.b[1] = (uint8_t)(dataValue>>24);
+                  controller->fccobix = 5; controller->fccob.low  = (uint8_t)(dataValue>>24);
                }
             }
          }
@@ -414,10 +415,10 @@ void eraseRange(FlashData_t *flashData) {
    // Erase each sector
    while (address <= endAddress) {
       // Write command
-      controller->fccobix = 0; controller->fccob.b[0] = eraseCommand; 
-                               controller->fccob.b[1] = (uint8_t)(address>>16);
-      controller->fccobix = 1; controller->fccob.b[0] = (uint8_t)(address>>8);
-                               controller->fccob.b[1] = (uint8_t)(address);
+      controller->fccobix = 0; controller->fccob.high = eraseCommand; 
+                               controller->fccob.low  = (uint8_t)(address>>16);
+      controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
+                               controller->fccob.low  = (uint8_t)(address);
       executeCommand(controller);
       // Advance to start of next sector
       address += flashData->sectorSize;
@@ -425,13 +426,12 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
-#if 1
 //! Check that a range of flash is blank (=0xFFFF)
 //!
 void blankCheckRange(FlashData_t *flashData) {
-#define  itemSize 4
-   uint32_t *address  = (uint32_t *)(flashData->address);
-   uint32_t numItems  = (flashData->dataSize+itemSize-1)/itemSize;
+   const int  itemSize  = 4;
+   uint32_t  *address   = (uint32_t *)(flashData->address);
+   uint32_t   numItems  = (flashData->dataSize+itemSize-1)/itemSize;
    
    if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
       return;
@@ -448,44 +448,6 @@ void blankCheckRange(FlashData_t *flashData) {
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
-#else
-//! Check that a range of flash is blank (=0xFFFF)
-//!
-void blankCheckRange(FlashData_t *flashData) {
-   static const uint32_t      elementSize = 8; // Size of element verified
-   volatile FlashController  *controller  = flashData->controller;
-   uint32_t                   address     = flashData->address;
-   uint32_t                   numElements = (flashData->dataSize+elementSize-1)/elementSize;
-
-   if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
-      return;
-   }
-   if ((address & (elementSize-1)) != 0) {
-      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-   }
-   while (numElements>0) {
-      int rc;
-      uint16_t num = 0x8000;
-      if (num>numElements) {
-         num = numElements;
-      }
-      controller->fccob0_3 = (F_RD1SEC << 24) | address;
-      controller->fccob4_7 = (num <<16) | (F_USER_MARGIN<<8) | 0;
-      rc = executeCommand(controller);
-      if (rc != FLASH_ERR_OK) {
-         if (rc == FLASH_ERR_PROG_MGSTAT0) {
-            rc = FLASH_ERR_ERASE_FAILED;
-         }
-//         flashData->frequency = controller->fccob0_3; // debug
-//         flashData->address   = controller->fccob4_7;
-         setErrorCode(rc);         
-      }
-      numElements -= num;
-      address     += elementSize*num;
-   }
-   flashData->flags &= ~DO_BLANK_CHECK_RANGE;
-}
-#endif
 
 //! Minimal vector table
 extern uint32_t __vector_table[];
@@ -508,9 +470,9 @@ void entry(void) {
 
    WDOG.cnt    = 0x20C5;                  // Write the 1st unlock word
    WDOG.cnt    = 0x28D9;                  // Write the 2nd unlock word
-   WDOG.toval  = 1000;                    // Setting timeout value
+   WDOG.toval  = 0x28D9;                  // Setting timeout value
    WDOG.cs2    = WDOG_CS2_CLK_LPOCLK;     // Setting 1-kHz clock source
-   WDOG.cs1    = WDOG_CS1_UPDATE;         // Disable watchdog
+   WDOG.cs1    = WDOG_CS1_UPDATE;         // Disable watch-dog
 #endif
    
    // Handle on programming data

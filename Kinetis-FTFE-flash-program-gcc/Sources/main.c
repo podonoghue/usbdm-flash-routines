@@ -101,6 +101,12 @@ typedef struct {
 #define CRC_CTRL_WAS                    (1<<25)
 #define CRC_CTRL_TCRC                   (1<<24)
 
+/* Address of Watchdog Refresh Register (16 bits) */
+#define WDOG_REFRESH (*(volatile uint16_t *)0x4005200C)
+/* Refresh Watchdog sequence words*/
+#define WDOG_REFRESH_SEQ_1   (0xA602)
+#define WDOG_REFRESH_SEQ_2   (0xB480)
+
 /* Address of Watchdog Unlock Register (16 bits) */
 #define WDOG_UNLOCK (*(volatile uint16_t *)0x4005200E)
 
@@ -111,8 +117,7 @@ typedef struct {
 #define WDOG_UNLOCK_SEQ_1   (0xC520)
 #define WDOG_UNLOCK_SEQ_2   (0xD928)
 
-/* Word to be written in in STCTRLH after unlocking sequence in order to disable the Watchdog */
-#define WDOG_DISABLED_CTRL  0x0012
+#define WDOG_DISABLED_CTRL  (0xD2)
 
 //==========================================================================================================
 // Operation masks
@@ -265,6 +270,7 @@ void executeCommand(volatile FlashController *controller) {
    // Wait for command complete
    while ((controller->fstat & FTFL_FSTAT_CCIF) == 0) {
    }
+   
    // Handle any errors
    if ((controller->fstat & FTFL_FSTAT_FPVIOL ) != 0) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
@@ -285,7 +291,7 @@ void executeCommand(volatile FlashController *controller) {
  * 
  */
 uint32_t fixAddress(uint32_t address) {
-   // Any address above this is assumed to be DFLASH
+   // Any address above this is assumed to be DFLASH and require A23=1
    const uint32_t DFLASH_START_ADDRESS  = 0x10000000;
 
    if (address>=DFLASH_START_ADDRESS) {
@@ -304,7 +310,6 @@ void eraseFlashBlock(FlashData_t *flashData) {
    if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
-   
    flashData->controller->fccob0_3 = (F_ERSBLK << 24) | address;
    executeCommand(flashData->controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
@@ -339,6 +344,7 @@ void programRange(FlashData_t *flashData) {
       flashData->controller->fccob8_B = *data++;
       executeCommand(flashData->controller);
       address += 8;
+//      flashData->frequency = address;
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
@@ -424,6 +430,7 @@ void blankCheckRange(FlashData_t *flashData) {
 //!
 void blankCheckRange(FlashData_t *flashData) {
    static const uint32_t      elementSize = 16; // Size of element verified
+   volatile FlashController  *controller  = flashData->controller;
    uint32_t                   address     = fixAddress(flashData->address);
    uint32_t                   numElements = (flashData->dataSize+elementSize-1)/elementSize;
 
@@ -439,9 +446,9 @@ void blankCheckRange(FlashData_t *flashData) {
       if (num>numElements) {
          num = numElements;
       }
-      flashData->controller->fccob0_3 = (F_RD1SEC << 24) | address;
-      flashData->controller->fccob4_7 = (num <<16) | (F_USER_MARGIN<<8) | 0;
-      rc = executeCommand(flashData->controller);
+      controller->fccob0_3 = (F_RD1SEC << 24) | address;
+      controller->fccob4_7 = (num <<16) | (F_USER_MARGIN<<8) | 0;
+      rc = executeCommand(controller);
       if (rc != FLASH_ERR_OK) {
          if (rc == FLASH_ERR_PROG_MGSTAT0) {
             rc = FLASH_ERR_ERASE_FAILED;
@@ -481,20 +488,18 @@ extern uint32_t __stacktop[];
 //! Assumes ramBuffer is set up beforehand
 //!
 void entry(void) {
-   FlashData_t *flashData;  // Handle on programming data
-
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
 #ifndef DEBUG
    /* Disable the Watchdog */
-   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH = WDOG_DISABLED_CTRL;
+   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
+   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
+   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
 #endif
    
    // Handle on programming data
-   flashData = gFlashProgramHeader.flashData;
+   FlashData_t * flashData = gFlashProgramHeader.flashData;
 
    initFlash(flashData);
    eraseFlashBlock(flashData);
@@ -717,7 +722,7 @@ void testApp(void) {
    // Disable watchdog
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH = WDOG_DISABLED_CTRL;
+   WDOG_STCTRLH = WDOG_WDOGEN;
       
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();

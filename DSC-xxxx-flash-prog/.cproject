@@ -13,22 +13,22 @@
 					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="elf" artifactName="DSC-56F8014-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134" isPrebuildInvalidatingBuild="false" name="MC56F8014" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+				<configuration artifactExtension="elf" artifactName="DSC-56F8014-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;org.eclipse.cdt.core.GmakeErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134" isPrebuildInvalidatingBuild="false" name="MC56F8014" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
 					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134." name="/" resourcePath="">
 						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.1189316452" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
 							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.947265086" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
-							<builder buildPath="${ProjDirPath}/MC56F8014" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.1642616526" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<builder buildPath="${ProjDirPath}/MC56F8014" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.1642616526" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.1381873838" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.616679396" name="Library Search Paths" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch"/>
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.909183659" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}\Project_Settings\Linker_Files\linker_8014.cmd" valueType="string"/>
@@ -106,7 +106,9 @@
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.adjusted.1079705987" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.adjusted.1174817856" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.adjusted.1205667356" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1259497881" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1259497881" name="DSC C/C++ Compiler"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.165650096" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.1326045021" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
 							</tool>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.1950749414" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
 								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.1649787995" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include"/>
@@ -118,6 +120,21 @@
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.438050493" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.232921832" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1449814847.1280932712">
+						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1449814847.1280932712" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.1449814847">
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.adjusted.556280051" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.adjusted.1111322684" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1164573506" name="DSC C/C++ Compiler"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1070509019" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.524724832" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
 					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1240967094" name="VectorTable.asm" rcbsApplicability="disable" resourcePath="Sources/VectorTable.asm" toolsToInvoke="com.freescale.dsc.cdt.toolchain.assembler.1950749414.2055235214">
 						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.1950749414.2055235214" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler.1950749414">
 							<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.881125531" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
@@ -127,19 +144,6 @@
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.488515219" name="Resource Custom Build Step Output Type"/>
-						</tool>
-					</fileInfo>
-					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.232921832" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1449814847.1280932712">
-						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1449814847.1280932712" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.1449814847">
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.adjusted.556280051" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.adjusted.1111322684" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1164573506" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130" name="Resource Custom Build Step Input Type">
-								<additionalInput kind="additionalinputdependency" paths=""/>
-							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
 				</configuration>
@@ -159,22 +163,22 @@
 					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="elf" artifactName="DSC-56F8323-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905" isPrebuildInvalidatingBuild="false" name="MC56F8323" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+				<configuration artifactExtension="elf" artifactName="DSC-56F8323-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;org.eclipse.cdt.core.GmakeErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905" isPrebuildInvalidatingBuild="false" name="MC56F8323" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
 					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905." name="/" resourcePath="">
 						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.1034702656" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
 							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.1644513145" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
-							<builder buildPath="${ProjDirPath}/MC56F8323" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.339517761" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<builder buildPath="${ProjDirPath}/MC56F8323" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.339517761" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.1531051531" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.765690927" name="Library Search Paths" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch"/>
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.601151075" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}\Project_Settings\Linker_Files\linker_8323.cmd" valueType="string"/>
@@ -252,7 +256,9 @@
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.21839612" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.989807940" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.33270475" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.406305578" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.406305578" name="DSC C/C++ Compiler"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1598231773" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.627434111" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
 							</tool>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.655503775" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
 								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.1905466877" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include"/>
@@ -264,19 +270,6 @@
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.296473901" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.753671131">
-						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.753671131" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.1588865866">
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.1932615308" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.1673613560" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.2131107226" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.471053904" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.1104522645" name="Resource Custom Build Step Input Type">
-								<additionalInput kind="additionalinputdependency" paths=""/>
-							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.1874388797" name="Resource Custom Build Step Output Type"/>
-						</tool>
-					</fileInfo>
 					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905.Sources/VectorTable.asm" name="VectorTable.asm" rcbsApplicability="disable" resourcePath="Sources/VectorTable.asm" toolsToInvoke="com.freescale.dsc.cdt.toolchain.assembler.807437053">
 						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.807437053" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler.655503775">
 							<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.1360524037" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
@@ -286,6 +279,21 @@
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.488515219.1413589096" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.303213905.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.753671131">
+						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.753671131" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.1588865866">
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.1932615308" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.1673613560" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.2131107226" name="DSC C/C++ Compiler"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1951463958" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.1293648800" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.471053904" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.1104522645" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.1874388797" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
 				</configuration>
@@ -305,22 +313,22 @@
 					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="elf" artifactName="DSC-56F8365-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531" isPrebuildInvalidatingBuild="false" name="MC56F8365" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+				<configuration artifactExtension="elf" artifactName="DSC-56F8365-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;org.eclipse.cdt.core.GmakeErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531" isPrebuildInvalidatingBuild="false" name="MC56F8365" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
 					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531." name="/" resourcePath="">
 						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.1970520349" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
 							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.629324061" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
-							<builder buildPath="${ProjDirPath}/MC56F8365" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.286484226" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<builder buildPath="${ProjDirPath}/MC56F8365" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.286484226" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.438568287" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.2038811590" name="Library Search Paths" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch"/>
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.1329413651" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}\Project_Settings\Linker_Files\linker_8365.cmd" valueType="string"/>
@@ -400,7 +408,9 @@
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.862205464" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.50715869.adjusted.1927146368" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.50715869" value="false" valueType="boolean"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1212117275.adjusted.2146080826" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1212117275" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1315852900" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1315852900" name="DSC C/C++ Compiler"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.2133887416" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.1289779884" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
 							</tool>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.186858054" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
 								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.933529820" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include"/>
@@ -412,19 +422,6 @@
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.1789393608" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1219944116">
-						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1219944116" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.522176682">
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.1417843397" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.696012017" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.2024835523" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.922931909" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.2021717286" name="Resource Custom Build Step Input Type">
-								<additionalInput kind="additionalinputdependency" paths=""/>
-							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.1038203957" name="Resource Custom Build Step Output Type"/>
-						</tool>
-					</fileInfo>
 					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531.Sources/VectorTable.asm" name="VectorTable.asm" rcbsApplicability="disable" resourcePath="Sources/VectorTable.asm" toolsToInvoke="com.freescale.dsc.cdt.toolchain.assembler.446673698">
 						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.446673698" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler.186858054">
 							<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.1412789027" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
@@ -434,6 +431,21 @@
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.488515219.167903794" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.2038550531.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1219944116">
+						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1219944116" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.522176682">
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.1417843397" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.696012017" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.2024835523" name="DSC C/C++ Compiler"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.392568683" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.1766503756" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.922931909" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.2021717286" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.1038203957" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
 				</configuration>
@@ -453,22 +465,22 @@
 					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
-					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="elf" artifactName="DSC-56F8033-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614" isPrebuildInvalidatingBuild="false" name="MC56F8033" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+				<configuration artifactExtension="elf" artifactName="DSC-56F8033-flash-prog" buildProperties="" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;org.eclipse.cdt.core.GmakeErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614" isPrebuildInvalidatingBuild="false" name="MC56F8033" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
 					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614." name="/" resourcePath="">
 						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.1017977058" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
 							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.1172417389" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
-							<builder buildPath="${ProjDirPath}/MC56F8033" errorParsers="com.freescale.core.ide.cdt.errorParsers.GCCErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.237666234" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<builder buildPath="${ProjDirPath}/MC56F8033" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.237666234" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildWorkspaceOn="true" parallelizationNumber="-1" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.2065278158" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.1798311139" name="Library Search Paths" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch"/>
 								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.1007259032" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}\Project_Settings\Linker_Files\linker_8033.cmd" valueType="string"/>
@@ -546,7 +558,9 @@
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.1711721028" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.1052245114" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
 								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.223805878" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1226022603" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.1226022603" name="DSC C/C++ Compiler"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.2069065027" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.670358640" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
 							</tool>
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.1459362011" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
 								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.423420834" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include"/>
@@ -558,19 +572,6 @@
 							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.1194878943" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1588276324">
-						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1588276324" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.239860019">
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.885128224" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
-							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.353540397" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
-							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.303305897" name="DSC C/C++ Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType"/>
-						</tool>
-						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.338005719" name="Resource Custom Build Step">
-							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.448311578" name="Resource Custom Build Step Input Type">
-								<additionalInput kind="additionalinputdependency" paths=""/>
-							</inputType>
-							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.849415462" name="Resource Custom Build Step Output Type"/>
-						</tool>
-					</fileInfo>
 					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614.Sources/VectorTable.asm" name="VectorTable.asm" rcbsApplicability="disable" resourcePath="Sources/VectorTable.asm" toolsToInvoke="com.freescale.dsc.cdt.toolchain.assembler.726633573">
 						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.726633573" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler.1459362011">
 							<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.741751689" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
@@ -580,6 +581,21 @@
 								<additionalInput kind="additionalinputdependency" paths=""/>
 							</inputType>
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.488515219.1521771488" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1133012134.1137973614.Sources/main.c" name="main.c" rcbsApplicability="disable" resourcePath="Sources/main.c" toolsToInvoke="com.freescale.dsc.cdt.toolchain.compiler.1588276324">
+						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1588276324" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler.239860019">
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698.885128224" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.1357621698" value="false" valueType="boolean"/>
+							<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111.353540397" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.969329111" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.303305897" name="DSC C/C++ Compiler"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.2076703255" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+							<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.1212442569" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+						</tool>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.728196494.338005719" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1185250130.448311578" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.699758486.849415462" name="Resource Custom Build Step Output Type"/>
 						</tool>
 					</fileInfo>
 				</configuration>
@@ -979,4 +995,5 @@
 			</profile>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 </cproject>

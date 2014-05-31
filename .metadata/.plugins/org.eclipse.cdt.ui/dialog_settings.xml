@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="C:\Users\podonoghue\Development\Settings" key="org.eclipse.cdt.ui.codeformatter.savepath.loadpath"/>
+	<item value="875" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_height"/>
+	<item value="1" key="org.eclipse.cdt.uiformatter_page.line_wrapping_tab_page.last_category_index"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_page.white_space_tab_page.node"/>
+	<item value="true" key="LexicalSortingAction.sort"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_x"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_y"/>
+	<item value="1117" key="org.eclipse.cdt.uiformatter_pagemodify_dialog.preferred_width"/>
+	<item value="0" key="org.eclipse.cdt.uiformatter_page.white_space.c_view.inner"/>
+	<section name="OptionalMessageDialog.hide.">
+	</section>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="PDOMSearchPage">
+	</section>
+	<section name="RenameInformationPopup">
+	</section>
+	<section name="org.eclipse.cdt.ui.OPEN_ACTION_SELECTION_DIALOG_SECTION">
+		<item value="398" key="DIALOG_WIDTH"/>
+		<item value="242" key="DIALOG_Y_ORIGIN"/>
+		<item value="437" key="DIALOG_HEIGHT"/>
+		<item value="769" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="CRenameRefactoringInputPage">
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+</section>

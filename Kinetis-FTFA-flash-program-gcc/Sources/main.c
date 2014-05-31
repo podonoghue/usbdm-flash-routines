@@ -119,7 +119,6 @@ typedef struct {
 #define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
 #define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
 #define DO_VERIFY_RANGE       (1<<5) // Verify range
-#define DO_PARTITION_FLEXNVM  (1<<7) // Program FlexNVM DFLASH/EEPROM partitioning
 #define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
 
 #define IS_COMPLETE           (1<<31)
@@ -140,7 +139,6 @@ typedef struct {
 #define CAP_RELOCATABLE        (1<<31)
 
 #define ADDRESS_LINEAR (1UL<<31) // Indicate address is linear
-#define ADDRESS_EEPROM (1UL<<30) // Indicate address lies within EEPROM
 
 // These error numbers are just for debugging
 typedef enum {
@@ -217,7 +215,7 @@ void testApp(void);
 void asm_testApp(void);
 void executeCommand(volatile FlashController *controller);
 
-//! Set error code to return to BDM & halts
+//! Set error code to return to BDM & halt
 //!
 void setErrorCode(int errorCode) {
    FlashData_t *flashData = gFlashProgramHeader.flashData;
@@ -364,7 +362,6 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
-#if 1
 //! Check that a range of flash is blank (=0xFFFF)
 //!
 void blankCheckRange(FlashData_t *flashData) {
@@ -387,43 +384,6 @@ void blankCheckRange(FlashData_t *flashData) {
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
-#else
-//! Check that a range of flash is blank (=0xFFFF)
-//!
-void blankCheckRange(FlashData_t *flashData) {
-   static const uint32_t  elementSize = 8; // Size of element verified
-   uint32_t                   address     = fixAddress(flashData->address);
-   uint32_t                   numElements = (flashData->dataSize+elementSize-1)/elementSize;
-
-   if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
-      return;
-   }
-   if ((address & (elementSize-1)) != 0) {
-      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-   }
-   while (numElements>0) {
-      int rc;
-      uint16_t num = 0x8000;
-      if (num>numElements) {
-         num = numElements;
-      }
-      flashData->controller->fccob0_3 = (F_RD1SEC << 24) | address;
-      flashData->controller->fccob4_7 = (num <<16) | (F_USER_MARGIN<<8) | 0;
-      rc = executeCommand(flashData->controller);
-      if (rc != FLASH_ERR_OK) {
-         if (rc == FLASH_ERR_PROG_MGSTAT0) {
-            rc = FLASH_ERR_ERASE_FAILED;
-         }
-//         flashData->frequency = controller->fccob0_3; // debug
-//         flashData->address   = controller->fccob4_7;
-         setErrorCode(rc);         
-      }
-      numElements -= num;
-      address     += elementSize*num;
-   }
-   flashData->flags &= ~DO_BLANK_CHECK_RANGE;
-}
-#endif
 
 //! Minimal vector table
 extern uint32_t __vector_table[];
@@ -441,7 +401,7 @@ void entry(void) {
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
-   // Disable watchdog
+   /* Disable the Watchdog */
    SIM_COPC = COP_DISABLE;
    
    // Handle on programming data

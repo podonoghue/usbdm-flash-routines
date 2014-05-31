@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Kinetis-FTMRH-flash-program-gcc/Project_Settings/Linker_Files/MKE02Z64_flash.ld&apos; to &apos;MKE02Z64_flash_0x1FFFFE00.ld&apos;" description="Rename resource &apos;MKE02Z64_flash.ld&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Project_Settings/Linker_Files/MKE02Z64_flash.ld" name="MKE02Z64_flash_0x1FFFFE00.ld" stamp="1397537747260" updateReferences="true"/>
+</session>

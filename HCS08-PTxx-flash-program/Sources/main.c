@@ -7,11 +7,19 @@
 //! CPU
 //!   CPU08
 //!
-//!
 //! CPU Memory accesses are limited to 64K
+//!
+//!============================================================================
+//!   WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING   WARNING 
+//!  
+//! The WDOG address is hard-coded in this routine due to HCS08 CPU limitations
+//!
+//!============================================================================
+//!   WARNING  WARNING  WARNING  WARNING  WARNING  WARNING  WARNING   WARNING 
 //!
 //! History
 //! =======================================================================================================
+//! 26 Apr 22 | Changed WDOG to use refresh rather than disable                                 V4.10.6.140
 //!  4 Mar 14 | Removed unnecessary alignment check on EEPROM                                   V4.10.6.120
 //! =======================================================================================================
 #pragma CODE_SEG code
@@ -61,16 +69,6 @@ typedef struct {
    } fccob;
    volatile uint8_t  fopt;
 } FlashController;
-
-#define FSTAT_OFFSET 6
-
-typedef struct {
-   volatile uint8_t  cs1;
-   volatile uint8_t  cs2;
-   volatile uint16_t cnt;
-   volatile uint16_t toval;
-   volatile uint16_t win;
-} WatchDog;
 
 #define FSTAT_OFFSET              6
 
@@ -167,7 +165,7 @@ typedef struct {
    uint16_t           errorCode;    //  0: Error code from action
    uint16_t           flags;        //  2: Controls actions of routine
    FlashController   *controller;   //  4: Ptr to flash controller
-   WatchDog          *watchDog;     //  6: Address of Watchdog
+   uint16_t           unused;       //  6: Address of Watchdog
    uint16_t           frequency;    //  8: Target frequency (kHz)
    uint16_t           sectorSize;   // 10: Size of Flash memory sectors (smallest erasable block)
    uint32_t           address;      // 12: Linear memory address being accessed
@@ -246,11 +244,29 @@ void setErrorCode(uint8_t errorCode) {
    }
 }
 
+//! Refresh watchdog
+//!
+#pragma NO_ENTRY
+#pragma NO_EXIT
+#pragma NO_RETURN
+void refreshWatchdog(void) {
+#define WATCHDOG_COUNT $3032
+   asm {
+      pshx
+      ldhx  #$A602
+      sthx  WATCHDOG_COUNT
+      
+      ldhx  #$B480
+      sthx  WATCHDOG_COUNT
+      pulx
+      rts
+   }
+}
+
 //! Does any initialisation required before accessing the Flash
 //!
 void initFlash(void) {
    FlashController *controller;
-   WatchDog        *watchDog;
    if ((gFlashData.flags&DO_INIT_FLASH) == 0) {
       return;
    }
@@ -262,13 +278,7 @@ void initFlash(void) {
 
    controller->fprot  = 0xFF;  // Unprotect Flash
    controller->eeprot = 0xFF;  // Unprotect EEprom
-   
-   // Disable Watch-dog
-   watchDog = gFlashData.watchDog;
-   watchDog->toval = 0xFF00;
-   watchDog->cs2   = 0x00;
-   watchDog->cs1   = 0x00;
-      
+        
    gFlashData.flags  &= ~DO_INIT_FLASH;
 }
 
@@ -289,6 +299,14 @@ void doFlashCommand(void) {
       
       // Wait for command complete
    loop:
+      // Refresh watchdog
+      ldhx  #$A602
+      sthx  WATCHDOG_COUNT
+      ldhx  #$B480
+      sthx  WATCHDOG_COUNT
+
+      // HX=FlashController
+      ldhx  gFlashData:CONTROLLER_OFFSET
       lda   FSTAT_OFFSET,x
       and   #FSTAT_CCIF|FSTAT_ACCERR|FSTAT_FPVIOL
       beq   loop
@@ -458,6 +476,7 @@ void verifyRange(void) {
 
    // Verify bytes
    while (numBytes-- > 0) {
+      refreshWatchdog();
       if (*address++ != *data++) {
          setErrorCode(FLASH_ERR_VERIFY_FAILED);
       }
@@ -533,6 +552,7 @@ void blankCheckRange() {
    numBytes = gFlashData.size;
    
    while (numBytes>0) {
+      refreshWatchdog();
       if (*address++ != (uint8_t)-1) {
          setErrorCode(FLASH_ERR_ERASE_FAILED);
       }
