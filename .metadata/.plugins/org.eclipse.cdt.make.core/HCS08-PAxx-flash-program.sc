@@ -56,4 +56,22 @@
 <definedSymbol symbol="__far="/>
 </collector>
 </instance>
+<instance id="toolchain.config.hcs08.release.1655899139.1829550837.691256958;toolchain.config.hcs08.release.1655899139.1829550837.691256958.;hcs08.toolchain.compiler.1544198701;hcs08.toolchain.compiler.base.input.c.283298808">
+<collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<definedSymbol symbol="near="/>
+<definedSymbol symbol="far="/>
+<definedSymbol symbol="__near="/>
+<definedSymbol symbol="__linear="/>
+<definedSymbol symbol="__far="/>
+</collector>
+</instance>
+<instance id="toolchain.config.hcs08.release.1655899139.1829550837.691256958;toolchain.config.hcs08.release.1655899139.1829550837.691256958.;hcs08.toolchain.compiler.1544198701;hcs08.toolchain.compiler.base.input.cpp.1108718322">
+<collector id="org.eclipse.cdt.make.core.PerProjectSICollector">
+<definedSymbol symbol="near="/>
+<definedSymbol symbol="far="/>
+<definedSymbol symbol="__near="/>
+<definedSymbol symbol="__linear="/>
+<definedSymbol symbol="__far="/>
+</collector>
+</instance>
 </scannerInfo>

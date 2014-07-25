@@ -199,7 +199,7 @@ volatile const FlashProgramHeader_t gFlashProgramHeader = {
 
 void setErrorCode(int errorCode) __attribute__ ((noreturn));
 void initFlash(FlashData_t *flashData);
-void eraseFlashBlock(FlashData_t *flashData);
+void eraseBlock(FlashData_t *flashData);
 void programRange(FlashData_t *flashData);
 void verifyRange(FlashData_t *flashData);
 void eraseRange(FlashData_t *flashData);
@@ -224,7 +224,7 @@ void setErrorCode(int errorCode) {
 //! Does any initialisation required before accessing the Flash
 //!
 void initFlash(FlashData_t *flashData) {
-   volatile FlashController *controller = flashData->controller;;
+   volatile FlashController *controller = flashData->controller;
    if ((flashData->flags&DO_INIT_FLASH) == 0) {
       return;
    }
@@ -262,7 +262,7 @@ void executeCommand(volatile FlashController *controller) {
 
 //! Erase entire flash block
 //!
-void eraseFlashBlock(FlashData_t *flashData) {
+void eraseBlock(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
    uint32_t                  address    = flashData->address;
    
@@ -271,21 +271,22 @@ void eraseFlashBlock(FlashData_t *flashData) {
    }
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
-   
-   if ((address & ADDRESS_EEPROM) != 0) {
-      // Global address [23] selects between flash (0) or EEPROM (1) block.
-      address |= (1<<23); 
-   }
+
+   // Address is an offset within EEPROM block (assume <64K)
+   address &= 0x0000FFFF;
+   // Global address [23] selects between flash (0) or EEPROM (1) block.
+   //address &= ~(1<<23); // Flash
+
    // Write command & address
    controller->fccobix = 0; controller->fccob.high = FCMD_ERASE_FLASH_BLOCK; 
-                            controller->fccob.low  = ((uint8_t)(address>>16));
-   controller->fccobix = 1; controller->fccob.high =  (uint8_t)(address>>8);
-                            controller->fccob.low  =  (uint8_t)(address);
+                            controller->fccob.low  = (uint8_t)(address>>16);
+   controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
+                            controller->fccob.low  = (uint8_t)(address);
    executeCommand(controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
-//! Program a range of flash from buffer
+//! Program a range from buffer
 //!
 //! Returns an error if the security location is to be programmed
 //! to permanently lock the device
@@ -293,71 +294,41 @@ void eraseFlashBlock(FlashData_t *flashData) {
 void programRange(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
    uint32_t         address    = flashData->address;
-   const uint32_t  *data       = flashData->dataAddress;
+   uint32_t         endAddress = flashData->address+flashData->dataSize;
+   const uint32_t  *data       = (uint32_t*)flashData->dataAddress;
    
    if ((flashData->flags&DO_PROGRAM_RANGE) == 0) {
       return;
    }
-   // Programs phrases
-   
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
 
-   if ((address & ADDRESS_EEPROM) == 0) {
-      uint16_t numPhrases = flashData->dataSize/4;
-      // Program 1 to 2 Flash phrases (1 phrase = 4 bytes)
-      while (numPhrases-- > 0) {
-         uint32_t dataValue;
-         // Write command
-         controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_FLASH; 
-                                  controller->fccob.low  = (uint8_t)(address>>16);
-         controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
-                                  controller->fccob.low  = (uint8_t)(address);
-         // 1st phrase
-         dataValue = *data++; 
-         controller->fccobix = 2; controller->fccob.high    = (uint8_t)(dataValue>>8);
-                                  controller->fccob.low     = (uint8_t)(dataValue);
-         controller->fccobix = 3; controller->fccob.high    = (uint8_t)(dataValue>>24);
-                                  controller->fccob.low     = (uint8_t)(dataValue>>16);
-         if (numPhrases > 0) {
-            // 2nd phrase
-            dataValue = *data++; 
-            controller->fccobix = 4; controller->fccob.high    = (uint8_t)(dataValue>>8);
-                                     controller->fccob.low     = (uint8_t)(dataValue);
-            controller->fccobix = 5; controller->fccob.high    = (uint8_t)(dataValue>>24);
-                                     controller->fccob.low     = (uint8_t)(dataValue>>16);
-            numPhrases--;
-           }
-         executeCommand(controller);
-         address += 8;
-      }
-   }
-   else {
-      uint16_t numBytes = flashData->dataSize;
-      // Program 1 to 4 EEPROM bytes
-      while (numBytes-- > 0) {
-         uint32_t dataValue = *data++;
-         // Write command
-         controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_EEPROM; 
-                                  controller->fccob.low  = (uint8_t)(address>>16);
-		   controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
-		                            controller->fccob.low  = (uint8_t)(address);
-         controller->fccobix = 2; controller->fccob.low  = (uint8_t)(dataValue);
-         if (numBytes > 0) {
-            numBytes--;
-            controller->fccobix = 3; controller->fccob.low  = (uint8_t)(dataValue>>8);
-            if (numBytes > 0) {
-               numBytes--;
-               controller->fccobix = 4; controller->fccob.low  = (uint8_t)(dataValue>>16);
-               if (numBytes > 0) {
-                  numBytes--;
-                  controller->fccobix = 5; controller->fccob.low  = (uint8_t)(dataValue>>24);
-               }
-            }
-         }
-         executeCommand(controller);
-         address += 4;
-      }
+   // Program 1 to 2 Flash phrases (1 phrase = 4 bytes)
+   while (address < endAddress) { // Exclusive end address
+      uint32_t dataValue;
+      
+      // Write command & address
+      controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_FLASH; 
+      /*                    */ controller->fccob.low  = (uint8_t)(address>>16);
+      controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
+      /*                    */ controller->fccob.low  = (uint8_t)(address);
+      // 1st phrase
+      dataValue  = *data++; 
+      address   += 4;
+      controller->fccobix = 2; controller->fccob.high    = (uint8_t)(dataValue>>8);
+      /*                    */ controller->fccob.low     = (uint8_t)(dataValue);
+      controller->fccobix = 3; controller->fccob.high    = (uint8_t)(dataValue>>24);
+      /*                    */ controller->fccob.low     = (uint8_t)(dataValue>>16);
+      if (address < endAddress) {
+         // 2nd phrase
+         dataValue  = *data++; 
+         address   += 4;
+         controller->fccobix = 4; controller->fccob.high    = (uint8_t)(dataValue>>8);
+         /*                    */ controller->fccob.low     = (uint8_t)(dataValue);
+         controller->fccobix = 5; controller->fccob.high    = (uint8_t)(dataValue>>24);
+         /*                    */ controller->fccob.low     = (uint8_t)(dataValue>>16);
+        }
+      executeCommand(controller);
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
@@ -365,16 +336,18 @@ void programRange(FlashData_t *flashData) {
 //! Verify a range of flash against buffer
 //!
 void verifyRange(FlashData_t *flashData) {
-   uint8_t       *address   = (uint8_t *)flashData->address;
-   const uint8_t *data      = (uint8_t *)flashData->dataAddress;
-   uint32_t       numBytes  = flashData->dataSize;
+   uint8_t       *address    = (uint8_t *)flashData->address;
+   uint8_t       *endAddress = (uint8_t *)(flashData->address+flashData->dataSize);
+   const uint8_t *data       = (uint8_t *)flashData->dataAddress;
    
    if ((flashData->flags&DO_VERIFY_RANGE) == 0) {
       return;
    }
    // Verify bytes
-   while (numBytes-- > 0) {
+   while (address<endAddress) {
       if (*address++ != *data++) {
+         // Record failure address
+//         flashData->controller = (FlashController*)(address);
          setErrorCode(FLASH_ERR_VERIFY_FAILED);
       }
    flashData->flags &= ~DO_VERIFY_RANGE;
@@ -388,7 +361,6 @@ void eraseRange(FlashData_t *flashData) {
    uint32_t address     = flashData->address;
    uint32_t endAddress  = address + flashData->dataSize - 1; // Inclusive
    uint32_t pageMask    = flashData->sectorSize-1U;
-   uint8_t  eraseCommand;
    
    if ((flashData->flags&DO_ERASE_RANGE) == 0) {
       return;
@@ -403,19 +375,13 @@ void eraseRange(FlashData_t *flashData) {
    // Round end address to end of block (inclusive)
    endAddress |= pageMask;
    
-   if ((address & ADDRESS_EEPROM) != 0) {
-      eraseCommand = FCMD_ERASE_EEPROM_SECTOR;
-   }
-   else {
-      eraseCommand = FCMD_ERASE_FLASH_SECTOR;
-   }
    // Clear any existing errors
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
 
    // Erase each sector
-   while (address <= endAddress) {
+   while (address <= endAddress) { // Inclusive range!
       // Write command
-      controller->fccobix = 0; controller->fccob.high = eraseCommand; 
+      controller->fccobix = 0; controller->fccob.high = FCMD_ERASE_FLASH_SECTOR; 
                                controller->fccob.low  = (uint8_t)(address>>16);
       controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);
                                controller->fccob.low  = (uint8_t)(address);
@@ -426,25 +392,23 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
-//! Check that a range of flash is blank (=0xFFFF)
+//! Check that a range of flash is blank (=0xFFFFFFFF)
+//!
+//! Note: Range is treated as longwords (32-bit values)
 //!
 void blankCheckRange(FlashData_t *flashData) {
-   const int  itemSize  = 4;
-   uint32_t  *address   = (uint32_t *)(flashData->address);
-   uint32_t   numItems  = (flashData->dataSize+itemSize-1)/itemSize;
+   uint32_t  *address     = (uint32_t *)(flashData->address);
+   uint32_t  *endAddress  = (uint32_t *)(flashData->address+flashData->dataSize);
    
    if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
       return;
    }
-//   if (((int)address & (itemSize-1)) != 0) {
-//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-//   }
-   while (numItems>0) {
-      if (*address != 0xFFFFFFFFUL) {
+   while (address < endAddress) {
+      if (*address++ != 0xFFFFFFFFUL) {
+         // Record failure address
+//         flashData->controller = (FlashController*)address;
          setErrorCode(FLASH_ERR_ERASE_FAILED);
       }
-      numItems--;
-      address++;
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
@@ -467,7 +431,6 @@ void entry(void) {
    
 #ifndef DEBUG
    /* Disable the Watchdog */
-
    WDOG.cnt    = 0x20C5;                  // Write the 1st unlock word
    WDOG.cnt    = 0x28D9;                  // Write the 2nd unlock word
    WDOG.toval  = 0x28D9;                  // Setting timeout value
@@ -484,12 +447,8 @@ void entry(void) {
    // No errors so far
    flashData->errorCode = FLASH_ERR_OK;
    
-   // Clear invalid/unused address bits
-   // A23 is used for Flash block number
-   flashData->address &= 0x008FFFFFUL;
-   
    initFlash(flashData);
-   eraseFlashBlock(flashData);
+   eraseBlock(flashData);
    eraseRange(flashData);
    blankCheckRange(flashData);
    programRange(flashData);

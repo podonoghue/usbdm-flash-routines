@@ -6,7 +6,7 @@
 ENTRY(asm_testApp)
 
 MEMORY {
-   /* Optimized for 2K RAM */
+   /* Optimized for 1K RAM */
    m_flashProg (RX) : ORIGIN = 0x1FFFFF00, LENGTH = 0x400 /* 1K RAM (.25K lower)+(.75K upper) */
 }
 

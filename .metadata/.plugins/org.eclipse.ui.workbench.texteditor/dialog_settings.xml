@@ -13,26 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="FMC_PFB0CR" key="selection"/>
+		<item value="__loadAddress" key="selection"/>
 		<list key="findhistory">
-			<item value="FMC_PFB0CR"/>
-			<item value="FMC_PFAPR"/>
-			<item value="cache"/>
-			<item value="PLACR"/>
-			<item value="FLASH_ERR_VERIFY_FAILED"/>
-			<item value="DEBUG"/>
-			<item value="fdiv"/>
-			<item value="fccob"/>
+			<item value="__loadAddress"/>
+			<item value="entry"/>
+			<item value="blankCheckRange"/>
+			<item value="eraseFlashBlock"/>
+			<item value="`"/>
+			<item value="FCMD_ERASE_FLASH_SECTOR"/>
+			<item value="FCMD_PROGRAM_EEPROM"/>
+			<item value="FCMD_PROGRAM_FLASH"/>
 		</list>
 		<list key="replacehistory">
+			<item value="eraseEepromBlock"/>
+			<item value="WDOG_DISABLED_CTRL"/>
+			<item value="gFlashProgramHeader.flashData"/>
+			<item value="//!"/>
 			<item value="fccob"/>
 			<item value="b.low "/>
 			<item value="b.high"/>
 			<item value="flashAddress"/>
-			<item value="writeProgramStatus"/>
-			<item value="writeMassEraseStatus"/>
-			<item value="writeBlankCheckStatus"/>
-			<item value="writeSelectiveEraseStatus"/>
 		</list>
 	</section>
 </section>

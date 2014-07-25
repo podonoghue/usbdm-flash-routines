@@ -27,7 +27,7 @@
 		<item value="org.eclipse.ui.wizards.import.ExternalProject" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
-			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
+			<item value="com.freescale.core.ide.ui.category.codewarrior"/>
 		</list>
 	</section>
 </section>
