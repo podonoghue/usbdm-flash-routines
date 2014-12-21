@@ -337,8 +337,8 @@ void verifyRange(FlashData_t *flashData) {
 //         flashData->controller = (FlashController*)(address);
          setErrorCode(FLASH_ERR_VERIFY_FAILED);
       }
-   flashData->flags &= ~DO_VERIFY_RANGE;
    }
+   flashData->flags &= ~DO_VERIFY_RANGE;
 }
 
 //! Erase a range of flash

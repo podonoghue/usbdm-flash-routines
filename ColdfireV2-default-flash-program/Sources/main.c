@@ -13,7 +13,7 @@ extern uint8_t _vect[];
 //==========================================================================================================
 // Target defines
 
-#define CLOCK_CALIB (2084616) // 1 second count for a 25MHz Coldfire V2 chip
+#define CLOCK_CALIB  (1797981) // 1 second count for a 25MHz Coldfire V2 chip
 
 #define NV_SECURITY_ADDRESS        (0x00000400)
 #define NV_SEC_KEYEN               (1<<31)

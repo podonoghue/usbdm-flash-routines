@@ -1,4 +1,4 @@
-/* This is a linker parameter file for the mc9s08pt60 */
+/* This is a linker parameter file */
 
 NAMES END
 

@@ -13,4 +13,6 @@
 *.exe
 *.dll
 
+.metadata
+
 .settings
