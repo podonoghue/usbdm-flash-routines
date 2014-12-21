@@ -1,2 +1,0 @@
-eclipse.preferences.version=1
-org.eclipse.core.variables.valueVariables=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<valueVariables>\r\n<valueVariable description\="The current GDI folder path." name\="MCUGDIDirectory" readOnly\="false" value\="C\:\\Apps\\Freescale\\CW MCU v10.6\\eclipse\\../MCU\\bin\\plugins\\support\\HC08\\gdi"/>\r\n</valueVariables>\r\n
