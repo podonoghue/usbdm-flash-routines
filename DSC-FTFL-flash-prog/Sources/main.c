@@ -1,55 +1,23 @@
+
 //*******************************************************
 // Note all addresses & sizes are in words (16 bits)
 //*******************************************************
 
 /*
-   This code is used with the following devices:
+  FTFL - Used for (MC56F84452, MC56F84763 tested):
+                 MC56F84441, MC56F84442, MC56F84540, MC56F84543
+                 MC56F84451, MC56F84452, MC56F84550, MC56F84553
+                 MC56F84462, MC56F84565, MC56F84567, MC56F84763, MC56F84766, MC56F84769
+                 MC56F84585, MC56F84587, MC56F84786, MC56F84789
   
-   DSC-56F8006-flash-prog.elf.S
-      MC56F8002, MC56F8006
-
-   DSC-56F8014-flash-prog.elf.S
-      MC56F8011/13, /MC56F8014
-      
-   DSC-56F8023-flash-program.elf.S
-      MC56F8023/33
-      MC56F8025/35
-      MC56F8036
-      MC56F8027/37
-      
-   DSC-56F825X-flash-program.elf.S
-      MC56F8245/46/47/55/56/57
-
-   DSC-56F8323-flash-prog.elf.S
-      MC56F8122/MC56F8322
-      MC56F8123/MC56F8323
-      MC56F8165/MC56F8365
-	   
 ===============================================================================================================
 | History                                                                                                      
 ---------------------------------------------------------------------------------------------------------------
-| 19 Jan 2015 | Added factory clock trim                                                         | V4.10.6.250
+| 19 Jan 2015 | Created                                                                           | V4.10.6.250
 ===============================================================================================================
 */
-typedef signed char int8_t;
-typedef short int   int16_t;
-typedef long int    int32_t;
 
-typedef unsigned char		 uint8_t;
-typedef unsigned short int  uint16_t;
-typedef unsigned long int   uint32_t;
-
-#ifndef NULL
-#define NULL ((void*)0)
-#endif
-
-#define MC56F8006 1
-#define MC56F8014 2
-#define MC56F8023 3
-#define MC56F825X 4 
-#define MC56F8323 5
-
-//#define DEBUG
+#include <stdint.h>
 
 enum AddressModifiers {
    ADDRESS_DATA   = 1UL<<31,  //!< DATA (X:) memory (DSC)
@@ -58,96 +26,98 @@ enum AddressModifiers {
    ADDRESS_A23    = 1UL<<23   //!< A23 bit for Flex/DataFlash on ARM/CFV1+
 } ;
 
-//==========================================================================================================
 // Target defines
 //
-#if (TARGET == MC56F8006)   
-#define CLOCK_CALIB (444039)               // 1 second count for a 4000 kHz sysclock speed MC568014 chip
+#define FTFL 1
+
+#if (TARGET == FTFL)   
+#define CLOCK_CALIB (500553)              // 1 second count for a 4000 kHz sysclock speed MC56F84452 chip
 #define ISOVERLAYED (CAP_DSC_OVERLAY)
-#define  FM_OPT1      (*(uint16_t *) (0xF41B)) // Factory Flash trim
-#define  OCCS_OCTRL   (*(uint16_t *) (0xF164)) // IRC Clock trim
-#define  COP_CTRL     (*(uint16_t *) (0xF140)) // COP control
-#elif (TARGET == MC56F8014)   
-#define CLOCK_CALIB (444039)               // 1 second count for a 4000 kHz sysclock speed MC568014 chip
-#define ISOVERLAYED (CAP_DSC_OVERLAY)
-#define  FM_OPT1      (*(uint16_t *) (0xF41B)) // Factory Flash trim
-#define  OCCS_OCTRL   (*(uint16_t *) (0xF0F5)) // IRC Clock trim
-#define  COP_CTRL     (*(uint16_t *) (0xF0E0)) // COP control
-#elif (TARGET == MC56F8023)   
-#define CLOCK_CALIB (444039)               // 1 second count for a 4000 kHz sysclock speed MC568033 chip
-#define ISOVERLAYED (CAP_DSC_OVERLAY)
-#define  FM_OPT1      (*(uint16_t *) (0xF41B)) // Factory Flash trim
-#define  OCCS_OCTRL   (*(uint16_t *) (0xF135)) // IRC Clock trim
-#define  COP_CTRL     (*(uint16_t *) (0xF120)) // COP control
-#elif (TARGET == MC56F825X)   
-#define CLOCK_CALIB (444039)               // 1 second count for a 4000 kHz sysclock speed MC568245 chip
-#define ISOVERLAYED (CAP_DSC_OVERLAY)
-//#define  FM_OPT1      (*(uint16_t *) (0xF41A)) // Factory Flash trim - automatic trim
-//#define  OCCS_OCTRL   (*(uint16_t *) (0xF135)) // IRC Clock trim
-#define  COP_CTRL     (*(uint16_t *) (0xF110)) // COP control
-#elif (TARGET == MC56F8323)   
-#define CLOCK_CALIB (508214)               // 1 second count for a 4000 kHz sysclock speed MC568323 chip
-#define ISOVERLAYED (0)
-#define  FM_OPT1      (*(uint16_t *) (0xF41B)) // Factory Flash trim
-#define  OCCS_OCTRL   (*(uint16_t *) (0xF2D5)) // IRC Clock trim
-#define  COP_CTRL     (*(uint16_t *) (0xF2C0)) // COP control
+#define COP_CTRL      (*(uint16_t *)0x00E320UL)
+#define OCCS_OSCTL1   (*(uint16_t *)0x00E2B4UL)
+#define SIM_NVMOPT2H  (*(uint16_t *)0x00E42CUL)
 #else
 #error "TARGET not defined"
 #endif
 
-#ifdef DEBUG
-#define CLK_DIV     (0x0A)
-#define FTSR_BASE   (FlashController *)0x00F400
-#endif
-
 #define FREQ_CALIB  (4000)   // Clock calibration frequency (kHz)
 
-#define NV_SECURITY_ADDRESS        (0xFF00)
-#define NV_SEC_KEY_MASK            (3<<6)
-#define NV_SEC_KEY_ENABLE          (2<<6)
-#define NV_SEC_KEY_DISABLE         (1<<6)
-#define NV_SEC_SEC_MASK            (3<<0)
-#define NV_SEC_SECURE              (1<<0)
-#define NV_SEC_UNSECURE            (2<<0)
-#define NV_SEC_DEFAULT_UNSECURED   (NV_SEC_KEY_ENABLE|NV_SEC_UNSECURE)
-#define NV_SEC_DEFAULT_SECURED     (NV_SEC_KEY_ENABLE|NV_SEC_SECURE)
+#define NV_SECURITY_ADDRESS            (0x00000400UL)
+#define NV_FSEC_ADDRESS                (NV_SECURITY_ADDRESS+0x0C)
+#define FTFL_FSEC_KEY_MASK              0xC0
+#define FTFL_FSEC_KEY_ENABLE            0x80
+#define FTFL_FSEC_KEY_DISABLE           0xC0
+#define FTFL_FSEC_MEEN_MASK             0x30
+#define FTFL_FSEC_MEEN_ENABLE           0x30
+#define FTFL_FSEC_MEEN_DISABLE          0x20
+#define FTFL_FSEC_FSLACC                0x0C
+#define FTFL_FSEC_SEC_MASK              0x03
+#define FTFL_FSEC_UNSEC                 0x02
+#define FTFL_FSEC_SEC                   0x03
 
+#ifndef NULL
+#define NULL ((void*)0)
+#endif
+
+// Cache control
+#define FMC_PFAPR                       (*(volatile uint32_t *)0x00DE00UL)
+#define FMC_PFB0CR                      (*(volatile uint32_t *)0x00DE02UL)
+#define FMC_PFB1CR                      (*(volatile uint32_t *)0x00DE04UL)
+
+//#pragma pack(1)
 typedef struct {
-   volatile uint16_t  clkd;
-   volatile uint16_t  cr;
-   volatile uint16_t  pad1;
-   volatile uint16_t  sech;
-   volatile uint16_t  secl;
-   volatile uint16_t  pad2[11];
-   volatile uint16_t  prot;
-   volatile uint16_t  protb;
-   volatile uint16_t  pad3;
-   volatile uint16_t  ustat;
-   volatile uint16_t  cmd;
-   volatile uint16_t  pad4[3];
-   volatile uint16_t  dataAddress;
-   volatile uint16_t  pad5;
-   volatile uint16_t  opt0;
-   volatile uint16_t  opt1;
-   volatile uint16_t  pad6[2];
-   volatile uint16_t  tst_sig;
+   uint8_t  fstat;
+   uint8_t  fcnfg;
+   uint8_t  fsec;
+   uint8_t  fopt;
+   uint32_t fccob3_0;
+   uint32_t fccob7_4;
+   uint32_t fccobB_8;
+   uint32_t fprot3_0;
+   uint8_t  feprot;
+   uint8_t  fdprot;
 } FlashController;
+//#pragma pack(0)
 
-#define FSTAT_CBEIF    (1<<7)  //!< Command buffer empty
-#define FSTAT_CCIF     (1<<6)  //!< Command complete
-#define FSTAT_PVIOL    (1<<5)  //!< Protection violation
-#define FSTAT_ACCERR   (1<<4)  //!< Access error
-#define FSTAT_BLANK    (1<<2)  //!< Blank check OK
+#define FLASH_CONTROLLER (*(FlashController *)0x0001C780UL)
 
-#define CFMCLKD_DIVLD   (1<<7)
-#define CFMCLKD_PRDIV8  (1<<6)
-#define CFMCLKD_FDIV    (0x3F)
+#define FTFL_FSTAT_CCIF                 0x80
+#define FTFL_FSTAT_RDCOLLERR            0x40
+#define FTFL_FSTAT_ACCERR               0x20
+#define FTFL_FSTAT_FPVIOL               0x10
+#define FTFL_FSTAT_MGSTAT0              0x01
 
+#define FTFL_FCNFG_CCIE                 0x80
+#define FTFL_FCNFG_RDCOLLIE             0x40
+#define FTFL_FCNFG_ERSAREQ              0x20
+#define FTFL_FCNFG_ERSSUSP              0x10
+#define FTFL_FCNFG_SWAP                 0x08
+#define FTFL_FCNFG_PFLSH                0x04
+#define FTFL_FCNFG_RAMRDY               0x02
+#define FTFL_FCNFG_EEERDY               0x01
+
+#define FOPT_LPBOOTn                    0x01
+#define FOPT_EZPORT                     0x02
+   
 // Flash commands
-#define FCMD_PAGE_ERASE_VERIFY    (0x05)
-#define FCMD_WORD_PROGRAM         (0x20)
-#define FCMD_PAGE_ERASE           (0x40)
-#define FCMD_MASS_ERASE           (0x41)
+#define F_RD1BLK                        0x00UL
+#define F_RD1SEC                        0x01UL
+#define F_PGMCHK                        0x02UL
+#define F_RDRSRC                        0x03UL
+#define F_PGM4                          0x06UL
+#define F_ERSBLK                        0x08UL
+#define F_ERSSCR                        0x09UL
+#define F_PGMSEC                        0x0BUL
+#define F_RD1ALL                        0x40UL
+#define F_RDONCE                        0x41UL
+#define F_PGMONCE                       0x43UL
+#define F_ERSALL                        0x44UL
+#define F_VFYKEY                        0x45UL
+#define F_PGMPART                       0x80UL
+#define F_SETRAM                        0x81UL
+
+#define F_USER_MARGIN                   0x01UL // Use 'user' margin on flash verify
+#define F_FACTORY_MARGIN                0x02UL // Use 'factory' margin on flash verify
 
 //==========================================================================================================
 // Operation masks
@@ -265,6 +235,8 @@ void  timingLoop();
 void  doTiming();
 void  entry(void);
 void  testApp(void);
+void executeCommand(volatile FlashController *controller);
+uint32_t fixAddress(uint32_t address);
 
 //! Get address of Header Block
 //!
@@ -338,63 +310,87 @@ void initFlash(void) {
    if ((flashData->flags&DO_INIT_FLASH) == 0) {
       return;
    }
-#ifdef DEBUG
-   controller->clkd  = CLK_DIV;
-   controller->cr    = 0x00;  // 0 => Program or Boot flash, 1 => Data flash (8323)
-   controller->prot  = 0x00;  // Unprotect flash
-   controller->protb = 0x00;  // Unprotect boot flash
-#endif   
-   // Check if clock divider set
-   if ((controller->clkd & CFMCLKD_DIVLD) == 0) {
-      setErrorCode(FLASH_ERR_CLKDIV);
-   }
-   controller->cr = 0x00;
-#if (TARGET == MC56F8323)   
-   // Set flash bank select if DATA space
-   if (flashData->address&ADDRESS_DATA) {
-      controller->cr = 0x01;
-   }
-#endif
+   controller->fprot3_0 = 0xFFFFFFFFUL;  // Unprotect PFLASH
+   controller->feprot   = 0xFF;          // Unprotect EEPROM
+   controller->fdprot   = 0xFF;          // Unprotect DFLASH
+   
+   // Disable flash caching
+   FMC_PFB0CR  = 0x00000000;
+   FMC_PFB1CR  = 0x00000000;
+
    flashData->flags &= ~DO_INIT_FLASH;
+}
+
+//! Launch & wait for Flash command to complete
+//!
+void executeCommand(volatile FlashController *controller) {
+   // Clear any existing errors
+   controller->fstat = FTFL_FSTAT_ACCERR|FTFL_FSTAT_FPVIOL;
+
+   // Launch command
+   controller->fstat = FTFL_FSTAT_CCIF;
+
+   // Wait for command complete
+   while ((controller->fstat & FTFL_FSTAT_CCIF) == 0) {
+   }
+   // Handle any errors
+   if ((controller->fstat & FTFL_FSTAT_FPVIOL ) != 0) {
+      setErrorCode(FLASH_ERR_PROG_FPVIOL);
+   }
+   if ((controller->fstat & FTFL_FSTAT_ACCERR ) != 0) {
+      setErrorCode(FLASH_ERR_PROG_ACCERR);
+   }
+   if ((controller->fstat & FTFL_FSTAT_MGSTAT0 ) != 0) {
+      setErrorCode(FLASH_ERR_PROG_MGSTAT0);
+   }
+}
+
+/*
+ * Converts Global WORD address to adjusted BYTE address required by flash operations
+ * 
+ * A[31] indicates X space
+ * 
+ */
+uint32_t fixAddress(uint32_t address) {
+   // Validate & convert to byte address
+   if (address <= 0x0001FFFF) {
+      // P:ROM Primary Program/Data Flash
+      return address<<1;
+   }
+   else if ((address >= 0x00068000) && (address <= 0x0006BFFF)) {
+      // P:ROM Secondary(boot) Program/Data Flash
+      return ((address-0x00068000)<<1)|(1UL<<23);
+   }
+   else if ((address >= 0x80008000) && (address <= 0x8000BFFF)) {
+      // X:ROM Secondary(boot) Program/Data Flash - Map to P:ROM
+      return ((address-0x80008000)<<1)|(1UL<<23);
+   }
+   else if ((address >= 0x80020000) && (address <= 0x8003FFFF)) {
+      // X:ROM Primary Program/Data Flash - Map to PROM
+      return (address-0x80020000)<<1;
+   }
+   // Not valid programmable memory
+   setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
 }
 
 //! Erase entire flash block
 //!
 void eraseFlashBlock(void) {
-   uint16_t         fstat;
+   uint32_t         address;
    FlashData_t     *flashData = getHeader();
    FlashController *controller = flashData->controller;
    if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
-   // Clear any existing errors (1 bit at a time)
-   controller->ustat   = FSTAT_ACCERR;
-   controller->ustat   = FSTAT_PVIOL;
-   
-   // Write dummy data to Flash
-   writeMemorySpace(flashData->address, 0xFFFF);
+   // Convert to byte address
+   address        = fixAddress(flashData->address);
 
-   // Set command
-   controller->cmd = FCMD_MASS_ERASE;
-
-   // Launch command
-   controller->ustat = FSTAT_CBEIF;
-   asm {
-      nop // allow FSTAT_CCIF to clear
-      nop
-      nop
-      nop
+   if ((address & 0x03) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
    }
-   // Wait for command complete
-   do {
-      fstat = controller->ustat;
-   } while ((fstat&(FSTAT_CCIF|FSTAT_ACCERR|FSTAT_PVIOL)) == 0);
-   if ((fstat & FSTAT_ACCERR ) != 0) {
-      setErrorCode(FLASH_ERR_PROG_ACCERR);
-   }
-   if ((fstat & FSTAT_PVIOL ) != 0) {
-      setErrorCode(FLASH_ERR_PROG_FPVIOL);
-   }
+   // Erase block
+   flashData->controller->fccob3_0 = (F_ERSBLK << 24) | address;
+   executeCommand(flashData->controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
@@ -402,59 +398,32 @@ void eraseFlashBlock(void) {
 //!
 void programRange(void) {
    uint32_t         address;
-   const uint16_t  *data;
-   uint16_t         numWords;
-   uint16_t         fstat;
+   const uint32_t  *dataAddress;
+   uint16_t         numLongwords;
    
-   FlashData_t *flashData = getHeader();
-   FlashController *controller = flashData->controller;
+   FlashData_t     *flashData  = getHeader();
    if ((flashData->flags&DO_PROGRAM_RANGE) == 0) {
       return;
    }
-   address    = flashData->address;
-   data       = flashData->dataAddress;
-   numWords   = flashData->dataSize;
-
-   // Clear any existing errors (1 bit at a time)
-   controller->ustat   = FSTAT_ACCERR;
-   controller->ustat   = FSTAT_PVIOL;
-
+   address        = fixAddress(flashData->address);
+   dataAddress    = (uint32_t *)flashData->dataAddress;
+   numLongwords   = flashData->dataSize>>1;
+   
+   if ((address & 0x03) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+   }
    // Program words
-   while (numWords-- > 0) {
-      // Write data to flash P:address
-      writeMemorySpace(address, *data);
-
-      // Set command
-      controller->cmd = FCMD_WORD_PROGRAM;
-
-      // Launch command
-      controller->ustat = FSTAT_CBEIF;
-      asm {
-         nop // allow FSTAT_CBEIF to clear
-         nop
-         nop
-         nop
+   while (numLongwords-- > 0) {
+      if (address == (NV_FSEC_ADDRESS&~3)) {
+         // Check for permanent secure value
+         if ((*dataAddress & (FTFL_FSEC_MEEN_MASK)) == (FTFL_FSEC_MEEN_DISABLE)) {
+            setErrorCode(FLASH_ERR_ILLEGAL_SECURITY);
+         }
       }
-      // Wait for buffer empty or error
-      do {
-         fstat = controller->ustat;
-      } while ((fstat&(FSTAT_CBEIF|FSTAT_ACCERR|FSTAT_PVIOL)) == 0);
-      if ((fstat & FSTAT_ACCERR) != 0)
-         setErrorCode(FLASH_ERR_PROG_ACCERR);
-      if ((fstat & FSTAT_PVIOL) != 0)
-         setErrorCode(FLASH_ERR_PROG_FPVIOL);
-      address++;
-      data++;
-   }
-   // Wait for last command complete
-   do {
-      fstat = controller->ustat;
-   } while ((fstat&(FSTAT_CCIF|FSTAT_ACCERR|FSTAT_PVIOL)) == 0);
-   if ((fstat & FSTAT_ACCERR) != 0) {
-      setErrorCode(FLASH_ERR_PROG_ACCERR);
-   }
-   if ((fstat & FSTAT_PVIOL) != 0) {
-      setErrorCode(FLASH_ERR_PROG_FPVIOL);
+      flashData->controller->fccob3_0 = (F_PGM4 << 24) | address;
+      flashData->controller->fccob7_4 = *dataAddress++;
+      executeCommand(flashData->controller);
+      address += 4;
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
@@ -488,18 +457,18 @@ void verifyRange(void) {
 void eraseRange(void) {
    uint32_t  address;
    uint32_t  endAddress;
-   uint16_t  sectorSize;
+   uint32_t  sectorSize;
    uint32_t  pageMask;
-   uint16_t  fstat;
    
    FlashData_t     *flashData  = getHeader();
    FlashController *controller = flashData->controller;
    if ((flashData->flags&DO_ERASE_RANGE) == 0) {
       return;
    }
-   address     = flashData->address;
-   endAddress  = address + flashData->dataSize-1; // Inclusive
-   sectorSize  = flashData->sectorSize;
+   // Convert addresses to bytes
+   address     = fixAddress(flashData->address);
+   endAddress  = address + (flashData->dataSize<<1)-1; // Inclusive
+   sectorSize  = flashData->sectorSize<<1;
    pageMask    = sectorSize-1U;
    
    // Check for empty range before block rounding
@@ -509,41 +478,14 @@ void eraseRange(void) {
    // Round start address to start of block (inclusive)
    address &= ~pageMask;
    
-   // Round end address to end of block (exclusive)
-   endAddress += sectorSize;
-   endAddress &= ~pageMask;
+   // Round end address to end of block (inclusive)
+   endAddress |= pageMask;
    
-   // Clear any existing errors (1 bit at a time)
-   controller->ustat   = FSTAT_ACCERR;
-   controller->ustat   = FSTAT_PVIOL;
-
    // Erase each sector
-   while (address != endAddress) {
-      // Write dummy data to flash address
-      writeMemorySpace(address, 0xFFFF);
-
-      // Set command
-      controller->cmd = FCMD_PAGE_ERASE;
-
-      // Launch command
-      controller->ustat = FSTAT_CBEIF;
-      asm {
-         nop // allow FSTAT_CCIF to set
-         nop
-         nop
-         nop
-      }
-      // Wait for buffer empty
-      do {
-         fstat = controller->ustat;
-      } while ((fstat&(FSTAT_CCIF|FSTAT_ACCERR|FSTAT_PVIOL)) == 0);
-      if ((fstat & FSTAT_ACCERR) != 0) {
-         setErrorCode(FLASH_ERR_PROG_ACCERR);
-      }
-      if ((fstat & FSTAT_PVIOL) != 0) {
-         setErrorCode(FLASH_ERR_PROG_FPVIOL);
-      }
-      // Advance to start of next block
+   while (address <= endAddress) {
+      flashData->controller->fccob3_0 = (F_ERSSCR << 24) | address;
+      executeCommand(flashData->controller);
+      // Advance to start of next sector
       address += sectorSize;
    }
    flashData->flags &= ~DO_ERASE_RANGE;
@@ -610,10 +552,10 @@ void entry(void) {
    //Disable COP
    COP_CTRL = 0x0000;
 #endif
-#ifdef OCCS_OCTRL
+#ifdef OCCS_OSCTL1
    // Trim oscillator
    // Note: Some chips have incorrect trim values
-   OCCS_OCTRL  = (OCCS_OCTRL&~0x3FF) | (FM_OPT1&0x3FF);
+   OCCS_OSCTL1   = (OCCS_OSCTL1&~0x3FFFF)|(SIM_NVMOPT2H&0x3FFF);
 #endif
    
    initFlash();

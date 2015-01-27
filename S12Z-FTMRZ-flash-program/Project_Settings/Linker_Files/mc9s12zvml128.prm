@@ -1,0 +1,33 @@
+/* This is a linker parameter file */
+
+NAMES END
+
+SEGMENTS
+    DISCARD1   = READ_WRITE  0x0    TO 0x1FFF;
+    DISCARD2   = READ_ONLY   0x2000 TO 0xFFFF;
+    PSEUDO_ROM = READ_ONLY   0x1000 TO 0x1800;
+END
+
+PLACEMENT
+    .data,
+         INTO  DISCARD1;
+    .startData        
+         INTO  DISCARD2;
+
+    .rodata,
+    .init,
+    .text,
+    .common,
+    .stack
+         INTO  PSEUDO_ROM;    
+END
+
+STACKSIZE 0
+
+ENTRIES 
+/* keep the following unreferenced variables */
+/* stackSpace */ 
+/* headerPtr */
+END
+
+

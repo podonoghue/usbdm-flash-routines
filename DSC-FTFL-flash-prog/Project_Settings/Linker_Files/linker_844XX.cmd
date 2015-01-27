@@ -1,7 +1,7 @@
 MEMORY 
 {
-   .pRAM  (RX)  : ORIGIN = 0x02F800, LENGTH = 0x000800
-   .xRAM  (RW)  : ORIGIN = 0x000000, LENGTH = 0x001000
+   .pRAM  (RX)  : ORIGIN = 0x060000, LENGTH = 0x004000
+   .xRAM  (RW)  : ORIGIN = 0x000000, LENGTH = 0x004000
 }
 
 KEEP_SECTION{ vector_table.text}
@@ -17,19 +17,19 @@ SECTIONS
 
     .pCode :
     {
-        . = ALIGN(256);
+        . = ALIGN(1<<INTC_VBA_OFFSET);
         FloadAddress = .;
         
         WRITEW(FflashProgramHeader);          # Start of relocated vector table
         * (vector_table.text)                 # Rest of vector table
-        
+
         OBJECT (FflashProgramHeader, main_c.obj)
         * (.text)		
     } > .pRAM
 
     .xData :
     {
-#       . = .+ SIZEOF(.pCode)/2;  # Space for overlayed code
+        . = .+ SIZEOF(.pCode)/2;  # Space for overlayed code
         . = ALIGN(2);
         FstackStart = .+1;
         . = .+STACKSIZE;          # Stack space

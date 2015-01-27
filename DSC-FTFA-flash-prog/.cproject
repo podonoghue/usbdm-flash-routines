@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule configRelations="1" moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711" moduleId="org.eclipse.cdt.core.settings" name="DSC-FTFA-flash-prog">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.managedbuilder.core.ManagedBuildManager" point="org.eclipse.cdt.core.ScannerInfoProvider"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LltErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="DSC-FTFA-flash-prog" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711" isPrebuildInvalidatingBuild="false" isVersionInfoProjSpecific="false" name="DSC-FTFA-flash-prog" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711." name="/" resourcePath="">
+						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.862141768" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
+							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.1453404139" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
+							<builder buildPath="${ProjDirPath}/FTFA" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.1189982581" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildOn="true" parallelBuildWorkspaceOn="true" parallelizationNumber="optimal" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.1700196500" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.1957566077" name="Library Search Paths (-L)" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.mapFile.1363668926" name="Generate Link Map" superClass="com.freescale.dsc.cdt.toolchain.linker.output.mapFile" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.general.generates56800EX.675171245" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.linker.general.generates56800EX" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.58241636" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}/Project_Settings/Linker_Files/linker_844XX.cmd" valueType="string"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.entryPoint.202155705" name="Entry Point" superClass="com.freescale.dsc.cdt.toolchain.linker.input.entryPoint" value="Fasm_entry" valueType="string"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libs.260874787" name="Additional Libraries" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libs"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.generateSRecord.1460831220" name="Generate S-Record File" superClass="com.freescale.dsc.cdt.toolchain.linker.output.generateSRecord" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.maxRecordLength.1630016551" name="Max S-Record Length" superClass="com.freescale.dsc.cdt.toolchain.linker.output.maxRecordLength" value="36" valueType="string"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.sortbyAddr.607943124" name="Sort by Address" superClass="com.freescale.dsc.cdt.toolchain.linker.output.sortbyAddr" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.linkorder.1147136343" name="Link Order" superClass="com.freescale.dsc.cdt.toolchain.linker.input.linkorder" valueType="stringList">
+									<listOptionValue builtIn="false" value="Sources/DSP56800E_promxram.asm"/>
+									<listOptionValue builtIn="false" value="Sources/VectorTable.asm"/>
+									<listOptionValue builtIn="false" value="Sources/main.c"/>
+									<listOptionValue builtIn="false" value="FTFL/DSC-FTFL-flash-prog.elf.S"/>
+									<listOptionValue builtIn="false" value="FTFL/DSC-FTFL-flash-prog.elf.p.S"/>
+									<listOptionValue builtIn="false" value="FTFL/DSC-FTFL-flash-prog.elf.x.S"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.general.dataModel.2066248480" name="Large Data Memory Model" superClass="com.freescale.dsc.cdt.toolchain.linker.general.dataModel" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.nostdlib.1164292430" name="No Standard Library" superClass="com.freescale.dsc.cdt.toolchain.linker.input.nostdlib" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.general.warningsOff.2081961174" name="Suppress Link Warnings" superClass="com.freescale.dsc.cdt.toolchain.linker.general.warningsOff" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.symTable.865020160" name="Generate ELF Symbol Table" superClass="com.freescale.dsc.cdt.toolchain.linker.output.symTable" value="true" valueType="boolean"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.linker.inputType.1641455181" name="DSC Linker Input" superClass="com.freescale.dsc.cdt.toolchain.linker.inputType">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1139795944" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler">
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.sysInclude.596522275" name="Search System Paths (#include &lt;...&gt;)" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.sysInclude" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/MSL_Common/Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/DSP_56800E/prefix&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.include.1541187973" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Project_Headers&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/runtime_56800E/include&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.sysIncludeRecursive.1396146118" name="Search System Paths Recursively" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.sysIncludeRecursive" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.processor.generates56800EX.235068558" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.compiler.processor.generates56800EX" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.macros.definedMacros.1337165422" name="Defined Macros" superClass="com.freescale.dsc.cdt.toolchain.compiler.macros.definedMacros" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="TARGET=FTFA"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.processor.dataModel.514294453" name="Large Data Memory Model" superClass="com.freescale.dsc.cdt.toolchain.compiler.processor.dataModel" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.332537518" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.936349160" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.includeCap.302009620" name="Incorrect Capitalization in #include &quot;...&quot; (most)" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.includeCap" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.sysIncludeCap.1832219508" name="Incorrect Capitalization in System #include &lt;...&gt; (most)" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.sysIncludeCap" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1022163602" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1925291936" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.166724446" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.31505714" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.558457836" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.1900865547" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.123243638" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.462715006" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.249434869" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1697832145" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1779619014" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1636670891" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.805262215" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.2122764127" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.296536090" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.1716239954" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.164688948" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.1113713253" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.349456972" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.849757696" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.1155901647" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
+								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.1551449141" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Project_Headers&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.asm.general.generates56800EX.474080754" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.asm.general.generates56800EX" value="true" valueType="boolean"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.703089202" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.preprocessor.106843068" name="DSC Preprocessor" superClass="com.freescale.dsc.cdt.toolchain.preprocessor"/>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.1031172431" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
+						</toolChain>
+					</folderInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711.Project_Settings/Linker_Files/MC56F84452_Simulator_LDM.cmd" name="MC56F84452_Simulator_LDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Simulator_LDM.cmd" toolsToInvoke=""/>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711.Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd" name="MC56F84452_Simulator_SDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd" toolsToInvoke=""/>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.1616021711.Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd" name="MC56F84452_Internal_PFlash_LDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd" toolsToInvoke=""/>
+					<sourceEntries>
+						<entry excluding="Project_Settings/Startup_Code/DSP56800E_Simulator_vector.asm|Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd|Project_Settings/Linker_Files/MC56F84452_Simulator_LDM.cmd|Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd|Project_Settings/Startup_Code/DSP56800E_Simulator_init.asm" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="com.freescale.dsc.cdt.toolchain.config.debug.335453422">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.freescale.dsc.cdt.toolchain.config.debug.335453422" moduleId="org.eclipse.cdt.core.settings" name="Simulator_LDM">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.managedbuilder.core.ManagedBuildManager" point="org.eclipse.cdt.core.ScannerInfoProvider"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LltErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.AsmErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.CobjErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MPWErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactExtension="elf" artifactName="DSC-844XX-flash-prog" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" buildReferences="true" buildReferencingConfigurations="false" cleanCommand="&quot;${system:ECLIPSE_HOME}/../gnu/bin/rm&quot; -f" description="" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;" id="com.freescale.dsc.cdt.toolchain.config.debug.335453422" isPrebuildInvalidatingBuild="false" isVersionInfoProjSpecific="false" name="Simulator_LDM" parent="com.freescale.dsc.cdt.toolchain.config.debug" produceBuildErrorsWithMissingReferences="true">
+					<folderInfo id="com.freescale.dsc.cdt.toolchain.config.debug.335453422." name="/" resourcePath="">
+						<toolChain errorParsers="" id="com.freescale.dsc.cdt.toolchain.debug.2062741421" name="DSC Toolchain" superClass="com.freescale.dsc.cdt.toolchain.debug">
+							<targetPlatform id="com.freescale.dsc.cdt.toolchain.targetPlatform.1190601207" isAbstract="false" name="DSC Target Platform" superClass="com.freescale.dsc.cdt.toolchain.targetPlatform"/>
+							<builder buildPath="${ProjDirPath}/Simulator_LDM" errorParsers="org.eclipse.cdt.core.GmakeErrorParser;com.freescale.core.ide.cdt.errorParsers.LltErrorParser;com.freescale.core.ide.cdt.errorParsers.AsmErrorParser;com.freescale.core.ide.cdt.errorParsers.IcodeErrorParser;com.freescale.core.ide.cdt.errorParsers.CobjErrorParser;com.freescale.core.ide.cdt.errorParsers.MwErrorParser;com.freescale.core.ide.cdt.errorParsers.MPWErrorParser;com.freescale.core.ide.cdt.errorParsers.MwfeErrorParser;com.freescale.core.ide.cdt.errorParsers.LnkErrorParser" id="com.freescale.dsc.cdt.toolchain.builder.1538409656" keepEnvironmentInBuildfile="false" name="GNU Make Builder" parallelBuildOn="true" parallelBuildWorkspaceOn="true" parallelizationNumber="optimal" superClass="com.freescale.dsc.cdt.toolchain.builder"/>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.linker.295809455" name="DSC Linker" superClass="com.freescale.dsc.cdt.toolchain.linker">
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libSearch.869669714" name="Library Search Paths (-L)" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libSearch" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/DSP_56800E/lib&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.output.mapFile.2047362065" name="Generate Link Map" superClass="com.freescale.dsc.cdt.toolchain.linker.output.mapFile" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.general.generates56800EX.811532632" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.linker.general.generates56800EX" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.commandFile.96674390" name="Linker Command File" superClass="com.freescale.dsc.cdt.toolchain.linker.input.commandFile" value="${ProjDirPath}/Project_Settings/Linker_Files/MC56F84452_Simulator_LDM.cmd" valueType="string"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.entryPoint.304547219" name="Entry Point" superClass="com.freescale.dsc.cdt.toolchain.linker.input.entryPoint" value="Finit_sim_" valueType="string"/>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.input.libs.87547141" name="Additional Libraries" superClass="com.freescale.dsc.cdt.toolchain.linker.input.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/runtime_56800E/lib/Runtime 56800E lmm.lib&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/DSP_56800E/lib/MSL C 56800E LMM.lib&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.linker.general.dataModel.580697169" name="Large Data Memory Model" superClass="com.freescale.dsc.cdt.toolchain.linker.general.dataModel" value="true" valueType="boolean"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.linker.inputType.1154205679" name="DSC Linker Input" superClass="com.freescale.dsc.cdt.toolchain.linker.inputType">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.compiler.1824284207" name="DSC Compiler" superClass="com.freescale.dsc.cdt.toolchain.compiler">
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.sysInclude.1590341771" name="Search System Paths (#include &lt;...&gt;)" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.sysInclude" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/MSL_Common/Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/msl/MSL_C/DSP_56800E/prefix&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.include.1620639044" name="Search User Paths (#include &quot;...&quot;)" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Project_Headers&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support/runtime_56800E/include&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.input.sysIncludeRecursive.548955887" name="Search System Paths Recursively" superClass="com.freescale.dsc.cdt.toolchain.compiler.input.sysIncludeRecursive" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${MCUToolsBaseDir}/M56800E Support&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.processor.generates56800EX.563489556" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.compiler.processor.generates56800EX" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.processor.dataModel.849483112" name="Large Data Memory Model" superClass="com.freescale.dsc.cdt.toolchain.compiler.processor.dataModel" value="true" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773.adjusted.1326139155" name="(hidden) warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.warningsFlag.hidden.adjusted.491909773" value="false" valueType="boolean"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717.adjusted.852388542" name="(hidden) toggle warnings flag" superClass="com.freescale.dsc.cdt.toolchain.compiler.warnings.enableWarnings.hidden.adjusted.1118564717" value="com.freescale.dsc.cdt.toolchain.warnings.enableWarnings.custom.hidden" valueType="enumerated"/>
+								<option id="com.freescale.dsc.cdt.toolchain.compiler.macros.definedMacros.1103826661" name="Defined Macros" superClass="com.freescale.dsc.cdt.toolchain.compiler.macros.definedMacros" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="TARGET=FTFL"/>
+								</option>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1972687448" name="DSC C Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.c"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.574189572" name="DSC C++ Compiler Input" superClass="com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp"/>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.138731931" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler">
+								<option id="com.freescale.dsc.cdt.toolchain.asm.input.include.1634454328" name="User Path (-i)" superClass="com.freescale.dsc.cdt.toolchain.asm.input.include" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/Project_Headers&quot;"/>
+								</option>
+								<option id="com.freescale.dsc.cdt.toolchain.asm.general.generates56800EX.1188048518" name="Generates elf file for 56800EX core" superClass="com.freescale.dsc.cdt.toolchain.asm.general.generates56800EX" value="true" valueType="boolean"/>
+								<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.1810743580" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
+							</tool>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.preprocessor.1547494719" name="DSC Preprocessor" superClass="com.freescale.dsc.cdt.toolchain.preprocessor"/>
+							<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.disassembler.1682586390" name="DSC Disassembler" superClass="com.freescale.dsc.cdt.toolchain.disassembler"/>
+						</toolChain>
+					</folderInfo>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.335453422.Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd" name="MC56F84452_Simulator_SDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd" toolsToInvoke=""/>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.335453422.Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd" name="MC56F84452_Internal_PFlash_LDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd" toolsToInvoke=""/>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.335453422.Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_SDM.cmd" name="MC56F84452_Internal_PFlash_SDM.cmd" rcbsApplicability="disable" resourcePath="Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_SDM.cmd" toolsToInvoke=""/>
+					<fileInfo id="com.freescale.dsc.cdt.toolchain.config.debug.335453422.Utility/DSP56800E_promxram.asm" name="DSP56800E_promxram.asm" rcbsApplicability="disable" resourcePath="Sources/DSP56800E_promxram.asm" toolsToInvoke="com.freescale.dsc.cdt.toolchain.assembler.138731931.1019917616">
+						<tool errorParsers="" id="com.freescale.dsc.cdt.toolchain.assembler.138731931.1019917616" name="DSC Assembler" superClass="com.freescale.dsc.cdt.toolchain.assembler.138731931">
+							<inputType id="com.freescale.dsc.cdt.toolchain.asm.inputType.1642294051" name="DSC Assembler Input" superClass="com.freescale.dsc.cdt.toolchain.asm.inputType"/>
+						</tool>
+					</fileInfo>
+					<sourceEntries>
+						<entry excluding="Project_Settings/Debugger/MC56F84452.mem|Project_Settings/Debugger/MC56F84452.tcl|Utility/DSP56800E_zeroBSS.asm|Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_LDM.cmd|Project_Settings/Startup_Code/MC56F844xx_vector.asm|Utility/DSP56800E_promxram.asm|Project_Settings/Linker_Files/MC56F84452_Simulator_SDM.cmd|Project_Settings/Startup_Code/MC56F844xx_init.asm|Project_Settings/Linker_Files/MC56F84452_Internal_PFlash_SDM.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="DSC-844XX-flash-prog.com.freescale.dsc.cdt.toolchain.project.executable.63106288" name="Freescale DSC Project" projectType="com.freescale.dsc.cdt.toolchain.project.executable"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1616021711;com.freescale.dsc.cdt.toolchain.config.debug.1616021711.;com.freescale.dsc.cdt.toolchain.compiler.1139795944;com.freescale.dsc.cdt.toolchain.compiler.inputType.c.349456972">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.335453422;com.freescale.dsc.cdt.toolchain.config.debug.335453422.;com.freescale.dsc.cdt.toolchain.compiler.1824284207;com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1972687448">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1616021711;com.freescale.dsc.cdt.toolchain.config.debug.1616021711.;com.freescale.dsc.cdt.toolchain.compiler.1139795944;com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.849757696">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.335453422;com.freescale.dsc.cdt.toolchain.config.debug.335453422.;com.freescale.dsc.cdt.toolchain.compiler.1824284207;com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.574189572">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1951826009;com.freescale.dsc.cdt.toolchain.config.debug.1951826009.;com.freescale.dsc.cdt.toolchain.compiler.142084114;com.freescale.dsc.cdt.toolchain.compiler.inputType.c.908149773">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1745888956;com.freescale.dsc.cdt.toolchain.config.debug.1745888956.;com.freescale.dsc.cdt.toolchain.compiler.577225112;com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.5866143">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1745888956;com.freescale.dsc.cdt.toolchain.config.debug.1745888956.;com.freescale.dsc.cdt.toolchain.compiler.577225112;com.freescale.dsc.cdt.toolchain.compiler.inputType.c.1552926161">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.freescale.dsc.cdt.toolchain.config.debug.1951826009;com.freescale.dsc.cdt.toolchain.config.debug.1951826009.;com.freescale.dsc.cdt.toolchain.compiler.142084114;com.freescale.dsc.cdt.toolchain.compiler.inputType.cpp.716655603">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.freescale.dsc.cdt.c.symbols.toolchain.discoveryProfile"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.pathentry"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="DSC-FTFL-flash-prog">
+			<resource resourceType="PROJECT" workspacePath="/DSC-FTFL-flash-prog"/>
+		</configuration>
+		<configuration configurationName="Simulator_LDM">
+			<resource resourceType="PROJECT" workspacePath="/DSC-844XX-flash-prog"/>
+		</configuration>
+		<configuration configurationName="Simulator_SDM">
+			<resource resourceType="PROJECT" workspacePath="/DSC-844XX-flash-prog"/>
+		</configuration>
+		<configuration configurationName="DSC-FTFA-flash-prog">
+			<resource resourceType="PROJECT" workspacePath="/DSC-FTFA-flash-prog"/>
+		</configuration>
+		<configuration configurationName="MCF56F844XX">
+			<resource resourceType="PROJECT" workspacePath="/DSC-844XX-flash-prog"/>
+		</configuration>
+		<configuration configurationName="FLASH_LDM">
+			<resource resourceType="PROJECT" workspacePath="/DSC-844XX-flash-prog"/>
+		</configuration>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+</cproject>

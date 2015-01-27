@@ -1,0 +1,8 @@
+Sources/main.c
+Project_Settings/Linker_Files/mc9s12zvml128.prm
+Project_Settings/Startup_Code/starts12z.c
+Project_Headers/derivative.h
+Project_Headers/mc9s12zvml128.h
+Lib/mc9s12zvml128.c
+.settings/com.freescale.core.ide.newprojectwizard.prefs
+ReferencedRSESystems.xml

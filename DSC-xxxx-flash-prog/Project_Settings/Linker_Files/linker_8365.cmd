@@ -23,7 +23,7 @@ SECTIONS
         WRITEW(FflashProgramHeader);          # Start of relocated vector table
         * (vector_table.text)                 # Rest of vector table
         
-        OBJECT (FflashProgramHeader, main.c)
+        OBJECT (FflashProgramHeader, main_c.obj)
         * (.text)		
     } > .pRAM
 

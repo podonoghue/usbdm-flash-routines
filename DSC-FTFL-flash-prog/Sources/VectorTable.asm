@@ -3,14 +3,6 @@
 ;
 FLASH_ERR_TRAP equ 7 ; USBDM error number for TRAP
 
-; OMR mode bits
-
-NL_MODE        EQU      $8000
-CM_MODE        EQU      $0100
-XP_MODE        EQU      $0080
-R_MODE         EQU      $0020
-SA_MODE        EQU      $0010
-
    section vector_table
    org   p:
 
@@ -46,25 +38,6 @@ Fasm_entry:
    ; Relocate vector table to pRAM
    move.l   #INTC_VBA_VALUE,R0            ; Point at relocated vector table
    move.w   R0,x:>INTC_VBA                ; Relocate Vector table
-   
-; setup the OMR with the values required by C
-
-   bfset #NL_MODE,omr              ; ensure NL=1  (enables nested DO loops)
-   nop
-   nop
-                                    ; ensure CM=0  (optional for C)
-                                    ; ensure XP=0 to enable harvard architecture
-                                    ; ensure R=0  (required for C)
-                                    ; ensure SA=0 (required for C)
-   bfclr #(CM_MODE|XP_MODE|R_MODE|SA_MODE),omr   
-
-   move.w   #-1,x0
-   moveu.w  x0,m01                  ; set the m register to linear addressing
-            
-   moveu.w  hws,la                  ; clear the hardware stack
-   moveu.w  hws,la
-   nop
-   nop
    
    ; Set up stack
    move.l   #>>FstackStart,r0             ; Import SP address from linker
