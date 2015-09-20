@@ -18,13 +18,13 @@ extern uint32_t __stacktop[];
 extern uint32_t gFlashProgramHeader[];
 
 tVectorTable __vector_table = { /* Interrupt vector table */
- gFlashProgramHeader,                                      /* 0  (0x00000000) (prior: -) */
+ gFlashProgramHeader,                                      
   {
-   (tIsrFunc)isr_default,                                  /* 1  (0x00000004) (prior: -) */
-   (tIsrFunc)isr_default,                                  /* 2  (0x00000008) (prior: -2) */
-   (tIsrFunc)isr_default,                                  /* 3  (0x0000000C) (prior: -1) */
-   (tIsrFunc)isr_default,                                  /* 4  (0x00000010) (prior: -) */
-   (tIsrFunc)isr_default,                                  /* 5  (0x00000014) (prior: -) */
-   (tIsrFunc)isr_default,                                  /* 6  (0x00000018) (prior: -) */
+   (tIsrFunc)isr_default,                                  /* 1  (0x00000004) reset       */
+   (tIsrFunc)isr_default,                                  /* 2  (0x00000008) NMI         */
+   (tIsrFunc)isr_default,                                  /* 3  (0x0000000C) Hard fault  */
+   (tIsrFunc)isr_default,                                  /* 4  (0x00000010) MMU         */
+   (tIsrFunc)isr_default,                                  /* 5  (0x00000014) Bus fault   */
+   (tIsrFunc)isr_default,                                  /* 6  (0x00000018) Usage fault */
    }
 };

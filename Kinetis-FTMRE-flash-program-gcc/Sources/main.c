@@ -1,6 +1,9 @@
 //=======================================================================================
+// Flash code for Kinetis FTMRE memory (MKE02 flash devices)
+//=======================================================================================
 // History
 //---------------------------------------------------------------------------------------
+// 24 Jul 2015 - Added disabling NMI - Removed as makes it impossible to debug NMI code!
 // 16 Apr 2014 - Added disabling Flash cache
 //=======================================================================================
 
@@ -53,6 +56,9 @@ typedef struct {
    volatile uint16_t toval;
    volatile uint16_t win;
 } WatchDog;
+
+#define SIM_SOPT 			(*(volatile uint32_t*) 0x40048004) 
+#define SIM_SOPT_NMIE 		(1<<2)
 
 #define WDOG (*(volatile WatchDog*) 0x40052000) 
 
@@ -228,7 +234,11 @@ void initFlash(FlashData_t *flashData) {
    controller->fclkdiv = 0x17;  // Approximate divider for 24MHz clock out of reset
    controller->fprot   = 0xFF;  // Unprotect Flash
 
+   // Disable Flash cache
    MCM_PLACR = (MCM_PLACR_DFCS|MCM_PLACR_DFCC|MCM_PLACR_DFCIC|MCM_PLACR_DFCDA|MCM_PLACR_CFCC);
+   
+   // Disable NMI (V4.11.1.70)
+//   SIM_SOPT  &= ~SIM_SOPT_NMIE; // Removed as makes it impossible to debug NMI
    
    flashData->flags &= ~DO_INIT_FLASH;
 }
@@ -299,7 +309,8 @@ void programRange(FlashData_t *flashData) {
    // Program 1 to 2 Flash phrases (1 phrase = 4 bytes)
    while (numPhrases-- > 0) {
       uint32_t dataValue;
-      // Write command
+      
+      // Write command & address
       controller->fccobix = 0; controller->fccob.high = FCMD_PROGRAM_FLASH; 
       /*                    */ controller->fccob.low  = (uint8_t)(address>>16);
       controller->fccobix = 1; controller->fccob.high = (uint8_t)(address>>8);

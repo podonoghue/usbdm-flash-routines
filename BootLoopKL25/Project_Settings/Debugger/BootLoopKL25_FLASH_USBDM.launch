@@ -105,7 +105,7 @@
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.eraseMethod" value="2"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.leaveTargetPowered" value="0"/>
 <stringAttribute key="net.sourceforge.usbdm.connections.usbdm.setTargetVdd" value="0"/>
-<booleanAttribute key="net.sourceforge.usbdm.connections.usbdm.useDebugBuild" value="false"/>
+<stringAttribute key="net.sourceforge.usbdm.connections.usbdm.useDebugBuild" value="false"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="com.freescale.cdt.debug.cw.arm.ArmDebugger"/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_REGISTER_GROUPS" value=""/>
 <stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="run"/>

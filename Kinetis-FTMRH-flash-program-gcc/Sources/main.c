@@ -1,6 +1,9 @@
 //=======================================================================================
+// Flash code for Kinetis FTMRH memory (MKE04, MKE06 flash devices)
+//=======================================================================================
 // History
 //---------------------------------------------------------------------------------------
+// 24 Jul 2015 - Added disabling NMI - Removed as makes it impossible to debug NMI code!
 // 16 Apr 2014 - Added disabling Flash cache
 //=======================================================================================
 
@@ -53,6 +56,9 @@ typedef struct {
    volatile uint16_t toval;
    volatile uint16_t win;
 } WatchDog;
+
+#define SIM_SOPT 			   (*(volatile uint32_t*) 0x40048004) 
+#define SIM_SOPT_NMIE 		(1<<2)
 
 #define WDOG (*(volatile WatchDog*) 0x40052000) 
 
@@ -232,7 +238,11 @@ void initFlash(FlashData_t *flashData) {
    controller->fprot   = 0xFF;  // Unprotect Flash
    controller->eeprot  = 0xFF;  // Unprotect EEprom
 
+   // Disable Flash cache
    MCM_PLACR = (MCM_PLACR_DFCS|MCM_PLACR_DFCC|MCM_PLACR_DFCIC|MCM_PLACR_DFCDA|MCM_PLACR_CFCC);
+   
+   // Disable NMI (V4.11.1.70)
+//   SIM_SOPT  &= ~SIM_SOPT_NMIE;
    
    flashData->flags &= ~DO_INIT_FLASH;
 }
@@ -260,7 +270,7 @@ void executeCommand(volatile FlashController *controller) {
    }
 }
 
-//! Erase entire flash block
+//! Erase entire block
 //!
 void eraseBlock(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
@@ -327,7 +337,7 @@ void programRange(FlashData_t *flashData) {
          /*                    */ controller->fccob.low     = (uint8_t)(dataValue);
          controller->fccobix = 5; controller->fccob.high    = (uint8_t)(dataValue>>24);
          /*                    */ controller->fccob.low     = (uint8_t)(dataValue>>16);
-        }
+      }
       executeCommand(controller);
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
