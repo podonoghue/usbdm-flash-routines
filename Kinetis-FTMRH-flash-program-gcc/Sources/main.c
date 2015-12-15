@@ -58,7 +58,7 @@ typedef struct {
 } WatchDog;
 
 #define SIM_SOPT 			   (*(volatile uint32_t*) 0x40048004) 
-#define SIM_SOPT_NMIE 		(1<<2)
+#define SIM_SOPT_NMIE 		(1<<1)
 
 #define WDOG (*(volatile WatchDog*) 0x40052000) 
 
@@ -242,6 +242,7 @@ void initFlash(FlashData_t *flashData) {
    MCM_PLACR = (MCM_PLACR_DFCS|MCM_PLACR_DFCC|MCM_PLACR_DFCIC|MCM_PLACR_DFCDA|MCM_PLACR_CFCC);
    
    // Disable NMI (V4.11.1.70)
+   // This is not effective as it occurs too late - The NMI has already happened
 //   SIM_SOPT  &= ~SIM_SOPT_NMIE;
    
    flashData->flags &= ~DO_INIT_FLASH;
