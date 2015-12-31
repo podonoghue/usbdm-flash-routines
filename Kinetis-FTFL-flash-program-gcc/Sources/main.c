@@ -487,7 +487,7 @@ void entry(void) {
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
-#ifndef DEBUG
+#if !defined(DEBUG) && 0
    /* Disable the Watchdog */
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
