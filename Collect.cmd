@@ -11,6 +11,7 @@ set FILE_LIST=%FILE_LIST% HCS08-default-flash-program HCS08-PAxx-flash-program H
 set FILE_LIST=%FILE_LIST% Kinetis-default-flash-program Kinetis-FTFE-flash-program-gcc Kinetis-FTFL-flash-program-gcc
 set FILE_LIST=%FILE_LIST% Kinetis-FTMRE-flash-program-gcc Kinetis-FTMRH-eeprom-program-gcc Kinetis-FTMRH-flash-program-gcc
 set FILE_LIST=%FILE_LIST% Kinetis-MK-FTFA-flash-program-gcc Kinetis-MKL-FTFA-flash-program-gcc Kinetis-MKM-FTFA-flash-program-gcc
+set FILE_LIST=%FILE_LIST% Kinetis-MKV10-FTFA-flash-program-gcc
 set FILE_LIST=%FILE_LIST% S12Z-FTMRZ-flash-program STM32F100xx-default-flash-program
 
 rem echo %FILE_LIST%

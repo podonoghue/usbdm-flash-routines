@@ -1,12 +1,18 @@
-//=======================================================================================
-// Flash code for Kinetis FTFA memory (MKL flash devices)
-//=======================================================================================
-// History
-//---------------------------------------------------------------------------------------------
-// 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
-//---------------------------------------------------------------------------------------------
-
-#include <cstdint>
+/**
+ *  Flash code for Kinetis FTFA memory (MK flash devices)
+ *  
+ *  Summary
+ *  FTFA      Controller
+ *  WDOG      Watch-dog timer
+ *  FMC_PFAPR Flash cache control
+ *  
+ * History
+ *------------------------------------------------------------------------------------------------
+ * 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
+ *             - Fixed MCM_PLACR value (Disabling cache properly)                     | V4.10.4
+ *------------------------------------------------------------------------------------------------
+ */
+#include <stdint.h>
 
 #ifndef NULL
 #define NULL ((void*)0)
@@ -20,8 +26,8 @@
 // Vector Table Offset Register
 #define SCB_VTOR (*(volatile uint32_t *)0xE000ED08)
 
-#define NV_SECURITY_ADDRESS        (0x00000400)
-#define NV_FSEC_ADDRESS            (NV_SECURITY_ADDRESS+0x0C)
+#define NV_SECURITY_ADDRESS            (0x00000400)
+#define NV_FSEC_ADDRESS                (NV_SECURITY_ADDRESS+0x0C)
 #define FTFA_FSEC_KEY_MASK              0xC0
 #define FTFA_FSEC_KEY_ENABLE            0x80
 #define FTFA_FSEC_KEY_DISABLE           0xC0
@@ -55,6 +61,7 @@ typedef struct {
    uint8_t  feprot;
    uint8_t  fdprot;
 } FlashController;
+
 #pragma pack(0)
 
 #define FTFA_FSTAT_CCIF                 0x80
@@ -199,8 +206,9 @@ extern uint32_t __loadAddress[];
 
 void asm_entry(void);
 
-//! Flash programming command table
-//!
+/**
+ * Flash programming command table
+ */
 volatile const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress  */ __loadAddress,     // load address of image
      /* entry        */ asm_entry,         // entry point for code
@@ -219,26 +227,42 @@ void eraseRange(FlashData_t *flashData);
 void blankCheckRange(FlashData_t *flashData);
 void entry(void);
 void isr_default(void);
-void testApp(void);
+//void testApp(void);
 void asm_testApp(void);
 void executeCommand(volatile FlashController *controller);
 
-//! Set error code to return to BDM & halt
-//!
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+   setErrorCode(FLASH_ERR_TRAP);
+}
+
+/**
+ * Set error code to return to BDM & halt
+ */
 void setErrorCode(int errorCode) {
    FlashData_t *flashData = gFlashProgramHeader.flashData;
    flashData->errorCode   = (uint16_t)errorCode;
    flashData->flags      |= IS_COMPLETE; 
    for(;;) {
-	   asm("bkpt  0");
+	   __asm__("bkpt  0");
    }
 }
 
-//! Does any initialisation required before accessing the Flash
-//!
+/**
+ * Does any initialisation required before accessing the Flash
+ */
 void initFlash(FlashData_t *flashData) {
-   // Do init flash every time
+   // Do initialise flash every time
    
+#ifndef DEBUG
+   /* Disable the Watchdog */
+   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
+   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
+   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
+#endif
+
    // Unprotect flash
    flashData->controller->fprot0_3 = 0xFFFFFFFF;
    flashData->controller->fdprot   = 0xFF;
@@ -250,8 +274,9 @@ void initFlash(FlashData_t *flashData) {
    flashData->flags &= ~DO_INIT_FLASH;
 }
 
-//! Launch & wait for Flash command to complete
-//!
+/**
+ * Launch & wait for Flash command to complete
+ */
 void executeCommand(volatile FlashController *controller) {
    // Clear any existing errors
    controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
@@ -274,8 +299,9 @@ void executeCommand(volatile FlashController *controller) {
    }
 }
 
-//! Erase entire flash block
-//!
+/**
+ * Erase entire flash block
+ */
 void eraseFlashBlock(FlashData_t *flashData) {
 
    if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
@@ -286,11 +312,12 @@ void eraseFlashBlock(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
-//! Program a range of flash from buffer
-//!
-//! Returns an error if the security location is to be programmed
-//! to permanently lock the device
-//!
+/**
+ * Program a range of flash from buffer
+ *
+ * Returns an error if the security location is to be programmed
+ * to permanently lock the device
+ */
 void programRange(FlashData_t *flashData) {
    uint32_t         address    = flashData->address;
    const uint32_t  *data       = flashData->dataAddress;
@@ -313,13 +340,14 @@ void programRange(FlashData_t *flashData) {
       flashData->controller->fccob0_3 = (F_PGM4 << 24) | address;
       flashData->controller->fccob4_7 = *data++;
       executeCommand(flashData->controller);
-      address += 4;
+      address  += 4;
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
 
-//! Verify a range of flash against buffer
-//!
+/*
+ * Verify a range of flash against buffer
+ */
 void verifyRange(FlashData_t *flashData) {
    uint32_t        address       = flashData->address;
    const uint32_t *data          = flashData->dataAddress;
@@ -340,8 +368,9 @@ void verifyRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_VERIFY_RANGE;
 }
 
-//! Erase a range of flash
-//!
+/**
+ * Erase a range of flash
+ */
 void eraseRange(FlashData_t *flashData) {
    uint32_t   address     = flashData->address;
    uint32_t   endAddress  = address + flashData->dataSize - 1; // Inclusive
@@ -370,8 +399,9 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
-//! Check that a range of flash is blank (=0xFFFF)
-//!
+/**
+ * Check that a range of flash is blank (=0xFFFF)
+ */
 void blankCheckRange(FlashData_t *flashData) {
    const int  itemSize  = 4;
    uint32_t  *address   = (uint32_t *)(flashData->address);
@@ -399,23 +429,17 @@ extern uint32_t __vector_table[];
 //! Some stack space
 extern uint32_t __stacktop[];
 
-//! Main C entry point
-//! 
-//! Assumes ramBuffer is set up beforehand
-//!
+/**
+ * Main C entry point
+ *
+ * Assumes ramBuffer is set up beforehand
+ */
 void entry(void) {
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
-   
-#ifndef DEBUG
-   /* Disable the Watchdog */
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
-#endif
-   
+  
    // Handle on programming data
-   FlashData_t * flashData = gFlashProgramHeader.flashData;
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
 
    initFlash(flashData);
    eraseFlashBlock(flashData);
@@ -430,19 +454,14 @@ void entry(void) {
 #endif
 }
 
-//! Default unexpected interrupt handler
-//!
-void isr_default(void) {
-   setErrorCode(FLASH_ERR_TRAP);
-}
-
-//! Low level entry point
-//! 
+/**
+ * Low level entry point
+ */
 __attribute__((naked))
 void asm_entry(void) {
 #ifndef DEBUG
    // Setup the stack before we attempt anything else
-   asm (
+   __asm__ (
    "mov   r0,%[stacktop]\n\t"
    "mov   sp,r0\n\t"
    "b     entry\n\t"
@@ -635,10 +654,10 @@ void testApp(void) {
    SCB_VTOR = (uint32_t)__vector_table;
    
    // Disable watchdog
-   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
+   WDOG_UNLOCK = WDOG_UNLOCK_SEQ_1;
+   WDOG_UNLOCK = WDOG_UNLOCK_SEQ_2;
    WDOG_STCTRLH = WDOG_WDOGEN;
-      
+
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();
 #ifdef DO_B

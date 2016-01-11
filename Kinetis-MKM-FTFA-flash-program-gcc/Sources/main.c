@@ -1,13 +1,19 @@
-//=======================================================================================
-// Flash code for Kinetis FTFA memory (MKM flash devices)
-//=======================================================================================
-// History
-//------------------------------------------------------------------------------------------------
-// 27 Jul 2015 - Added NMI disable                                                    | V4.11.1.70 
-// 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
-//             - Fixed MCM_PLACR value (Disabling cache properly)                     | V4.10.4
-//------------------------------------------------------------------------------------------------
-
+/**
+ *  Flash code for Kinetis FTFA memory (MKM flash devices)
+ *  
+ *  Summary
+ *  FTFA      Controller
+ *  WDOG      Watch-dog timer
+ *  MCM_PLACR Flash cache control
+ *  NMI       Disabled in SIM_CTRL_REG (move to TCL?)
+ *  
+ * History
+ *------------------------------------------------------------------------------------------------
+ * 27 Jul 2015 - Added NMI disable                                                    | V4.11.1.70 
+ * 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
+ *             - Fixed MCM_PLACR value (Disabling cache properly)                     | V4.10.4
+ *------------------------------------------------------------------------------------------------
+ */
 #include <stdint.h>
 
 #ifndef NULL
@@ -243,8 +249,7 @@ void asm_entry(void);
 volatile const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress  */ __loadAddress,     // load address of image
      /* entry        */ asm_entry,         // entry point for code
-     /* capabilities */ CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK
-	 |CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_PARTITION_FLEXNVM,
+     /* capabilities */ CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|CAP_PARTITION_FLEXNVM,
      /* Reserved1    */ 0,
      /* Reserved2    */ 0,
      /* flashData    */ NULL,
@@ -682,10 +687,10 @@ void testApp(void) {
    SCB_VTOR = (uint32_t)__vector_table;
    
    // Disable watchdog
-   WDOG_UNLOCK = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK = WDOG_UNLOCK_SEQ_2;
+   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
+   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
    WDOG_STCTRLH = WDOG_WDOGEN;
-
+      
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();
 #ifdef DO_B
