@@ -114,7 +114,7 @@ typedef struct {
 /* Word to be written in in STCTRLH after unlocking sequence in order to disable the Watchdog */
 #define WDOG_DISABLED_CTRL  0x0012
 
-//=================================================================================================
+//==========================================================================================================
 // Operation masks
 //
 //  The following combinations (amongst others) are sensible:
@@ -304,7 +304,6 @@ void eraseFlashBlock(FlashData_t *flashData) {
    if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
-   
    flashData->controller->fccob0_3 = (F_ERSBLK << 24) | address;
    executeCommand(flashData->controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
@@ -482,12 +481,10 @@ extern uint32_t __stacktop[];
 //! Assumes ramBuffer is set up beforehand
 //!
 void entry(void) {
-   FlashData_t *flashData;  // Handle on programming data
-
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
-#if !defined(DEBUG) && 0
+#if !defined(DEBUG)
    /* Disable the Watchdog */
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
@@ -495,7 +492,7 @@ void entry(void) {
 #endif
    
    // Handle on programming data
-   flashData = gFlashProgramHeader.flashData;
+   FlashData_t * flashData = gFlashProgramHeader.flashData;
 
    initFlash(flashData);
    eraseFlashBlock(flashData);

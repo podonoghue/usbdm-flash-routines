@@ -101,12 +101,6 @@ typedef struct {
 #define CRC_CTRL_WAS                    (1<<25)
 #define CRC_CTRL_TCRC                   (1<<24)
 
-/* Address of Watchdog Refresh Register (16 bits) */
-#define WDOG_REFRESH (*(volatile uint16_t *)0x4005200C)
-/* Refresh Watchdog sequence words*/
-#define WDOG_REFRESH_SEQ_1   (0xA602)
-#define WDOG_REFRESH_SEQ_2   (0xB480)
-
 /* Address of Watchdog Unlock Register (16 bits) */
 #define WDOG_UNLOCK (*(volatile uint16_t *)0x4005200E)
 
@@ -117,6 +111,7 @@ typedef struct {
 #define WDOG_UNLOCK_SEQ_1   (0xC520)
 #define WDOG_UNLOCK_SEQ_2   (0xD928)
 
+/* Word to be written in in STCTRLH after unlocking sequence in order to disable the Watchdog */
 #define WDOG_DISABLED_CTRL  (0xD2)
 
 //==========================================================================================================
@@ -270,7 +265,6 @@ void executeCommand(volatile FlashController *controller) {
    // Wait for command complete
    while ((controller->fstat & FTFL_FSTAT_CCIF) == 0) {
    }
-   
    // Handle any errors
    if ((controller->fstat & FTFL_FSTAT_FPVIOL ) != 0) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
@@ -491,11 +485,11 @@ void entry(void) {
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
-#ifndef DEBUG
+#if !defined(DEBUG)
    /* Disable the Watchdog */
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
+   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
+   WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
+   WDOG_STCTRLH = WDOG_DISABLED_CTRL;
 #endif
    
    // Handle on programming data
@@ -722,7 +716,7 @@ void testApp(void) {
    // Disable watchdog
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH = WDOG_WDOGEN;
+   WDOG_STCTRLH = WDOG_DISABLED_CTRL;
       
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();
