@@ -2,14 +2,13 @@
  *  Flash code for Kinetis FTFA memory (MKV10 flash devices)
  *  
  *  Summary
- *  FTFA      Controller
+ *  FTFL      Controller
  *  WDOG      Watch-dog timer
  *  MCM_PLACR Flash cache control
  *  
  * History
  *------------------------------------------------------------------------------------------------
- * 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
- *             - Fixed MCM_PLACR value (Disabling cache properly)                     | V4.10.4
+ * 17 Dec 2016 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6.150 
  *------------------------------------------------------------------------------------------------
  */
 #include <stdint.h>
@@ -28,27 +27,27 @@
 
 #define NV_SECURITY_ADDRESS            (0x00000400)
 #define NV_FSEC_ADDRESS                (NV_SECURITY_ADDRESS+0x0C)
-#define FTFA_FSEC_KEY_MASK              0xC0
-#define FTFA_FSEC_KEY_ENABLE            0x80
-#define FTFA_FSEC_KEY_DISABLE           0xC0
-#define FTFA_FSEC_MEEN_MASK             0x30
-#define FTFA_FSEC_MEEN_ENABLE           0x30
-#define FTFA_FSEC_MEEN_DISABLE          0x20
-#define FTFA_FSEC_FSLACC                0x0C
-#define FTFA_FSEC_SEC_MASK              0x03
-#define FTFA_FSEC_UNSEC                 0x02
-#define FTFA_FSEC_SEC                   0x03
+#define FTFL_FSEC_KEY_MASK              0xC0
+#define FTFL_FSEC_KEY_ENABLE            0x80
+#define FTFL_FSEC_KEY_DISABLE           0xC0
+#define FTFL_FSEC_MEEN_MASK             0x30
+#define FTFL_FSEC_MEEN_ENABLE           0x30
+#define FTFL_FSEC_MEEN_DISABLE          0x20
+#define FTFL_FSEC_FSLACC                0x0C
+#define FTFL_FSEC_SEC_MASK              0x03
+#define FTFL_FSEC_UNSEC                 0x02
+#define FTFL_FSEC_SEC                   0x03
 
 #ifdef DEBUG
-#define FTFA_BASE_ADDRESS               ((volatile FlashController *)0x40020000)
+#define FTFL_BASE_ADDRESS               ((volatile FlashController *)0x40020000)
 #endif
 
+// Cache control
 #define MCM_PLACR_CFCC  (1<<10) // Clear Flash Controller Cache 
 #define MCM_PLACR_DFCDA (1<<11) // Disable Flash Controller Data Caching
 #define MCM_PLACR_DFCC  (1<<13) // Disable Flash Controller Cache
 #define MCM_PLACR_DFCS  (1<<15) // Disable Flash Controller Speculation
 
-// Cache control
 #define MCM_PLACR                  (*(volatile uint32_t *)0xF000300C)
 
 #pragma pack(1)
@@ -61,66 +60,64 @@ typedef struct {
    uint32_t fccob4_7;
    uint32_t fccob8_B;
    uint32_t fprot0_3;
+   uint8_t  feprot;
+   uint8_t  fdprot;
 } FlashController;
 
 #pragma pack(0)
 
-#define FTFA_FSTAT_CCIF                 0x80
-#define FTFA_FSTAT_RDCOLLERR            0x40
-#define FTFA_FSTAT_ACCERR               0x20
-#define FTFA_FSTAT_FPVIOL               0x10
-#define FTFA_FSTAT_MGSTAT0              0x01
+#define FTFL_FSTAT_CCIF                 0x80
+#define FTFL_FSTAT_RDCOLLERR            0x40
+#define FTFL_FSTAT_ACCERR               0x20
+#define FTFL_FSTAT_FPVIOL               0x10
+#define FTFL_FSTAT_MGSTAT0              0x01
 
-#define FTFA_FCNFG_CCIE                 0x80
-#define FTFA_FCNFG_RDCOLLIE             0x40
-#define FTFA_FCNFG_ERSAREQ              0x20
-#define FTFA_FCNFG_ERSSUSP              0x10
-#define FTFA_FCNFG_SWAP                 0x08
-#define FTFA_FCNFG_PFLSH                0x04
-#define FTFA_FCNFG_RAMRDY               0x02
-#define FTFA_FCNFG_EEERDY               0x01
+#define FTFL_FCNFG_CCIE                 0x80
+#define FTFL_FCNFG_RDCOLLIE             0x40
+#define FTFL_FCNFG_ERSAREQ              0x20
+#define FTFL_FCNFG_ERSSUSP              0x10
+#define FTFL_FCNFG_SWAP                 0x08
+#define FTFL_FCNFG_PFLSH                0x04
+#define FTFL_FCNFG_RAMRDY               0x02
+#define FTFL_FCNFG_EEERDY               0x01
 
 #define FOPT_LPBOOTn                    0x01
 #define FOPT_EZPORT                     0x02
    
 // Flash commands
+#define F_RD1BLK                        0x00
 #define F_RD1SEC                        0x01
 #define F_PGMCHK                        0x02
 #define F_RDRSRC                        0x03
-#define F_PGM4                          0x06
+#define F_PGM8                          0x07
+#define F_ERSBLK                        0x08
 #define F_ERSSCR                        0x09
+#define F_PGMSEC                        0x0B
 #define F_RD1ALL                        0x40
 #define F_RDONCE                        0x41
 #define F_PGMONCE                       0x43
 #define F_ERSALL                        0x44
 #define F_VFYKEY                        0x45
+#define F_PGMPART                       0x80UL
+#define F_SETRAM                        0x81
 
 #define F_USER_MARGIN                   0x01 // Use 'user' margin on flash verify
 #define F_FACTORY_MARGIN                0x02 // Use 'factory' margin on flash verify
 
-#define CRC_CRC                         (*(volatile uint32_t *)0x40032000)
-#define CRC_GPOLY                       (*(volatile uint32_t *)0x40032004)
-#define CRC_CTRL                        (*(volatile uint32_t *)0x40032008)
-#define CRC_CTRL_WAS                    (1<<25)
-#define CRC_CTRL_TCRC                   (1<<24)
+/* Address of Watch-dog Control Register */
+#define WDOG_CS 	(*(volatile uint32_t *)0x40052000)
 
-/* Address of Watchdog Refresh Register (16 bits) */
-#define WDOG_REFRESH (*(volatile uint16_t *)0x4005200C)
-/* Refresh Watchdog sequence words*/
-#define WDOG_REFRESH_SEQ_1   (0xA602)
-#define WDOG_REFRESH_SEQ_2   (0xB480)
+/* Address of Watch-dog Count register (for unlock) */
+#define WDOG_CNT 	(*(volatile uint32_t *)0x40052004)
 
-/* Address of Watchdog Unlock Register (16 bits) */
-#define WDOG_UNLOCK (*(volatile uint16_t *)0x4005200E)
+/* Address of Watch-dog Timeout Value Register */
+#define WDOG_TOVAL 	(*(volatile uint32_t *)0x40052008)
 
-/* Address of Watchdog Status and Control Register High (16 bits) */
-#define WDOG_STCTRLH (*(volatile uint16_t *)0x40052000)
+/* Address of Watch-dog Window Register */
+#define WDOG_WIN 	(*(volatile uint32_t *)0x4005200C)
 
-/* Unlocking Watchdog sequence words*/
-#define WDOG_UNLOCK_SEQ_1   (0xC520)
-#define WDOG_UNLOCK_SEQ_2   (0xD928)
-
-#define WDOG_DISABLED_CTRL  (0xD2)
+/* Word to be written in in WDOG_CNT to unlock */
+#define WDOG_UNLOCK  (0xD928C520)
 
 /*==========================================================================================================
  * Operation masks
@@ -135,6 +132,7 @@ typedef struct {
 #define DO_BLANK_CHECK_RANGE  (1<<3) // Blank check region
 #define DO_PROGRAM_RANGE      (1<<4) // Program range (including option region)
 #define DO_VERIFY_RANGE       (1<<5) // Verify range
+#define DO_PARTITION_FLEXNVM  (1<<7) // Program FlexNVM DFLASH/EEPROM partitioning
 #define DO_TIMING_LOOP        (1<<8) // Counting loop to determine clock speed
 
 #define IS_COMPLETE           (1<<31)
@@ -155,6 +153,7 @@ typedef struct {
 #define CAP_RELOCATABLE        (1<<31)
 
 #define ADDRESS_LINEAR (1UL<<31) // Indicate address is linear
+#define ADDRESS_EEPROM (1UL<<30) // Indicate address lies within EEPROM
 
 // These error numbers are just for debugging
 typedef enum {
@@ -226,6 +225,7 @@ void programRange(FlashData_t *flashData);
 void verifyRange(FlashData_t *flashData);
 void eraseRange(FlashData_t *flashData);
 void blankCheckRange(FlashData_t *flashData);
+void programPartition(FlashData_t *flashData);
 void entry(void);
 void isr_default(void);
 //void testApp(void);
@@ -251,6 +251,11 @@ void setErrorCode(int errorCode) {
    }
 }
 
+#define WDOG_CS_UPDATE_MASK  (1<<5)
+#define WDOG_CS_EN_MASK      (1<<7)
+#define WDOG_CS_ULK_MASK     (1<<11)
+#define WDOG_CS_CMD32EN_MASK (1<<13)
+
 /**
  * Does any initialisation required before accessing the Flash
  */
@@ -258,14 +263,19 @@ void initFlash(FlashData_t *flashData) {
    // Do initialise flash every time
    
 #if !defined(DEBUG)
-   /* Disable the Watch-dog */
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
+   /* 
+    * Disable the Watch-dog 
+    * Must write to all registers to have effect
+    */
+   WDOG_CNT   = 0xD928C520;  		// Unlock watch-dog
+   WDOG_TOVAL = -1;                    
+   WDOG_WIN   = -1;                    
+   WDOG_CS    = WDOG_CS_CMD32EN_MASK|WDOG_CS_ULK_MASK; // Disable watch-dog
 #endif
 
    // Unprotect flash
    flashData->controller->fprot0_3 = 0xFFFFFFFF;
+   flashData->controller->fdprot   = 0xFF;
    
    // Disable flash caching
    MCM_PLACR = MCM_PLACR_DFCC|MCM_PLACR_DFCS;
@@ -278,35 +288,55 @@ void initFlash(FlashData_t *flashData) {
  */
 void executeCommand(volatile FlashController *controller) {
    // Clear any existing errors
-   controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
+   controller->fstat = FTFL_FSTAT_ACCERR|FTFL_FSTAT_FPVIOL;
 
    // Launch command
-   controller->fstat = FTFA_FSTAT_CCIF;
+   controller->fstat = FTFL_FSTAT_CCIF;
 
    // Wait for command complete
-   while ((controller->fstat & FTFA_FSTAT_CCIF) == 0) {
+   while ((controller->fstat & FTFL_FSTAT_CCIF) == 0) {
    }
    // Handle any errors
-   if ((controller->fstat & FTFA_FSTAT_FPVIOL ) != 0) {
+   if ((controller->fstat & FTFL_FSTAT_FPVIOL ) != 0) {
       setErrorCode(FLASH_ERR_PROG_FPVIOL);
    }
-   if ((controller->fstat & FTFA_FSTAT_ACCERR ) != 0) {
+   if ((controller->fstat & FTFL_FSTAT_ACCERR ) != 0) {
       setErrorCode(FLASH_ERR_PROG_ACCERR);
    }
-   if ((controller->fstat & FTFA_FSTAT_MGSTAT0 ) != 0) {
+   if ((controller->fstat & FTFL_FSTAT_MGSTAT0 ) != 0) {
       setErrorCode(FLASH_ERR_PROG_MGSTAT0);
    }
+}
+
+/**
+ * Converts Global address to address required by flash operations
+ * 
+ * A23     = PFLASH/DFLASH selection
+ * A31..24 = 0
+ * 
+ */
+uint32_t fixAddress(uint32_t address) {
+   // Any address above this is assumed to be DFLASH and require A23=1
+   const uint32_t DFLASH_START_ADDRESS  = 0x10000000;
+
+   if (address>=DFLASH_START_ADDRESS) {
+      // A23 selects between PFLASH & DFLASH 
+      address |= 1<<23;
+   }
+   // Discard unused byte (addresses are relative to start of Flash Block rather than Global)
+   return (address &= 0xFFFFFF);   
 }
 
 /**
  * Erase entire flash block
  */
 void eraseFlashBlock(FlashData_t *flashData) {
+   uint32_t address = fixAddress(flashData->address);
 
    if ((flashData->flags&DO_ERASE_BLOCK) == 0) {
       return;
    }
-   flashData->controller->fccob0_3 = (F_ERSALL << 24) ;
+   flashData->controller->fccob0_3 = (F_ERSBLK << 24) | address;
    executeCommand(flashData->controller);
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
@@ -318,28 +348,29 @@ void eraseFlashBlock(FlashData_t *flashData) {
  * to permanently lock the device
  */
 void programRange(FlashData_t *flashData) {
-   uint32_t         address    = flashData->address;
+   uint32_t         address    = fixAddress(flashData->address);
    uint32_t         endAddress = flashData->address+flashData->dataSize;
    const uint32_t  *data       = flashData->dataAddress;
    
    if ((flashData->flags&DO_PROGRAM_RANGE) == 0) {
       return;
    }
-//   if ((address & 0x03) != 0) {
-//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-//   }
+   if ((address & 0x07) != 0) {
+      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
+   }
    // Program words
    while (address < endAddress) {
       if (address == (NV_FSEC_ADDRESS&~3)) {
          // Check for permanent secure value
-         if ((*data & (FTFA_FSEC_MEEN_MASK)) == (FTFA_FSEC_MEEN_DISABLE)) {
+         if ((*data & (FTFL_FSEC_MEEN_MASK)) == (FTFL_FSEC_MEEN_DISABLE)) {
             setErrorCode(FLASH_ERR_ILLEGAL_SECURITY);
          }
       }
-      flashData->controller->fccob0_3 = (F_PGM4 << 24) | address;
+      flashData->controller->fccob0_3 = (F_PGM8 << 24) | address;
       flashData->controller->fccob4_7 = *data++;
+      flashData->controller->fccob8_B = *data++;
       executeCommand(flashData->controller);
-      address  += 4;
+      address += 8;
    }
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
@@ -348,7 +379,7 @@ void programRange(FlashData_t *flashData) {
  * Verify a range of flash against buffer
  */
 void verifyRange(FlashData_t *flashData) {
-   uint32_t        address    = flashData->address;
+   uint32_t        address    = fixAddress(flashData->address);
    uint32_t        endAddress = flashData->address+flashData->dataSize;
    const uint32_t *data       = flashData->dataAddress;
    
@@ -371,7 +402,7 @@ void verifyRange(FlashData_t *flashData) {
  * Erase a range of flash
  */
 void eraseRange(FlashData_t *flashData) {
-   uint32_t   address     = flashData->address;
+   uint32_t   address     = fixAddress(flashData->address);
    uint32_t   endAddress  = address + flashData->dataSize;
    uint32_t   pageMask    = flashData->sectorSize-1U;
    
@@ -417,6 +448,20 @@ void blankCheckRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
 
+/*
+ * Partition FlexNVM/EEPROM 
+ */
+ void programPartition(FlashData_t *flashData) {
+   volatile FlashController *controller = flashData->controller;
+   if ((flashData->flags&DO_PARTITION_FLEXNVM) == 0) {
+      return;
+   }
+   controller->fccob0_3 = (F_PGMPART << 24)|0;
+   controller->fccob4_7 = flashData->frequency;
+   executeCommand(controller);
+   flashData->flags &= ~DO_PARTITION_FLEXNVM;
+}
+
 //! Minimal vector table
 extern uint32_t __vector_table[];
 
@@ -437,6 +482,7 @@ void entry(void) {
 
    initFlash(flashData);
    eraseFlashBlock(flashData);
+   programPartition(flashData) ;
    eraseRange(flashData);
    blankCheckRange(flashData);
    programRange(flashData);
@@ -478,7 +524,7 @@ static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x
 
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -489,7 +535,7 @@ static const FlashData_t flashdataA = {
 #define DO_B
 static const FlashData_t flashdataB = {
    /* flags      */ DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -500,7 +546,7 @@ static const FlashData_t flashdataB = {
 #define DO_C
 static const FlashData_t flashdataC = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -511,7 +557,7 @@ static const FlashData_t flashdataC = {
 #define DO_D
 static const FlashData_t flashdataD = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -522,7 +568,7 @@ static const FlashData_t flashdataD = {
 #define DO_E
 static const FlashData_t flashdataE = {
    /* flags      */ DO_INIT_FLASH,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
 };
@@ -530,7 +576,7 @@ static const FlashData_t flashdataE = {
 // Unlock flash
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_UNLOCK_FLASH|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -539,7 +585,7 @@ static const FlashData_t flashdataA = {
 // Lock Flash 
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_LOCK_FLASH|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -548,7 +594,7 @@ static const FlashData_t flashdataA = {
 // Not used
 static const FlashData_t flashdataA = {
    /* flags      */ DO_TIMING_LOOP,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -557,7 +603,7 @@ static const FlashData_t flashdataA = {
 // Set erasing ranges
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -568,7 +614,7 @@ static const FlashData_t flashdataA = {
 // Set erasing ranges
 static const FlashData_t flashdataB = {
    /* flags      */ DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -580,7 +626,7 @@ static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x
 // Mass erase + Unlock flash
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_UNLOCK_FLASH|DO_ERASE_BLOCK,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -588,7 +634,7 @@ static const FlashData_t flashdataA = {
 #define DO_B
 static const FlashData_t flashdataB = {
    /* flags      */ DO_INIT_FLASH|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -599,7 +645,7 @@ static const FlashData_t flashdataB = {
 #define DO_C
 static const FlashData_t flashdataC = {
    /* flags      */ DO_INIT_FLASH|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -615,7 +661,7 @@ static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x
 
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -626,11 +672,11 @@ static const FlashData_t flashdataA = {
 #elif TEST == 8
 // Checking security anti-lockup
 //static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,
-//                                 (FTFA_FSEC_KEY_ENABLE|FTFA_FSEC_MEEN_DISABLE|FTFA_FSEC_FSLACC|FTFA_FSEC_UNSEC),0xFF,0xFF,0xFF,}; 
+//                                 (FTFL_FSEC_KEY_ENABLE|FTFL_FSEC_MEEN_DISABLE|FTFL_FSEC_FSLACC|FTFL_FSEC_UNSEC),0xFF,0xFF,0xFF,}; 
 
 static const FlashData_t flashdataA = {
    /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-   /* controller */ FTFA_BASE_ADDRESS,
+   /* controller */ FTFL_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
    /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -650,7 +696,7 @@ void testApp(void) {
    // Disable watchdog
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_1;
    WDOG_UNLOCK  = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH = WDOG_WDOGEN;
+   WDOG_STCTRLH = WDOG_DISABLED_CTRL;
       
    fph->flashData = (FlashData_t *)&flashdataA;
    fph->entry();

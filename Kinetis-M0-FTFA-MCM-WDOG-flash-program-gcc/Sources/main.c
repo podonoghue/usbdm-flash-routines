@@ -1,13 +1,15 @@
 /**
- *  Flash code for Kinetis FTFA memory (MKV10 flash devices)
+ *  Flash code for Kinetis FTFA memory (Cortex-M0 flash devices)
  *  
  *  Summary
  *  FTFA      Controller
  *  WDOG      Watch-dog timer
  *  MCM_PLACR Flash cache control
+ *  NMI       Disabled in SIM_CTRL_REG (move to TCL?)
  *  
  * History
  *------------------------------------------------------------------------------------------------
+ * 27 Jul 2015 - Added NMI disable                                                    | V4.11.1.70 
  * 17 Aug 2013 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6 
  *             - Fixed MCM_PLACR value (Disabling cache properly)                     | V4.10.4
  *------------------------------------------------------------------------------------------------
@@ -46,7 +48,7 @@
 #define MCM_PLACR_CFCC  (1<<10) // Clear Flash Controller Cache 
 #define MCM_PLACR_DFCDA (1<<11) // Disable Flash Controller Data Caching
 #define MCM_PLACR_DFCC  (1<<13) // Disable Flash Controller Cache
-#define MCM_PLACR_DFCS  (1<<15) // Disable Flash Controller Speculation
+#define MCM_PLACR_DFCS  (1<<13) // Disable Flash Controller Speculation
 
 // Cache control
 #define MCM_PLACR                  (*(volatile uint32_t *)0xF000300C)
@@ -62,6 +64,9 @@ typedef struct {
    uint32_t fccob8_B;
    uint32_t fprot0_3;
 } FlashController;
+
+#define SIM_CTRL_REG                    (*(volatile uint32_t*) 0x4003F004)
+#define SIM_CTRL_REG_NMIDIS             (1<<1)
 
 #pragma pack(0)
 
@@ -104,17 +109,48 @@ typedef struct {
 #define CRC_CTRL_WAS                    (1<<25)
 #define CRC_CTRL_TCRC                   (1<<24)
 
-/* Address of Watchdog Refresh Register (16 bits) */
-#define WDOG_REFRESH (*(volatile uint16_t *)0x4005200C)
+/* ================================================================================ */
+/* ================           WDOG (file:WDOG_MKM)                 ================ */
+/* ================================================================================ */
+
+/**
+ * @brief Watchdog Timer
+ */
+typedef struct {                                /*!<       WDOG Structure                                               */
+   volatile uint16_t  STCTRLH;                  /*!< 0000: Status and Control Register High                             */
+   volatile uint16_t  STCTRLL;                  /*!< 0002: Status and Control Register Low                              */
+   union {                                      /*!< 0000: (size=0004)                                                  */
+      volatile uint32_t  TOVAL;                 /*!< 0004: Time-out Value Register High TOVALL:TOVALH                   */
+      struct {                                  /*!< 0000: (size=0004)                                                  */
+         volatile uint16_t  TOVALH;             /*!< 0004: Time-out Value Register High                                 */
+         volatile uint16_t  TOVALL;             /*!< 0006: Time-out Value Register Low                                  */
+      };
+   };
+   union {                                      /*!< 0000: (size=0004)                                                  */
+      volatile uint32_t  WIN;                   /*!< 0008: Window Register (WINL:WINH)                                  */
+      struct {                                  /*!< 0000: (size=0004)                                                  */
+         volatile uint16_t  WINH;               /*!< 0008: Window Register High                                         */
+         volatile uint16_t  WINL;               /*!< 000A: Window Register Low                                          */
+      };
+   };
+   volatile uint16_t  REFRESH;                  /*!< 000C: Refresh Register                                             */
+   volatile uint16_t  UNLOCK;                   /*!< 000E: Unlock Register                                              */
+   union {                                      /*!< 0000: (size=0004)                                                  */
+      volatile uint32_t  TMROUT;                /*!< 0010: Timer Output Register (TMROUTL:TMROUTH)                      */
+      struct {                                  /*!< 0000: (size=0004)                                                  */
+         volatile uint16_t  TMROUTH;            /*!< 0010: Timer Output Register High                                   */
+         volatile uint16_t  TMROUTL;            /*!< 0012: Timer Output Register Low                                    */
+      };
+   };
+   volatile uint16_t  RSTCNT;                   /*!< 0014: Reset Count Register                                         */
+   volatile uint16_t  PRESC;                    /*!< 0016: Prescaler Register                                           */
+} WDOG_Type;
+
+#define WDOG (*(volatile WDOG_Type *)0x40053000)
+
 /* Refresh Watchdog sequence words*/
 #define WDOG_REFRESH_SEQ_1   (0xA602)
 #define WDOG_REFRESH_SEQ_2   (0xB480)
-
-/* Address of Watchdog Unlock Register (16 bits) */
-#define WDOG_UNLOCK (*(volatile uint16_t *)0x4005200E)
-
-/* Address of Watchdog Status and Control Register High (16 bits) */
-#define WDOG_STCTRLH (*(volatile uint16_t *)0x40052000)
 
 /* Unlocking Watchdog sequence words*/
 #define WDOG_UNLOCK_SEQ_1   (0xC520)
@@ -122,13 +158,13 @@ typedef struct {
 
 #define WDOG_DISABLED_CTRL  (0xD2)
 
-/*==========================================================================================================
- * Operation masks
- *
- *  The following combinations (amongst others) are sensible:
- *  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
- *  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
- */
+//==========================================================================================================
+// Operation masks
+//
+//  The following combinations (amongst others) are sensible:
+//  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
+//  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
+//
 #define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
 #define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
@@ -219,7 +255,7 @@ volatile const FlashProgramHeader_t gFlashProgramHeader = {
      /* flashData    */ NULL,
 };
 
-void setErrorCode(int errorCode) __attribute__ ((noreturn));
+void setErrorCode(uint16_t errorCode) __attribute__ ((noreturn));
 void initFlash(FlashData_t *flashData);
 void eraseFlashBlock(FlashData_t *flashData);
 void programRange(FlashData_t *flashData);
@@ -242,10 +278,10 @@ void isr_default(void) {
 /**
  * Set error code to return to BDM & halt
  */
-void setErrorCode(int errorCode) {
+void setErrorCode(uint16_t errorCode) {
    FlashData_t *flashData = gFlashProgramHeader.flashData;
-   flashData->errorCode   = (uint16_t)errorCode;
-   flashData->flags      |= IS_COMPLETE; 
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
    for(;;) {
 	   __asm__("bkpt  0");
    }
@@ -257,11 +293,14 @@ void setErrorCode(int errorCode) {
 void initFlash(FlashData_t *flashData) {
    // Do initialise flash every time
    
-#if !defined(DEBUG)
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+
+#ifndef DEBUG
    /* Disable the Watch-dog */
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_1;
-   WDOG_UNLOCK   = WDOG_UNLOCK_SEQ_2;
-   WDOG_STCTRLH  = WDOG_DISABLED_CTRL;
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_1;
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_2;
+   WDOG.STCTRLH = WDOG_DISABLED_CTRL;
 #endif
 
    // Unprotect flash

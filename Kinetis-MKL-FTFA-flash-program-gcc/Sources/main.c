@@ -1,9 +1,9 @@
 /**
- *  Flash code for Kinetis FTFA memory (MKL flash devices)
+ *  Flash code for Kinetis FTFA memory (Cortex-M0  flash devices)
  *  
  *  Summary
- *  FTFA Controller
- *  COP  Watch-dog timer
+ *  FTFA      Controller
+ *  COP       Watch-dog timer
  *  MCM_PLACR Flash cache control
  *  
  * History
@@ -43,12 +43,12 @@
 #define FTFA_BASE_ADDRESS               ((volatile FlashController *)0x40020000)
 #endif
 
+// Cache control
 #define MCM_PLACR_CFCC  (1<<10) // Clear Flash Controller Cache 
 #define MCM_PLACR_DFCDA (1<<11) // Disable Flash Controller Data Caching
 #define MCM_PLACR_DFCC  (1<<13) // Disable Flash Controller Cache
-#define MCM_PLACR_DFCS  (1<<13) // Disable Flash Controller Speculation
+#define MCM_PLACR_DFCS  (1<<15) // Disable Flash Controller Speculation
 
-// Cache control
 #define MCM_PLACR                  (*(volatile uint32_t *)0xF000300C)
 
 #pragma pack(1)
@@ -64,6 +64,7 @@ typedef struct {
    uint8_t  feprot;
    uint8_t  fdprot;
 } FlashController;
+
 #pragma pack(0)
 
 #define FTFA_FSTAT_CCIF                 0x80
@@ -99,11 +100,6 @@ typedef struct {
 #define F_USER_MARGIN                   0x01 // Use 'user' margin on flash verify
 #define F_FACTORY_MARGIN                0x02 // Use 'factory' margin on flash verify
 
-#define CRC_CRC                         (*(volatile uint32_t *)0x40032000)
-#define CRC_GPOLY                       (*(volatile uint32_t *)0x40032004)
-#define CRC_CTRL                        (*(volatile uint32_t *)0x40032008)
-#define CRC_CTRL_WAS                    (1<<25)
-#define CRC_CTRL_TCRC                   (1<<24)
 
 /* Address of Watchdog Status and Control Register (32 bits) */
 #define SIM_COPC (*(volatile uint32_t *)0x40048100)
@@ -111,13 +107,13 @@ typedef struct {
 /* Word to be written in in SIM_COPC to disable the Watchdog */
 #define COP_DISABLE  0x0
 
-//==========================================================================================================
-// Operation masks
-//
-//  The following combinations (amongst others) are sensible:
-//  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
-//  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
-//
+/*==========================================================================================================
+ * Operation masks
+ *
+ *  The following combinations (amongst others) are sensible:
+ *  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
+ *  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
+ */
 #define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
 #define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)

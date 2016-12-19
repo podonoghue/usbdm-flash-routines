@@ -1,0 +1,179 @@
+
+Discarded input sections
+
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/kinetis_sysinit.o
+ .text          0x00000000        0x0 ./Sources/kinetis_sysinit.o
+ .data          0x00000000        0x0 ./Sources/kinetis_sysinit.o
+ .bss           0x00000000        0x0 ./Sources/kinetis_sysinit.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .group         0x00000000        0x8 ./Sources/main.o
+ .text          0x00000000        0x0 ./Sources/main.o
+ .data          0x00000000        0x0 ./Sources/main.o
+ .bss           0x00000000        0x0 ./Sources/main.o
+ .debug_macro   0x00000000      0x826 ./Sources/main.o
+ .debug_macro   0x00000000       0x22 ./Sources/main.o
+ .debug_macro   0x00000000       0x4f ./Sources/main.o
+ .debug_macro   0x00000000       0x44 ./Sources/main.o
+ .debug_macro   0x00000000       0xfd ./Sources/main.o
+ .debug_macro   0x00000000       0x22 ./Sources/main.o
+ .debug_macro   0x00000000      0x1df ./Sources/main.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+m_flashProg      0x1fffff00         0x000003fc         xr
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD ./Sources/kinetis_sysinit.o
+LOAD ./Sources/main.o
+                0x00000032                STACKSIZE = 0x32
+
+.flashProg      0x1fffff00      0x3f0
+                0x1fffff00                . = ALIGN (0x80)
+                0x1fffff00                __loadAddress = .
+ *(.data.__vector_table)
+ .data.__vector_table
+                0x1fffff00       0x10 ./Sources/kinetis_sysinit.o
+                0x1fffff00                __vector_table
+                0x1fffff42                . = (. + STACKSIZE)
+ *fill*         0x1fffff10       0x32 
+                0x1fffff44                . = ALIGN (0x4)
+ *fill*         0x1fffff42        0x2 
+                0x1fffff44                __stacktop = .
+                0x1fffff44                . = ALIGN (0x4)
+ *(.data.*)
+ .data.gFlashProgramHeader
+                0x1fffff44       0x18 ./Sources/main.o
+                0x1fffff44                gFlashProgramHeader
+ *(.text.*)
+ .text.asm_entry
+                0x1fffff5c       0x10 ./Sources/main.o
+                0x1fffff5c                asm_entry
+ .text.setErrorCode
+                0x1fffff6c       0x28 ./Sources/main.o
+                0x1fffff6c                setErrorCode
+ .text.isr_default
+                0x1fffff94        0x8 ./Sources/main.o
+                0x1fffff94                isr_default
+ .text.initFlash
+                0x1fffff9c       0x64 ./Sources/main.o
+                0x1fffff9c                initFlash
+ .text.executeCommand
+                0x20000000       0x32 ./Sources/main.o
+                0x20000000                executeCommand
+ .text.eraseFlashBlock
+                0x20000032       0x3e ./Sources/main.o
+                0x20000032                eraseFlashBlock
+ .text.programRange
+                0x20000070       0xbc ./Sources/main.o
+                0x20000070                programRange
+ .text.verifyRange
+                0x2000012c       0xba ./Sources/main.o
+                0x2000012c                verifyRange
+ .text.eraseRange
+                0x200001e6       0x7e ./Sources/main.o
+                0x200001e6                eraseRange
+ .text.blankCheckRange
+                0x20000264       0x40 ./Sources/main.o
+                0x20000264                blankCheckRange
+ .text.entry    0x200002a4       0x48 ./Sources/main.o
+                0x200002a4                entry
+ .text.asm_testApp
+                0x200002ec        0x2 ./Sources/main.o
+                0x200002ec                asm_testApp
+ *(.rodata.*)
+                0x200002f0                . = ALIGN (0x4)
+ *fill*         0x200002ee        0x2 
+OUTPUT(Kinetis-M0-FTFA-MCM-WDOG-flash-program-gcc.elf elf32-littlearm)
+
+.glue_7         0x200002f0        0x0
+ .glue_7        0x200002f0        0x0 linker stubs
+
+.glue_7t        0x200002f0        0x0
+ .glue_7t       0x200002f0        0x0 linker stubs
+
+.vfp11_veneer   0x200002f0        0x0
+ .vfp11_veneer  0x200002f0        0x0 linker stubs
+
+.v4_bx          0x200002f0        0x0
+ .v4_bx         0x200002f0        0x0 linker stubs
+
+.iplt           0x200002f0        0x0
+ .iplt          0x200002f0        0x0 ./Sources/kinetis_sysinit.o
+
+.igot.plt       0x200002f0        0x0
+ .igot.plt      0x200002f0        0x0 ./Sources/kinetis_sysinit.o
+
+.rel.dyn        0x200002f0        0x0
+ .rel.iplt      0x200002f0        0x0 ./Sources/kinetis_sysinit.o
+
+.debug_info     0x00000000      0x85e
+ .debug_info    0x00000000      0x10a ./Sources/kinetis_sysinit.o
+ .debug_info    0x0000010a      0x754 ./Sources/main.o
+
+.debug_abbrev   0x00000000      0x2a4
+ .debug_abbrev  0x00000000       0xa2 ./Sources/kinetis_sysinit.o
+ .debug_abbrev  0x000000a2      0x202 ./Sources/main.o
+
+.debug_aranges  0x00000000       0x90
+ .debug_aranges
+                0x00000000       0x18 ./Sources/kinetis_sysinit.o
+ .debug_aranges
+                0x00000018       0x78 ./Sources/main.o
+
+.debug_macro    0x00000000      0xecb
+ .debug_macro   0x00000000       0x6c ./Sources/kinetis_sysinit.o
+ .debug_macro   0x0000006c      0x826 ./Sources/kinetis_sysinit.o
+ .debug_macro   0x00000892       0x28 ./Sources/kinetis_sysinit.o
+ .debug_macro   0x000008ba       0x22 ./Sources/kinetis_sysinit.o
+ .debug_macro   0x000008dc       0x4f ./Sources/kinetis_sysinit.o
+ .debug_macro   0x0000092b       0x44 ./Sources/kinetis_sysinit.o
+ .debug_macro   0x0000096f       0xfd ./Sources/kinetis_sysinit.o
+ .debug_macro   0x00000a6c       0x22 ./Sources/kinetis_sysinit.o
+ .debug_macro   0x00000a8e      0x1df ./Sources/kinetis_sysinit.o
+ .debug_macro   0x00000c6d      0x25e ./Sources/main.o
+
+.debug_line     0x00000000      0x559
+ .debug_line    0x00000000      0x211 ./Sources/kinetis_sysinit.o
+ .debug_line    0x00000211      0x348 ./Sources/main.o
+
+.debug_str      0x00000000     0x3bdd
+ .debug_str     0x00000000     0x30d2 ./Sources/kinetis_sysinit.o
+                               0x3236 (size before relaxing)
+ .debug_str     0x000030d2      0xb0b ./Sources/main.o
+                               0x3c5e (size before relaxing)
+
+.comment        0x00000000       0x6e
+ .comment       0x00000000       0x6e ./Sources/kinetis_sysinit.o
+                                 0x6f (size before relaxing)
+ .comment       0x0000006e       0x6f ./Sources/main.o
+
+.ARM.attributes
+                0x00000000       0x32
+ .ARM.attributes
+                0x00000000       0x32 ./Sources/kinetis_sysinit.o
+ .ARM.attributes
+                0x00000032       0x32 ./Sources/main.o
+
+.debug_loc      0x00000000      0x382
+ .debug_loc     0x00000000      0x382 ./Sources/main.o
+
+.debug_ranges   0x00000000       0x68
+ .debug_ranges  0x00000000       0x68 ./Sources/main.o
+
+.debug_frame    0x00000000      0x138
+ .debug_frame   0x00000000      0x138 ./Sources/main.o

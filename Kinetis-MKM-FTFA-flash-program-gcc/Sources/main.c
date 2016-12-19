@@ -1,5 +1,5 @@
 /**
- *  Flash code for Kinetis FTFA memory (MKM flash devices)
+ *  Flash code for Kinetis FTFA memory (Cortex-M0 flash devices)
  *  
  *  Summary
  *  FTFA      Controller

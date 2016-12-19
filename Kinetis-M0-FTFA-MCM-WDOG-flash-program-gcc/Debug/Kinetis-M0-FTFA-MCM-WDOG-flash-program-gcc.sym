@@ -1,0 +1,17 @@
+00000032 A STACKSIZE
+1fffff00 T __loadAddress
+1fffff00 T __vector_table
+1fffff44 T __stacktop
+1fffff44 T gFlashProgramHeader
+1fffff5c T asm_entry
+1fffff6c T setErrorCode
+1fffff94 T isr_default
+1fffff9c T initFlash
+20000000 T executeCommand
+20000032 T eraseFlashBlock
+20000070 T programRange
+2000012c T verifyRange
+200001e6 T eraseRange
+20000264 T blankCheckRange
+200002a4 T entry
+200002ec T asm_testApp

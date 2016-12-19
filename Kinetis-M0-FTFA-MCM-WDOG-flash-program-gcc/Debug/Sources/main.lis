@@ -1,0 +1,936 @@
+
+main.o:     file format elf32-littlearm
+
+SYMBOL TABLE:
+00000000 l    df *ABS*	00000000 main.c
+00000000 l    d  .text	00000000 .text
+00000000 l    d  .data	00000000 .data
+00000000 l    d  .bss	00000000 .bss
+00000000 l    d  .text.asm_entry	00000000 .text.asm_entry
+00000000 l    d  .text.setErrorCode	00000000 .text.setErrorCode
+00000000 l    d  .text.isr_default	00000000 .text.isr_default
+00000000 l    d  .text.initFlash	00000000 .text.initFlash
+00000000 l    d  .text.executeCommand	00000000 .text.executeCommand
+00000000 l    d  .text.eraseFlashBlock	00000000 .text.eraseFlashBlock
+00000000 l    d  .text.programRange	00000000 .text.programRange
+00000000 l    d  .text.verifyRange	00000000 .text.verifyRange
+00000000 l    d  .text.eraseRange	00000000 .text.eraseRange
+00000000 l    d  .text.blankCheckRange	00000000 .text.blankCheckRange
+00000000 l    d  .text.entry	00000000 .text.entry
+00000000 l    d  .text.asm_testApp	00000000 .text.asm_testApp
+00000000 l    d  .data.gFlashProgramHeader	00000000 .data.gFlashProgramHeader
+00000000 l    d  .debug_info	00000000 .debug_info
+00000000 l    d  .debug_abbrev	00000000 .debug_abbrev
+00000000 l    d  .debug_loc	00000000 .debug_loc
+00000000 l    d  .debug_aranges	00000000 .debug_aranges
+00000000 l    d  .debug_ranges	00000000 .debug_ranges
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_line	00000000 .debug_line
+00000000 l    d  .debug_str	00000000 .debug_str
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_macro	00000000 .debug_macro
+00000000 l    d  .debug_frame	00000000 .debug_frame
+00000000 l       .group	00000000 wm4.0.fe80deb2ec9374e0778f602dfc830164
+00000000 l       .group	00000000 wm4._newlib_version.h.4.ad342815780c8db09778091a421b5b5b
+00000000 l       .group	00000000 wm4.features.h.33.7b36b8b41abe4293fbb29540b719705c
+00000000 l       .group	00000000 wm4._default_types.h.15.933e8edd27a65e0b69af4a865eb623d2
+00000000 l       .group	00000000 wm4._intsup.h.10.b82bf99f69d6a5c085fc866de0d3eb9b
+00000000 l       .group	00000000 wm4._stdint.h.10.f76354baea1c7088202064e6f3d4f5e3
+00000000 l       .group	00000000 wm4.stdint.h.23.373a9d32a9e4c2e88fd347156532d281
+00000000 l    d  .comment	00000000 .comment
+00000000 l    d  .ARM.attributes	00000000 .ARM.attributes
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 l    d  .group	00000000 .group
+00000000 g     F .text.asm_entry	00000010 asm_entry
+00000000 g     F .text.entry	00000048 entry
+00000000         *UND*	00000000 __stacktop
+00000000 g     F .text.setErrorCode	00000028 setErrorCode
+00000000 g     F .text.isr_default	00000008 isr_default
+00000000 g     F .text.initFlash	00000064 initFlash
+00000000 g     F .text.executeCommand	00000032 executeCommand
+00000000 g     F .text.eraseFlashBlock	0000003e eraseFlashBlock
+00000000 g     F .text.programRange	000000bc programRange
+00000000 g     F .text.verifyRange	000000ba verifyRange
+00000000 g     F .text.eraseRange	0000007e eraseRange
+00000000 g     F .text.blankCheckRange	00000040 blankCheckRange
+00000000         *UND*	00000000 __vector_table
+00000000 g     F .text.asm_testApp	00000002 asm_testApp
+00000000 g     O .data.gFlashProgramHeader	00000018 gFlashProgramHeader
+00000000         *UND*	00000000 __loadAddress
+
+
+
+Disassembly of section .text.asm_entry:
+
+00000000 <asm_entry>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	4b02      	ldr	r3, [pc, #8]	; (c <asm_entry+0xc>)
+   2:	1c18      	adds	r0, r3, #0
+   4:	4685      	mov	sp, r0
+   6:	e7fe      	b.n	0 <asm_entry>
+   8:	be00      	bkpt	0x0000
+   a:	46c0      	nop			; (mov r8, r8)
+   c:	00000000 	.word	0x00000000
+
+Disassembly of section .text.setErrorCode:
+
+00000000 <setErrorCode>:
+   0:	4a08      	ldr	r2, [pc, #32]	; (24 <setErrorCode+0x24>)
+   2:	8a93      	ldrh	r3, [r2, #20]
+   4:	8ad1      	ldrh	r1, [r2, #22]
+   6:	0409      	lsls	r1, r1, #16
+   8:	4319      	orrs	r1, r3
+   a:	884b      	ldrh	r3, [r1, #2]
+   c:	880a      	ldrh	r2, [r1, #0]
+   e:	041b      	lsls	r3, r3, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	4313      	orrs	r3, r2
+  12:	2280      	movs	r2, #128	; 0x80
+  14:	0612      	lsls	r2, r2, #24
+  16:	4313      	orrs	r3, r2
+  18:	800b      	strh	r3, [r1, #0]
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	0c1b      	lsrs	r3, r3, #16
+  1c:	8188      	strh	r0, [r1, #12]
+  1e:	804b      	strh	r3, [r1, #2]
+  20:	be00      	bkpt	0x0000
+  22:	e7fd      	b.n	20 <setErrorCode+0x20>
+  24:	00000000 	.word	0x00000000
+
+Disassembly of section .text.isr_default:
+
+00000000 <isr_default>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	b510      	push	{r4, lr}
+   2:	2007      	movs	r0, #7
+   4:	f7ff fffe 	bl	0 <isr_default>
+
+Disassembly of section .text.initFlash:
+
+00000000 <initFlash>:
+   0:	2102      	movs	r1, #2
+   2:	4a13      	ldr	r2, [pc, #76]	; (50 <initFlash+0x50>)
+   4:	6813      	ldr	r3, [r2, #0]
+   6:	430b      	orrs	r3, r1
+   8:	6013      	str	r3, [r2, #0]
+   a:	4b12      	ldr	r3, [pc, #72]	; (54 <initFlash+0x54>)
+   c:	4a12      	ldr	r2, [pc, #72]	; (58 <initFlash+0x58>)
+   e:	81da      	strh	r2, [r3, #14]
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	4a12      	ldr	r2, [pc, #72]	; (5c <initFlash+0x5c>)
+  12:	81da      	strh	r2, [r3, #14]
+  14:	22d2      	movs	r2, #210	; 0xd2
+  16:	801a      	strh	r2, [r3, #0]
+  18:	88c3      	ldrh	r3, [r0, #6]
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	8882      	ldrh	r2, [r0, #4]
+  1c:	041b      	lsls	r3, r3, #16
+  1e:	4313      	orrs	r3, r2
+  20:	7c1a      	ldrb	r2, [r3, #16]
+  22:	2201      	movs	r2, #1
+  24:	4252      	negs	r2, r2
+  26:	741a      	strb	r2, [r3, #16]
+  28:	7c59      	ldrb	r1, [r3, #17]
+  2a:	745a      	strb	r2, [r3, #17]
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	7c99      	ldrb	r1, [r3, #18]
+   flashData->flags      |= IS_COMPLETE;
+  2e:	749a      	strb	r2, [r3, #18]
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	7cd9      	ldrb	r1, [r3, #19]
+  32:	74da      	strb	r2, [r3, #19]
+  34:	2280      	movs	r2, #128	; 0x80
+  36:	4b0a      	ldr	r3, [pc, #40]	; (60 <initFlash+0x60>)
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	0192      	lsls	r2, r2, #6
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	601a      	str	r2, [r3, #0]
+  3c:	8843      	ldrh	r3, [r0, #2]
+  3e:	8802      	ldrh	r2, [r0, #0]
+ */
+void initFlash(FlashData_t *flashData) {
+   // Do initialise flash every time
+   
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+  40:	041b      	lsls	r3, r3, #16
+  42:	4313      	orrs	r3, r2
+  44:	2201      	movs	r2, #1
+  46:	4393      	bics	r3, r2
+  48:	8003      	strh	r3, [r0, #0]
+
+#ifndef DEBUG
+   /* Disable the Watch-dog */
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_1;
+  4a:	0c1b      	lsrs	r3, r3, #16
+  4c:	8043      	strh	r3, [r0, #2]
+  4e:	4770      	bx	lr
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_2;
+  50:	4003f004 	.word	0x4003f004
+   WDOG.STCTRLH = WDOG_DISABLED_CTRL;
+  54:	40053000 	.word	0x40053000
+#endif
+
+   // Unprotect flash
+   flashData->controller->fprot0_3 = 0xFFFFFFFF;
+  58:	ffffc520 	.word	0xffffc520
+  5c:	ffffd928 	.word	0xffffd928
+  60:	f000300c 	.word	0xf000300c
+
+Disassembly of section .text.executeCommand:
+
+00000000 <executeCommand>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	2330      	movs	r3, #48	; 0x30
+   2:	b510      	push	{r4, lr}
+   4:	7003      	strb	r3, [r0, #0]
+   6:	3350      	adds	r3, #80	; 0x50
+   8:	7003      	strb	r3, [r0, #0]
+   a:	7803      	ldrb	r3, [r0, #0]
+   c:	b25b      	sxtb	r3, r3
+   e:	2b00      	cmp	r3, #0
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	dafb      	bge.n	a <executeCommand+0xa>
+  12:	7803      	ldrb	r3, [r0, #0]
+  14:	06db      	lsls	r3, r3, #27
+  16:	d501      	bpl.n	1c <executeCommand+0x1c>
+  18:	2009      	movs	r0, #9
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	e003      	b.n	24 <executeCommand+0x24>
+  1c:	7803      	ldrb	r3, [r0, #0]
+  1e:	069b      	lsls	r3, r3, #26
+  20:	d502      	bpl.n	28 <executeCommand+0x28>
+  22:	2008      	movs	r0, #8
+  24:	f7ff fffe 	bl	0 <executeCommand>
+  28:	7803      	ldrb	r3, [r0, #0]
+  2a:	200a      	movs	r0, #10
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	07db      	lsls	r3, r3, #31
+   flashData->flags      |= IS_COMPLETE;
+  2e:	d4f9      	bmi.n	24 <executeCommand+0x24>
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	bd10      	pop	{r4, pc}
+
+Disassembly of section .text.eraseFlashBlock:
+
+00000000 <eraseFlashBlock>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	8803      	ldrh	r3, [r0, #0]
+   2:	b510      	push	{r4, lr}
+   4:	0004      	movs	r4, r0
+   6:	079b      	lsls	r3, r3, #30
+   8:	d518      	bpl.n	3c <eraseFlashBlock+0x3c>
+   a:	8883      	ldrh	r3, [r0, #4]
+   c:	88c0      	ldrh	r0, [r0, #6]
+   e:	0400      	lsls	r0, r0, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	4318      	orrs	r0, r3
+  12:	7903      	ldrb	r3, [r0, #4]
+  14:	2300      	movs	r3, #0
+  16:	7103      	strb	r3, [r0, #4]
+  18:	7942      	ldrb	r2, [r0, #5]
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	7143      	strb	r3, [r0, #5]
+  1c:	7982      	ldrb	r2, [r0, #6]
+  1e:	7183      	strb	r3, [r0, #6]
+  20:	79c3      	ldrb	r3, [r0, #7]
+  22:	2344      	movs	r3, #68	; 0x44
+  24:	71c3      	strb	r3, [r0, #7]
+  26:	f7ff fffe 	bl	0 <eraseFlashBlock>
+  2a:	8863      	ldrh	r3, [r4, #2]
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	8822      	ldrh	r2, [r4, #0]
+   flashData->flags      |= IS_COMPLETE;
+  2e:	041b      	lsls	r3, r3, #16
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	4313      	orrs	r3, r2
+  32:	2202      	movs	r2, #2
+  34:	4393      	bics	r3, r2
+  36:	8023      	strh	r3, [r4, #0]
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	0c1b      	lsrs	r3, r3, #16
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	8063      	strh	r3, [r4, #2]
+  3c:	bd10      	pop	{r4, pc}
+
+Disassembly of section .text.programRange:
+
+00000000 <programRange>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	8803      	ldrh	r3, [r0, #0]
+   2:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+   4:	0004      	movs	r4, r0
+   6:	06db      	lsls	r3, r3, #27
+   8:	d555      	bpl.n	b6 <programRange+0xb6>
+   a:	8a46      	ldrh	r6, [r0, #18]
+   c:	8a03      	ldrh	r3, [r0, #16]
+   e:	0436      	lsls	r6, r6, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	431e      	orrs	r6, r3
+  12:	0035      	movs	r5, r6
+  14:	8ac3      	ldrh	r3, [r0, #22]
+  16:	8a82      	ldrh	r2, [r0, #20]
+  18:	041b      	lsls	r3, r3, #16
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	4313      	orrs	r3, r2
+  1c:	9301      	str	r3, [sp, #4]
+  1e:	8b47      	ldrh	r7, [r0, #26]
+  20:	8b03      	ldrh	r3, [r0, #24]
+  22:	043f      	lsls	r7, r7, #16
+  24:	431f      	orrs	r7, r3
+  26:	9700      	str	r7, [sp, #0]
+  28:	9b01      	ldr	r3, [sp, #4]
+  2a:	18f3      	adds	r3, r6, r3
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	429d      	cmp	r5, r3
+   flashData->flags      |= IS_COMPLETE;
+  2e:	d239      	bcs.n	a4 <programRange+0xa4>
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	4b21      	ldr	r3, [pc, #132]	; (b8 <programRange+0xb8>)
+  32:	429d      	cmp	r5, r3
+  34:	d109      	bne.n	4a <programRange+0x4a>
+  36:	2230      	movs	r2, #48	; 0x30
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	9b00      	ldr	r3, [sp, #0]
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	1b9b      	subs	r3, r3, r6
+  3c:	595b      	ldr	r3, [r3, r5]
+  3e:	4013      	ands	r3, r2
+ */
+void initFlash(FlashData_t *flashData) {
+   // Do initialise flash every time
+   
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+  40:	2b20      	cmp	r3, #32
+  42:	d102      	bne.n	4a <programRange+0x4a>
+  44:	200c      	movs	r0, #12
+  46:	f7ff fffe 	bl	0 <programRange>
+
+#ifndef DEBUG
+   /* Disable the Watch-dog */
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_1;
+  4a:	22c0      	movs	r2, #192	; 0xc0
+  4c:	88e0      	ldrh	r0, [r4, #6]
+  4e:	88a3      	ldrh	r3, [r4, #4]
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_2;
+  50:	04d2      	lsls	r2, r2, #19
+  52:	432a      	orrs	r2, r5
+   WDOG.STCTRLH = WDOG_DISABLED_CTRL;
+  54:	0400      	lsls	r0, r0, #16
+  56:	4318      	orrs	r0, r3
+#endif
+
+   // Unprotect flash
+   flashData->controller->fprot0_3 = 0xFFFFFFFF;
+  58:	0011      	movs	r1, r2
+  5a:	23ff      	movs	r3, #255	; 0xff
+  5c:	4019      	ands	r1, r3
+  5e:	7907      	ldrb	r7, [r0, #4]
+  60:	7101      	strb	r1, [r0, #4]
+  62:	0a11      	lsrs	r1, r2, #8
+  64:	4019      	ands	r1, r3
+  66:	7947      	ldrb	r7, [r0, #5]
+  68:	7141      	strb	r1, [r0, #5]
+  6a:	0c11      	lsrs	r1, r2, #16
+  6c:	4019      	ands	r1, r3
+  6e:	7987      	ldrb	r7, [r0, #6]
+  70:	0e12      	lsrs	r2, r2, #24
+  72:	7181      	strb	r1, [r0, #6]
+   
+   // Disable flash caching
+   MCM_PLACR = MCM_PLACR_DFCC|MCM_PLACR_DFCS;
+  74:	79c1      	ldrb	r1, [r0, #7]
+  76:	71c2      	strb	r2, [r0, #7]
+  78:	9a00      	ldr	r2, [sp, #0]
+  7a:	7a07      	ldrb	r7, [r0, #8]
+
+   flashData->flags &= ~DO_INIT_FLASH;
+  7c:	1b92      	subs	r2, r2, r6
+  7e:	5952      	ldr	r2, [r2, r5]
+  80:	3504      	adds	r5, #4
+  82:	0011      	movs	r1, r2
+  84:	4019      	ands	r1, r3
+  86:	7201      	strb	r1, [r0, #8]
+  88:	0a11      	lsrs	r1, r2, #8
+  8a:	4019      	ands	r1, r3
+  8c:	7a47      	ldrb	r7, [r0, #9]
+}
+  8e:	7241      	strb	r1, [r0, #9]
+  90:	0c11      	lsrs	r1, r2, #16
+  92:	400b      	ands	r3, r1
+  94:	0e12      	lsrs	r2, r2, #24
+  96:	7a81      	ldrb	r1, [r0, #10]
+  98:	7283      	strb	r3, [r0, #10]
+  9a:	7ac3      	ldrb	r3, [r0, #11]
+  9c:	72c2      	strb	r2, [r0, #11]
+  9e:	f7ff fffe 	bl	0 <programRange>
+  a2:	e7c1      	b.n	28 <programRange+0x28>
+/**
+ * Launch & wait for Flash command to complete
+ */
+void executeCommand(volatile FlashController *controller) {
+   // Clear any existing errors
+   controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
+  a4:	8863      	ldrh	r3, [r4, #2]
+}
+
+/**
+ * Launch & wait for Flash command to complete
+ */
+void executeCommand(volatile FlashController *controller) {
+  a6:	8822      	ldrh	r2, [r4, #0]
+   // Clear any existing errors
+   controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
+  a8:	041b      	lsls	r3, r3, #16
+
+   // Launch command
+   controller->fstat = FTFA_FSTAT_CCIF;
+  aa:	4313      	orrs	r3, r2
+  ac:	2210      	movs	r2, #16
+
+   // Wait for command complete
+   while ((controller->fstat & FTFA_FSTAT_CCIF) == 0) {
+  ae:	4393      	bics	r3, r2
+  b0:	8023      	strh	r3, [r4, #0]
+  b2:	40d3      	lsrs	r3, r2
+  b4:	8063      	strh	r3, [r4, #2]
+   }
+   // Handle any errors
+   if ((controller->fstat & FTFA_FSTAT_FPVIOL ) != 0) {
+  b6:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+  b8:	0000040c 	.word	0x0000040c
+
+Disassembly of section .text.verifyRange:
+
+00000000 <verifyRange>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	8803      	ldrh	r3, [r0, #0]
+   2:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+   4:	0004      	movs	r4, r0
+   6:	069b      	lsls	r3, r3, #26
+   8:	d556      	bpl.n	b8 <verifyRange+0xb8>
+   a:	8a47      	ldrh	r7, [r0, #18]
+   c:	8a03      	ldrh	r3, [r0, #16]
+   e:	043f      	lsls	r7, r7, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	431f      	orrs	r7, r3
+  12:	003e      	movs	r6, r7
+  14:	25ff      	movs	r5, #255	; 0xff
+  16:	8ac3      	ldrh	r3, [r0, #22]
+  18:	8a82      	ldrh	r2, [r0, #20]
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	041b      	lsls	r3, r3, #16
+  1c:	4313      	orrs	r3, r2
+  1e:	9300      	str	r3, [sp, #0]
+  20:	8b43      	ldrh	r3, [r0, #26]
+  22:	8b02      	ldrh	r2, [r0, #24]
+  24:	041b      	lsls	r3, r3, #16
+  26:	4313      	orrs	r3, r2
+  28:	9301      	str	r3, [sp, #4]
+  2a:	9b00      	ldr	r3, [sp, #0]
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	18fb      	adds	r3, r7, r3
+   flashData->flags      |= IS_COMPLETE;
+  2e:	429e      	cmp	r6, r3
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	d239      	bcs.n	a6 <verifyRange+0xa6>
+  32:	88e0      	ldrh	r0, [r4, #6]
+  34:	88a3      	ldrh	r3, [r4, #4]
+  36:	0400      	lsls	r0, r0, #16
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	4318      	orrs	r0, r3
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	2380      	movs	r3, #128	; 0x80
+  3c:	7902      	ldrb	r2, [r0, #4]
+  3e:	2200      	movs	r2, #0
+ */
+void initFlash(FlashData_t *flashData) {
+   // Do initialise flash every time
+   
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+  40:	049b      	lsls	r3, r3, #18
+  42:	4333      	orrs	r3, r6
+  44:	0019      	movs	r1, r3
+  46:	4694      	mov	ip, r2
+  48:	4029      	ands	r1, r5
+
+#ifndef DEBUG
+   /* Disable the Watch-dog */
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_1;
+  4a:	7101      	strb	r1, [r0, #4]
+  4c:	0a19      	lsrs	r1, r3, #8
+  4e:	4029      	ands	r1, r5
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_2;
+  50:	7942      	ldrb	r2, [r0, #5]
+  52:	7141      	strb	r1, [r0, #5]
+   WDOG.STCTRLH = WDOG_DISABLED_CTRL;
+  54:	0c19      	lsrs	r1, r3, #16
+  56:	4029      	ands	r1, r5
+#endif
+
+   // Unprotect flash
+   flashData->controller->fprot0_3 = 0xFFFFFFFF;
+  58:	7982      	ldrb	r2, [r0, #6]
+  5a:	0e1b      	lsrs	r3, r3, #24
+  5c:	7181      	strb	r1, [r0, #6]
+  5e:	79c1      	ldrb	r1, [r0, #7]
+  60:	71c3      	strb	r3, [r0, #7]
+  62:	7a03      	ldrb	r3, [r0, #8]
+  64:	4663      	mov	r3, ip
+  66:	7203      	strb	r3, [r0, #8]
+  68:	7a43      	ldrb	r3, [r0, #9]
+  6a:	4663      	mov	r3, ip
+  6c:	7243      	strb	r3, [r0, #9]
+  6e:	7a83      	ldrb	r3, [r0, #10]
+  70:	4663      	mov	r3, ip
+  72:	7283      	strb	r3, [r0, #10]
+   
+   // Disable flash caching
+   MCM_PLACR = MCM_PLACR_DFCC|MCM_PLACR_DFCS;
+  74:	7ac3      	ldrb	r3, [r0, #11]
+  76:	2301      	movs	r3, #1
+  78:	72c3      	strb	r3, [r0, #11]
+  7a:	9b01      	ldr	r3, [sp, #4]
+
+   flashData->flags &= ~DO_INIT_FLASH;
+  7c:	7b01      	ldrb	r1, [r0, #12]
+  7e:	1bdb      	subs	r3, r3, r7
+  80:	599b      	ldr	r3, [r3, r6]
+  82:	3604      	adds	r6, #4
+  84:	001a      	movs	r2, r3
+  86:	402a      	ands	r2, r5
+  88:	7302      	strb	r2, [r0, #12]
+  8a:	0a1a      	lsrs	r2, r3, #8
+  8c:	402a      	ands	r2, r5
+}
+  8e:	7b41      	ldrb	r1, [r0, #13]
+  90:	7342      	strb	r2, [r0, #13]
+  92:	0c1a      	lsrs	r2, r3, #16
+  94:	402a      	ands	r2, r5
+  96:	7b81      	ldrb	r1, [r0, #14]
+  98:	0e1b      	lsrs	r3, r3, #24
+  9a:	7382      	strb	r2, [r0, #14]
+  9c:	7bc2      	ldrb	r2, [r0, #15]
+  9e:	73c3      	strb	r3, [r0, #15]
+  a0:	f7ff fffe 	bl	0 <verifyRange>
+/**
+ * Launch & wait for Flash command to complete
+ */
+void executeCommand(volatile FlashController *controller) {
+   // Clear any existing errors
+   controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
+  a4:	e7c1      	b.n	2a <verifyRange+0x2a>
+}
+
+/**
+ * Launch & wait for Flash command to complete
+ */
+void executeCommand(volatile FlashController *controller) {
+  a6:	8863      	ldrh	r3, [r4, #2]
+   // Clear any existing errors
+   controller->fstat = FTFA_FSTAT_ACCERR|FTFA_FSTAT_FPVIOL;
+  a8:	8822      	ldrh	r2, [r4, #0]
+
+   // Launch command
+   controller->fstat = FTFA_FSTAT_CCIF;
+  aa:	041b      	lsls	r3, r3, #16
+  ac:	4313      	orrs	r3, r2
+
+   // Wait for command complete
+   while ((controller->fstat & FTFA_FSTAT_CCIF) == 0) {
+  ae:	2220      	movs	r2, #32
+  b0:	4393      	bics	r3, r2
+  b2:	8023      	strh	r3, [r4, #0]
+  b4:	0c1b      	lsrs	r3, r3, #16
+   }
+   // Handle any errors
+   if ((controller->fstat & FTFA_FSTAT_FPVIOL ) != 0) {
+  b6:	8063      	strh	r3, [r4, #2]
+  b8:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+
+Disassembly of section .text.eraseRange:
+
+00000000 <eraseRange>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	8803      	ldrh	r3, [r0, #0]
+   2:	b5f7      	push	{r0, r1, r2, r4, r5, r6, r7, lr}
+   4:	0004      	movs	r4, r0
+   6:	075b      	lsls	r3, r3, #29
+   8:	d438      	bmi.n	7c <eraseRange+0x7c>
+   a:	8ac3      	ldrh	r3, [r0, #22]
+   c:	8a82      	ldrh	r2, [r0, #20]
+   e:	041b      	lsls	r3, r3, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	4313      	orrs	r3, r2
+  12:	d033      	beq.n	7c <eraseRange+0x7c>
+  14:	8a41      	ldrh	r1, [r0, #18]
+  16:	8a02      	ldrh	r2, [r0, #16]
+  18:	0409      	lsls	r1, r1, #16
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	4311      	orrs	r1, r2
+  1c:	000d      	movs	r5, r1
+  1e:	2790      	movs	r7, #144	; 0x90
+  20:	26ff      	movs	r6, #255	; 0xff
+  22:	89c2      	ldrh	r2, [r0, #14]
+  24:	18cb      	adds	r3, r1, r3
+  26:	3a01      	subs	r2, #1
+  28:	4313      	orrs	r3, r2
+  2a:	4395      	bics	r5, r2
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	9301      	str	r3, [sp, #4]
+   flashData->flags      |= IS_COMPLETE;
+  2e:	053f      	lsls	r7, r7, #20
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	9b01      	ldr	r3, [sp, #4]
+  32:	429d      	cmp	r5, r3
+  34:	d219      	bcs.n	6a <eraseRange+0x6a>
+  36:	88e0      	ldrh	r0, [r4, #6]
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	88a3      	ldrh	r3, [r4, #4]
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	0400      	lsls	r0, r0, #16
+  3c:	4318      	orrs	r0, r3
+  3e:	003b      	movs	r3, r7
+ */
+void initFlash(FlashData_t *flashData) {
+   // Do initialise flash every time
+   
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+  40:	432b      	orrs	r3, r5
+  42:	001a      	movs	r2, r3
+  44:	4032      	ands	r2, r6
+  46:	7901      	ldrb	r1, [r0, #4]
+  48:	7102      	strb	r2, [r0, #4]
+
+#ifndef DEBUG
+   /* Disable the Watch-dog */
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_1;
+  4a:	0a1a      	lsrs	r2, r3, #8
+  4c:	4032      	ands	r2, r6
+  4e:	7941      	ldrb	r1, [r0, #5]
+   WDOG.UNLOCK  = WDOG_UNLOCK_SEQ_2;
+  50:	7142      	strb	r2, [r0, #5]
+  52:	0c1a      	lsrs	r2, r3, #16
+   WDOG.STCTRLH = WDOG_DISABLED_CTRL;
+  54:	4032      	ands	r2, r6
+  56:	7981      	ldrb	r1, [r0, #6]
+#endif
+
+   // Unprotect flash
+   flashData->controller->fprot0_3 = 0xFFFFFFFF;
+  58:	0e1b      	lsrs	r3, r3, #24
+  5a:	7182      	strb	r2, [r0, #6]
+  5c:	79c2      	ldrb	r2, [r0, #7]
+  5e:	71c3      	strb	r3, [r0, #7]
+  60:	f7ff fffe 	bl	0 <eraseRange>
+  64:	89e3      	ldrh	r3, [r4, #14]
+  66:	18ed      	adds	r5, r5, r3
+  68:	e7e2      	b.n	30 <eraseRange+0x30>
+  6a:	8863      	ldrh	r3, [r4, #2]
+  6c:	8822      	ldrh	r2, [r4, #0]
+  6e:	041b      	lsls	r3, r3, #16
+  70:	4313      	orrs	r3, r2
+  72:	2204      	movs	r2, #4
+   
+   // Disable flash caching
+   MCM_PLACR = MCM_PLACR_DFCC|MCM_PLACR_DFCS;
+  74:	4393      	bics	r3, r2
+  76:	8023      	strh	r3, [r4, #0]
+  78:	0c1b      	lsrs	r3, r3, #16
+  7a:	8063      	strh	r3, [r4, #2]
+
+   flashData->flags &= ~DO_INIT_FLASH;
+  7c:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}
+
+Disassembly of section .text.blankCheckRange:
+
+00000000 <blankCheckRange>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	8843      	ldrh	r3, [r0, #2]
+   2:	8802      	ldrh	r2, [r0, #0]
+   4:	041b      	lsls	r3, r3, #16
+   6:	4313      	orrs	r3, r2
+   8:	b570      	push	{r4, r5, r6, lr}
+   a:	071a      	lsls	r2, r3, #28
+   c:	d517      	bpl.n	3e <blankCheckRange+0x3e>
+   e:	8a42      	ldrh	r2, [r0, #18]
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	8ac4      	ldrh	r4, [r0, #22]
+  12:	8a01      	ldrh	r1, [r0, #16]
+  14:	8a85      	ldrh	r5, [r0, #20]
+  16:	0412      	lsls	r2, r2, #16
+  18:	0424      	lsls	r4, r4, #16
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	432c      	orrs	r4, r5
+  1c:	430a      	orrs	r2, r1
+  1e:	1911      	adds	r1, r2, r4
+  20:	428a      	cmp	r2, r1
+  22:	d207      	bcs.n	34 <blankCheckRange+0x34>
+  24:	6814      	ldr	r4, [r2, #0]
+  26:	3401      	adds	r4, #1
+  28:	d002      	beq.n	30 <blankCheckRange+0x30>
+  2a:	2006      	movs	r0, #6
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	f7ff fffe 	bl	0 <blankCheckRange>
+   flashData->flags      |= IS_COMPLETE;
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	3204      	adds	r2, #4
+  32:	e7f5      	b.n	20 <blankCheckRange+0x20>
+  34:	2208      	movs	r2, #8
+  36:	4393      	bics	r3, r2
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	8003      	strh	r3, [r0, #0]
+   setErrorCode(FLASH_ERR_TRAP);
+  3a:	0c1b      	lsrs	r3, r3, #16
+  3c:	8043      	strh	r3, [r0, #2]
+  3e:	bd70      	pop	{r4, r5, r6, pc}
+
+Disassembly of section .text.entry:
+
+00000000 <entry>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	b510      	push	{r4, lr}
+   2:	4a0e      	ldr	r2, [pc, #56]	; (3c <entry+0x3c>)
+   4:	4b0e      	ldr	r3, [pc, #56]	; (40 <entry+0x40>)
+   6:	601a      	str	r2, [r3, #0]
+   8:	4a0e      	ldr	r2, [pc, #56]	; (44 <entry+0x44>)
+   a:	8a93      	ldrh	r3, [r2, #20]
+   c:	8ad4      	ldrh	r4, [r2, #22]
+   e:	0424      	lsls	r4, r4, #16
+
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+  10:	431c      	orrs	r4, r3
+  12:	0020      	movs	r0, r4
+  14:	f7ff fffe 	bl	0 <entry>
+  18:	0020      	movs	r0, r4
+   flashData->errorCode   = errorCode;
+   flashData->flags      |= IS_COMPLETE;
+  1a:	f7ff fffe 	bl	0 <entry>
+  1e:	0020      	movs	r0, r4
+  20:	f7ff fffe 	bl	0 <entry>
+  24:	0020      	movs	r0, r4
+  26:	f7ff fffe 	bl	0 <entry>
+  2a:	0020      	movs	r0, r4
+/**
+ * Set error code to return to BDM & halt
+ */
+void setErrorCode(uint16_t errorCode) {
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
+   flashData->errorCode   = errorCode;
+  2c:	f7ff fffe 	bl	0 <entry>
+   flashData->flags      |= IS_COMPLETE;
+   for(;;) {
+	   __asm__("bkpt  0");
+  30:	0020      	movs	r0, r4
+  32:	f7ff fffe 	bl	0 <entry>
+  36:	2000      	movs	r0, #0
+void executeCommand(volatile FlashController *controller);
+
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+  38:	f7ff fffe 	bl	0 <entry>
+   setErrorCode(FLASH_ERR_TRAP);
+  3c:	00000000 	.word	0x00000000
+ */
+void initFlash(FlashData_t *flashData) {
+   // Do initialise flash every time
+   
+   // Disable NMI (V4.11.1.70)
+   SIM_CTRL_REG  |= SIM_CTRL_REG_NMIDIS;
+  40:	e000ed08 	.word	0xe000ed08
+  44:	00000000 	.word	0x00000000
+
+Disassembly of section .text.asm_testApp:
+
+00000000 <asm_testApp>:
+ */
+__attribute__((naked))
+void asm_entry(void) {
+#ifndef DEBUG
+   // Setup the stack before we attempt anything else
+   __asm__ (
+   0:	4770      	bx	lr

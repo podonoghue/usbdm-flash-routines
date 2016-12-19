@@ -1,5 +1,5 @@
 /**
- *  Flash code for Kinetis FTFA memory (MK flash devices)
+ *  Flash code for Kinetis FTFA memory (Cortex-M4 flash devices)
  *  
  *  Summary
  *  FTFA      Controller
@@ -437,7 +437,7 @@ extern uint32_t __stacktop[];
 void entry(void) {
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
-  
+   
    // Handle on programming data
    FlashData_t *flashData = gFlashProgramHeader.flashData;
 
