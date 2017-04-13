@@ -1,14 +1,19 @@
-//=======================================================================================
-// Flash code for Kinetis FTMRE memory (MKE02 flash devices)
-//=======================================================================================
-// History
-//---------------------------------------------------------------------------------------
+/**
+ *  Flash code for Kinetis FTMRE memory (Cortex-M0 flash devices)
+ *  
+ *  Summary
+ *  MPU       Cortex-M0 (MKE04)
+ *  FTMRE     Controller
+ *  WDOG      Watch-dog timer
+ *  MCM_PLACR Flash cache control
+ *
+ * History
+ *------------------------------------------------------------------------------------------------
 // 24 Jul 2015 - Added disabling NMI - Removed as makes it impossible to debug NMI code!
 // 16 Apr 2014 - Added disabling Flash cache
-//=======================================================================================
-
-
-#include <cstdint>
+ *------------------------------------------------------------------------------------------------
+ */
+#include <stdint.h>
 
 #ifndef NULL
 #define NULL ((void*)0)
@@ -103,13 +108,13 @@ typedef struct {
 #define MCM_PLACR_DFCDA (1<<11)
 #define MCM_PLACR_CFCC  (1<<10)
 
-//==========================================================================================================
-// Operation masks
-//
-//  The following combinations (amongst others) are sensible:
-//  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
-//  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
-//
+/*==========================================================================================================
+ * Operation masks
+ *
+ *  The following combinations (amongst others) are sensible:
+ *  DO_PROGRAM_RANGE|DO_VERIFY_RANGE program & verify range assuming previously erased
+ *  DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE do all steps
+ */
 #define DO_INIT_FLASH         (1<<0) // Do initialisation of flash
 #define DO_ERASE_BLOCK        (1<<1) // Erase entire flash block e.g. Flash, FlexNVM etc
 #define DO_ERASE_RANGE        (1<<2) // Erase range (including option region)
@@ -188,8 +193,9 @@ extern uint32_t __loadAddress[];
 
 void asm_entry(void);
 
-//! Flash programming command table
-//!
+/**
+ * Flash programming command table
+ */
 volatile const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress  */ __loadAddress,     // load address of image
      /* entry        */ asm_entry,         // entry point for code
@@ -208,29 +214,35 @@ void eraseRange(FlashData_t *flashData);
 void blankCheckRange(FlashData_t *flashData);
 void entry(void);
 void isr_default(void);
-void testApp(void);
+//void testApp(void);
 void asm_testApp(void);
 void executeCommand(volatile FlashController *controller);
 
-//! Set error code to return to BDM & halt
-//!
+/**
+ * Default unexpected interrupt handler
+ */
+void isr_default(void) {
+   setErrorCode(FLASH_ERR_TRAP);
+}
+
+/**
+ * Set error code to return to BDM & halt
+ */
 void setErrorCode(int errorCode) {
    FlashData_t *flashData = gFlashProgramHeader.flashData;
    flashData->errorCode   = (uint16_t)errorCode;
    flashData->flags      |= IS_COMPLETE; 
    for(;;) {
-	   asm("bkpt  0");
+	   __asm__("bkpt  0");
    }
 }
 
-//! Does any initialisation required before accessing the Flash
-//!
+/**
+ * Does any initialisation required before accessing the Flash
+ */
 void initFlash(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
-//   if ((flashData->flags&DO_INIT_FLASH) == 0) {
-//      return;
-//   }
-   // Init every time
+   // Do initialise flash every time
    controller->fclkdiv = 0x17;  // Approximate divider for 24MHz clock out of reset
    controller->fprot   = 0xFF;  // Unprotect Flash
 
@@ -243,8 +255,9 @@ void initFlash(FlashData_t *flashData) {
    flashData->flags &= ~DO_INIT_FLASH;
 }
 
-//! Launch & wait for Flash command to complete
-//!
+/**
+ * Launch & wait for Flash command to complete
+ */
 void executeCommand(volatile FlashController *controller) {
    volatile uint8_t *pFstat;
    uint8_t           fstat;
@@ -266,8 +279,9 @@ void executeCommand(volatile FlashController *controller) {
    }
 }
 
-//! Erase entire flash block
-//!
+/**
+ * Erase flash block
+ */
 void eraseFlashBlock(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
    uint32_t                  address    = flashData->address;
@@ -287,11 +301,12 @@ void eraseFlashBlock(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_BLOCK;
 }
 
-//! Program a range from buffer
-//!
-//! Returns an error if the security location is to be programmed
-//! to permanently lock the device
-//!
+/**
+ * Program a range of flash from buffer
+ *
+ * Returns an error if the security location is to be programmed
+ * to permanently lock the device
+ */
 void programRange(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
    uint32_t         address    = flashData->address;
@@ -336,8 +351,9 @@ void programRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_PROGRAM_RANGE;
 }
 
-//! Verify a range of flash against buffer
-//!
+/*
+ * Verify a range of flash against buffer
+ */
 void verifyRange(FlashData_t *flashData) {
    uint8_t       *address    = (uint8_t *)flashData->address;
    const uint8_t *data       = (uint8_t *)flashData->dataAddress;
@@ -357,13 +373,14 @@ void verifyRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_VERIFY_RANGE;
 }
 
-//! Erase a range of flash
-//!
+/**
+ * Erase a range of flash
+ */
 void eraseRange(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
-   uint32_t address     = flashData->address;
-   uint32_t endAddress  = address + flashData->dataSize - 1; // Inclusive
-   uint32_t pageMask    = flashData->sectorSize-1U;
+   uint32_t   address     = flashData->address;
+   uint32_t   endAddress  = address + flashData->dataSize;
+   uint32_t   pageMask    = flashData->sectorSize-1U;
    
    if ((flashData->flags&DO_ERASE_RANGE) == 0) {
       return;
@@ -382,7 +399,7 @@ void eraseRange(FlashData_t *flashData) {
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
 
    // Erase each sector
-   while (address <= endAddress) { // Inclusive range!
+   while (address < endAddress) {
       // Write command
       controller->fccobix = 0; controller->fccob.high = FCMD_ERASE_FLASH_SECTOR; 
                                controller->fccob.low  = (uint8_t)(address>>16);
@@ -395,25 +412,21 @@ void eraseRange(FlashData_t *flashData) {
    flashData->flags &= ~DO_ERASE_RANGE;
 }
 
-//! Check that a range of flash is blank (=0xFFFF)
-//!
+/**
+ * Check that a range of flash is blank (=0xFFFF)
+ */
 void blankCheckRange(FlashData_t *flashData) {
-   const int  itemSize  = 4;
-   uint32_t  *address   = (uint32_t *)(flashData->address);
-   uint32_t   numItems  = (flashData->dataSize+itemSize-1)/itemSize;
-   
+   uint32_t   address     = flashData->address;
+   uint32_t   endAddress  = address + flashData->dataSize;
+
    if ((flashData->flags&DO_BLANK_CHECK_RANGE) == 0) {
       return;
    }
-//   if (((int)address & (itemSize-1)) != 0) {
-//      setErrorCode(FLASH_ERR_ILLEGAL_PARAMS);
-//   }
-   while (numItems>0) {
-      if (*address != 0xFFFFFFFFUL) {
+   while (address < endAddress) {
+      if (*(uint32_t *)address != 0xFFFFFFFFUL) {
          setErrorCode(FLASH_ERR_ERASE_FAILED);
       }
-      numItems--;
-      address++;
+      address += 4;
    }
    flashData->flags &= ~DO_BLANK_CHECK_RANGE;
 }
@@ -424,13 +437,12 @@ extern uint32_t __vector_table[];
 //! Some stack space
 extern uint32_t __stacktop[];
 
-//! Main C entry point
-//! 
-//! Assumes ramBuffer is set up beforehand
-//!
+/**
+ * Main C entry point
+ *
+ * Assumes ramBuffer is set up beforehand
+ */
 void entry(void) {
-   FlashData_t *flashData;  // Handle on programming data
-
    // Set the interrupt vector table position
    SCB_VTOR = (uint32_t)__vector_table;
    
@@ -444,7 +456,7 @@ void entry(void) {
 #endif
    
    // Handle on programming data
-   flashData = gFlashProgramHeader.flashData;
+   FlashData_t *flashData = gFlashProgramHeader.flashData;
 
    initFlash(flashData);
    eraseFlashBlock(flashData);
@@ -459,19 +471,14 @@ void entry(void) {
 #endif
 }
 
-//! Default unexpected interrupt handler
-//!
-void isr_default(void) {
-   setErrorCode(FLASH_ERR_TRAP);
-}
-
-//! Low level entry point
-//! 
+/**
+ * Low level entry point
+ */
 __attribute__((naked))
 void asm_entry(void) {
 #ifndef DEBUG
    // Setup the stack before we attempt anything else
-   asm (
+   __asm__ (
    "mov   r0,%[stacktop]\n\t"
    "mov   sp,r0\n\t"
    "b     entry\n\t"
