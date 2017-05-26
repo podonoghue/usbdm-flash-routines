@@ -27,6 +27,11 @@ set FILE_LIST_ARM=%FILE_LIST_ARM% STM32F100xx-default-flash-program
 echo %FILE_LIST_ARM%
 for %%f in (%FILE_LIST_ARM%) do if exist %~dp0\%%f\RAM copy %~dp0\%%f\RAM\*.hex %DEST_DIR_ARM% 
 
+set FILE_LIST_ARM=LPC-CM0-flash-program-gcc LPC-CM3-flash-program-gcc
+
+echo %FILE_LIST_ARM%
+for %%f in (%FILE_LIST_ARM%) do if exist %~dp0\%%f\Release copy %~dp0\%%f\Release\*.hex %DEST_DIR_ARM% 
+
 rem
 rem HCS08 devices
 rem
