@@ -112,7 +112,7 @@
  * IAP Error codes
  */
 typedef enum {
-   /*  0 */ CMD_SUCCESS,                    // Command is executed successfully. Sent by ISP handler only when command given by the host has   been completely and successfully executed.
+   /*  0 */ CMD_SUCCESS,                    // Command is executed successfully. Sent by ISP handler only when command given by the host has been completely and successfully executed.
    /*  1 */ INVALID_COMMAND,                // Invalid command.
    /*  2 */ SRC_ADDR_ERROR,                 // Source address is not on word boundary.
    /*  3 */ DST_ADDR_ERROR,                 // Destination address is not on a correct boundary.
@@ -170,19 +170,19 @@ enum {
 
 /* Set PLL mode options */
 enum {
-/* 0 */ CPU_FREQ_EQU,
-/* 1 */ CPU_FREQ_LTE,
-/* 2 */ CPU_FREQ_GTE,
-/* 3 */ CPU_FREQ_APPROX,
+   /* 0 */ CPU_FREQ_EQU,
+   /* 1 */ CPU_FREQ_LTE,
+   /* 2 */ CPU_FREQ_GTE,
+   /* 3 */ CPU_FREQ_APPROX,
 };
 
 /* Set PLL result[0] options */
 enum {
-/* 0 */ PLL_CMD_SUCCESS,
-/* 1 */ PLL_INVALID_FREQ,
-/* 2 */ PLL_INVALID_MODE,
-/* 3 */ PLL_FREQ_NOT_FOUND,
-/* 4 */ PLL_NOT_LOCKED,
+   /* 0 */ PLL_CMD_SUCCESS,
+   /* 1 */ PLL_INVALID_FREQ,
+   /* 2 */ PLL_INVALID_MODE,
+   /* 3 */ PLL_FREQ_NOT_FOUND,
+   /* 4 */ PLL_NOT_LOCKED,
 };
 
 /** Thumb mode addresses must be odd */
@@ -195,7 +195,7 @@ enum {
 typedef void (*romFunctionPtr_t)(uint32_t *, uint32_t *);
 
 /** IAP entry point */
-#define IAP_ADDRESS_PTR ((romFunctionPtr_t)(0x1FFF1FF0|THUMB_MODE))
+#define IAP_ENTRY ((romFunctionPtr_t)(0x1FFF1FF0|THUMB_MODE))
 
 /** ROM entry points for clock/power functions */
 typedef struct {
@@ -320,7 +320,7 @@ void initFlash(FlashData_t *flashData) {
  */
 void prepareSectors(uint32_t startSector, uint32_t endSector) {
    uint32_t params[5] = {PREPARE_SECTORS, startSector, endSector, 0, 0,};
-   IAP_ADDRESS_PTR(params, params);
+   IAP_ENTRY(params, params);
    setErrorCode(params[0]);
 }
 
@@ -333,7 +333,7 @@ void prepareSectors(uint32_t startSector, uint32_t endSector) {
  */
 void eraseSectors(uint32_t startSector, uint32_t endSector, uint32_t frequency) {
    uint32_t params[5] = {ERASE_SECTORS, startSector, endSector, frequency, 0,};
-   IAP_ADDRESS_PTR(params, params);
+   IAP_ENTRY(params, params);
    setErrorCode(params[0]);
 }
 
@@ -346,7 +346,7 @@ void eraseSectors(uint32_t startSector, uint32_t endSector, uint32_t frequency) 
  */
 void copyRamtoRom(uint32_t destination, uint32_t source, uint32_t size, uint32_t frequency) {
    uint32_t params[5] = {COPY_RAM_TO_ROM, destination, source, size, frequency,};
-   IAP_ADDRESS_PTR(params, params);
+   IAP_ENTRY(params, params);
    setErrorCode(params[0]);
 }
 
@@ -511,6 +511,9 @@ void asm_entry(void) {
 
 #ifndef DEBUG_BUILD
 void asm_testApp(void) {
+   for(;;) {
+      __asm__("nop");
+   }
 }
 #else
 
@@ -539,19 +542,19 @@ static const uint8_t buffer[256] = {
 /* Erase all flash */
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
-      /* address    */ 0x00000000,
-      /* size       */ 0x2000,
+      /* address    */ 0x00000400,
+      /* size       */ 0x100,
       /* data       */ 0,
 };
 /* Program range */
 #define DO_B
 static const FlashData_t flashdataB = {
       /* flags      */ DO_INIT_FLASH|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -562,7 +565,7 @@ static const FlashData_t flashdataB = {
 #define DO_C
 static const FlashData_t flashdataC = {
       /* flags      */ DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -573,7 +576,7 @@ static const FlashData_t flashdataC = {
 //#define DO_D
 //static const FlashData_t flashdataD = {
 //      /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-//      /* controller */ IAP_ADDRESS_PTR,
+//      /* controller */ IAP_ENTRY,
 //      /* frequency  */ RESET_CLOCK_FREQ_kHz,
 //      /* errorCode  */ 0xAA55,
 //      /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -584,7 +587,7 @@ static const FlashData_t flashdataC = {
 //#define DO_E
 //static const FlashData_t flashdataE = {
 //      /* flags      */ DO_INIT_FLASH,
-//      /* controller */ IAP_ADDRESS_PTR,
+//      /* controller */ IAP_ENTRY,
 //      /* frequency  */ RESET_CLOCK_FREQ_kHz,
 //      /* errorCode  */ 0xAA55,
 //      /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -596,7 +599,7 @@ static const FlashData_t flashdataC = {
 // Unlock flash
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_UNLOCK_FLASH|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -605,7 +608,7 @@ static const FlashData_t flashdataA = {
 // Lock Flash
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_LOCK_FLASH|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -614,7 +617,7 @@ static const FlashData_t flashdataA = {
 // Not used
 static const FlashData_t flashdataA = {
       /* flags      */ DO_TIMING_LOOP,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -623,7 +626,7 @@ static const FlashData_t flashdataA = {
 // Set erasing ranges
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -634,7 +637,7 @@ static const FlashData_t flashdataA = {
 // Set erasing ranges
 static const FlashData_t flashdataB = {
       /* flags      */ DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -646,7 +649,7 @@ static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x
 // Mass erase + Unlock flash
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_UNLOCK_FLASH|DO_ERASE_BLOCK,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -654,7 +657,7 @@ static const FlashData_t flashdataA = {
 #define DO_B
 static const FlashData_t flashdataB = {
       /* flags      */ DO_INIT_FLASH|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -665,7 +668,7 @@ static const FlashData_t flashdataB = {
 #define DO_C
 static const FlashData_t flashdataC = {
       /* flags      */ DO_INIT_FLASH|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -681,7 +684,7 @@ static const uint8_t buffer[] = {0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x
 
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,
@@ -696,7 +699,7 @@ static const FlashData_t flashdataA = {
 
 static const FlashData_t flashdataA = {
       /* flags      */ DO_INIT_FLASH|DO_ERASE_RANGE|DO_BLANK_CHECK_RANGE|DO_PROGRAM_RANGE|DO_VERIFY_RANGE,
-      /* controller */ IAP_ADDRESS_PTR,
+      /* controller */ IAP_ENTRY,
       /* frequency  */ RESET_CLOCK_FREQ_kHz,
       /* errorCode  */ 0xAA55,
       /* sectorSize */ FLASH_SECTOR_SIZE,

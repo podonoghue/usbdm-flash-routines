@@ -1,18 +1,21 @@
-/* 
- * Linker-rom.ld 
- *
- * Memory map for devices without SRAM_U allocation for bit-band/bme
+/*
+ Minimal Linker file for RAM image
  */
- 
+
 /* ---- <<< Use Configuration Wizard in Context Menu >>> ---- */
+
+/* Entry Point */
+ENTRY(asm_testApp)
 
 MEMORY
 {
 /*
- *  <o>  RAM addres
+ *  <o>  RAM address
+ *  <i>  Start of RAM 
  *  <o1> RAM size 
+ *  <i>  Conservative size of RAM
  */
-  ram   (rwx) : ORIGIN = 0x10000000, LENGTH = 0x2000
+  ram   (rwx) : ORIGIN = 0x10000000, LENGTH = 0x1000
 };
 
 /*
@@ -40,14 +43,17 @@ SECTIONS
       ASSERT (. != __VECTOR_TABLE, "No reset vector found");
       __VECTOR_TABLE_END = .;
       
+      . = ALIGN (4);
       KEEP(*(.text))           /* .text sections (code) */
       KEEP(*(.text.*))         /* .text.* sections (code) */
       KEEP(*(.rodata))         /* .rodata.* sections (constants, strings, etc.) */
       KEEP(*(.rodata.*))       /* .rodata.* sections (constants, strings, etc.) */
       KEEP(*(.data))           /* .rodata.* sections (constants, strings, etc.) */
       KEEP(*(.data.*))         /* .rodata.* sections (constants, strings, etc.) */
-      
+      . = ALIGN (4);
       . = . + __stack_size;
+      . = ALIGN (4);
+      LONG(0);
     } > ram
    __stacktop = .;
 
