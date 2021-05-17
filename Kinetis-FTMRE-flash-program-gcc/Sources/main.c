@@ -9,8 +9,9 @@
  *
  * History
  *------------------------------------------------------------------------------------------------
-// 24 Jul 2015 - Added disabling NMI - Removed as makes it impossible to debug NMI code!
-// 16 Apr 2014 - Added disabling Flash cache
+ * 16 May 2021 - Fixed boundary address error in erase block                          | V4.11.1.270
+ * 24 Jul 2015 - Added disabling NMI - Removed as makes it impossible to debug NMI code!
+ * 16 Apr 2014 - Added disabling Flash cache
  *------------------------------------------------------------------------------------------------
  */
 #include <stdint.h>
@@ -19,6 +20,7 @@
 #define NULL ((void*)0)
 #endif
 
+// Enable for debugging
 //#define DEBUG
 
 //==========================================================================================================
@@ -379,7 +381,7 @@ void verifyRange(FlashData_t *flashData) {
 void eraseRange(FlashData_t *flashData) {
    volatile FlashController *controller = flashData->controller;
    uint32_t   address     = flashData->address;
-   uint32_t   endAddress  = address + flashData->dataSize;
+   uint32_t   endAddress  = address + flashData->dataSize-1; // inclusive
    uint32_t   pageMask    = flashData->sectorSize-1U;
    
    if ((flashData->flags&DO_ERASE_RANGE) == 0) {
@@ -399,7 +401,7 @@ void eraseRange(FlashData_t *flashData) {
    controller->fstat   = FSTAT_ACCERR|FSTAT_FPVIOL;
 
    // Erase each sector
-   while (address < endAddress) {
+   while (address <= endAddress) {
       // Write command
       controller->fccobix = 0; controller->fccob.high = FCMD_ERASE_FLASH_SECTOR; 
                                controller->fccob.low  = (uint8_t)(address>>16);

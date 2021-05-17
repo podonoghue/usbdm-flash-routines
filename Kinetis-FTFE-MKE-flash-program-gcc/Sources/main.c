@@ -10,17 +10,19 @@
  *
  * History
  *------------------------------------------------------------------------------------------------
+ * 16 May 2021 - Fixed boundary address error in erase block                          | V4.11.1.270
  * 13 Apr 2017 - Corrected names (FTFL->FTFE)                                         | V4.10.6.170 
  * 13 Apr 2017 - Changed address handling                                             | V4.10.6.170 
  * 17 Dec 2016 - Fixed regression that prevented programming DFLASH  (A23 changes)    | V4.10.6.150 
  *------------------------------------------------------------------------------------------------
  */
-#include <cstdint>
+#include <stdint.h>
 
 #ifndef NULL
 #define NULL ((void*)0)
 #endif
 
+// Enable for debugging
 //#define DEBUG
 
 //==========================================================================================================
@@ -408,7 +410,7 @@ void verifyRange(FlashData_t *flashData) {
  */
 void eraseRange(FlashData_t *flashData) {
    uint32_t   address     = fixAddress(flashData->address);
-   uint32_t   endAddress  = address + flashData->dataSize;
+   uint32_t   endAddress  = address + flashData->dataSize-1; // inclusive
    uint32_t   pageMask    = flashData->sectorSize-1U;
    
    if ((flashData->flags&DO_ERASE_RANGE) == 0) {
@@ -425,7 +427,7 @@ void eraseRange(FlashData_t *flashData) {
    endAddress |= pageMask;
    
    // Erase each sector
-   while (address < endAddress) {
+   while (address <= endAddress) {
       flashData->controller->fccob0_3 = (F_ERSSCR << 24) | address;
       executeCommand(flashData->controller);
       // Advance to start of next sector
@@ -579,6 +581,10 @@ static const FlashData_t flashdataE = {
    /* controller */ FTFE_BASE_ADDRESS,
    /* frequency  */ 0,
    /* errorCode  */ 0xAA55,
+   /* sectorSize */ 0,
+   /* address    */ 0,
+   /* size       */ 0,
+   /* data       */ 0,
 };
 #elif TEST == 2
 // Unlock flash

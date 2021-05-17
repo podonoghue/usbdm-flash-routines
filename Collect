@@ -1,0 +1,176 @@
+#!/bin/bash
+
+clear
+
+HOME_DIR="$(dirname $(readlink -f $0))"
+echo HOME_DIR=${HOME_DIR}
+
+DEST_DIR=${HOME_DIR}/GeneratedFiles
+DEST_DIR_ARM=${DEST_DIR}/ARM
+DEST_DIR_HCS08=${DEST_DIR}/HCS08
+DEST_DIR_DSC=${DEST_DIR}/DSC
+DEST_DIR_CFV1=${DEST_DIR}/CFV1
+DEST_DIR_CFVx=${DEST_DIR}/CFVx
+DEST_DIR_S12Z=${DEST_DIR}/S12Z
+
+shopt -s nullglob
+
+# 
+# ARM devices
+# 
+echo
+echo "DEST_DIR_ARM=${DEST_DIR_ARM}"
+if [[ ! -e ${DEST_DIR_ARM} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_ARM}
+fi
+
+FILE_LIST_ARM=
+FILE_LIST_ARM="${FILE_LIST_ARM} BootLoopK20 BootLoopKL25"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTFL-MK-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTFE-MK-flash-program-gcc Kinetis-FTFE-MKE-flash-program-gcc Kinetis-FTFE-MKE18-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTMRE-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTMRH-eeprom-program-gcc Kinetis-FTMRH-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTFA-MK-flash-program-gcc Kinetis-FTFA-MKL-flash-program-gcc Kinetis-FTFA-MKM-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} Kinetis-FTFA-MKV10-flash-program-gcc"
+FILE_LIST_ARM="${FILE_LIST_ARM} STM32F100xx-default-flash-program"
+
+for directory in ${FILE_LIST_ARM}; do
+#   echo ${HOME_DIR}/${directory}/RAM
+   if [ -d ${HOME_DIR}/${directory}/RAM ]; then
+      for file in ${directory}/RAM/*.hex ${directory}/RAM/*.S19; do
+         echo "Copying `basename ${file}`"
+         cp ${file} ${DEST_DIR_ARM} 
+      done
+   fi
+done
+
+FILE_LIST_ARM="LPC-CM0-flash-program-gcc LPC-CM3-flash-program-gcc"
+
+for directory in ${FILE_LIST_ARM}; do
+#   echo ${HOME_DIR}/${directory}/Release
+   if [ -d ${HOME_DIR}/${directory}/Release ]; then
+      for file in ${directory}/Release/*.hex; do
+         echo "Copying `basename ${file}`"
+         cp ${file} ${DEST_DIR_ARM} 
+      done
+   fi
+done
+
+# 
+# HCS08 devices
+# 
+echo
+echo "DEST_DIR_HCS08=${DEST_DIR_HCS08}"
+if [[ ! -e ${DEST_DIR_HCS08} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_HCS08}
+fi
+
+FILE_LIST_HCS08=
+FILE_LIST_HCS08="${FILE_LIST_HCS08} HCS08-PTxx-flash-program"
+
+for directory in ${FILE_LIST_HCS08}; do
+#   echo ${HOME_DIR}/${directory}/RAM
+   for file in ${directory}/*/*.s19; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_HCS08} 
+   done
+done
+
+FILE_LIST_HCS08=
+FILE_LIST_HCS08="${FILE_LIST_HCS08} HCS08-default-flash-program/Small-0x80 HCS08-default-flash-program/Default-0x80 HCS08-default-flash-program/Default-0xB0" 
+FILE_LIST_HCS08="${FILE_LIST_HCS08} HCS08-PAxx-flash-program/Default-eeprom-0x40 HCS08-PAxx-flash-program/Default-flash-0x40"
+
+for directory in ${FILE_LIST_HCS08}; do
+#   echo ${HOME_DIR}/${directory}/RAM
+   for file in ${directory}/*/*abs.s19; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_HCS08} 
+   done
+done
+
+# 
+# DSC devices
+# 
+echo
+echo "DEST_DIR_DSC=${DEST_DIR_DSC}"
+if [[ ! -e ${DEST_DIR_DSC} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_DSC}
+fi
+
+FILE_LIST_DSC=
+FILE_LIST_DSC="${FILE_LIST_DSC} DSC-FTFA-flash-prog DSC-FTFL-flash-prog DSC-xxxx-flash-prog"
+
+for directory in ${FILE_LIST_DSC}; do
+#   echo ${HOME_DIR}/${directory}/RAM
+   for file in ${directory}/*/*.p.S; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_DSC} 
+   done
+done
+
+# 
+# CFV1 devices
+# 
+echo
+echo "DEST_DIR_CFV1=${DEST_DIR_CFV1}"
+if [[ ! -e ${DEST_DIR_CFV1} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_CFV1}
+fi
+
+FILE_LIST_CFV1=
+FILE_LIST_CFV1="${FILE_LIST_CFV1} ColdfireV1Plus-default-flash-program ColdfireV1-default-flash-program"
+
+for directory in ${FILE_LIST_CFV1}; do
+#   echo ${HOME_DIR}/${directory}/
+   for file in ${directory}/*/*.S19; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_CFV1} 
+   done
+done
+
+# 
+# CFVx devices
+# 
+echo
+echo "DEST_DIR_CFVx=${DEST_DIR_CFVx}"
+if [[ ! -e ${DEST_DIR_CFVx} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_CFVx}
+fi
+
+FILE_LIST_CFVx=
+FILE_LIST_CFVx="${FILE_LIST_CFVx} ColdfireV2-default-flash-program"
+
+for directory in ${FILE_LIST_CFVx}; do
+#   echo ${HOME_DIR}/${directory}/
+   for file in ${directory}/*/*.S19; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_CFVx} 
+   done
+done
+
+# 
+# S12Z devices
+# 
+echo
+echo "DEST_DIR_CFVx=${DEST_DIR_S12Z}"
+if [[ ! -e ${DEST_DIR_S12Z} ]]; then
+   echo "Creating collection directory"
+   mkdir -p ${DEST_DIR_S12Z}
+fi
+
+FILE_LIST_S12Z=
+FILE_LIST_S12Z="${FILE_LIST_S12Z} S12Z-FTMRZ-flash-program"
+
+for directory in ${DEST_DIR_S12Z}; do
+#   echo ${HOME_DIR}/${directory}/
+   for file in ${directory}/*/*.sx; do
+      echo "Copying `basename ${file}`"
+      cp ${file} ${DEST_DIR_S12Z} 
+   done
+done
+
