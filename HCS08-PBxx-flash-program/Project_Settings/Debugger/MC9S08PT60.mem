@@ -1,0 +1,449 @@
+//         Memory Mapped Registers:
+//         ----------------------------------------------------------------------
+
+// Parallel input/output (PTA)
+// range      0x0000 0x0000 1 ReadWrite                                // PORT_PTAD
+
+// Parallel input/output (PTB)
+// range      0x0001 0x0001 1 ReadWrite                                // PORT_PTBD
+
+// Parallel input/output (PTC)
+// range      0x0002 0x0002 1 ReadWrite                                // PORT_PTCD
+
+// Parallel input/output (PTD)
+// range      0x0003 0x0003 1 ReadWrite                                // PORT_PTDD
+
+// Parallel input/output (PTE)
+// range      0x0004 0x0004 1 ReadWrite                                // PORT_PTED
+
+// Parallel input/output (PTF)
+// range      0x0005 0x0005 1 ReadWrite                                // PORT_PTFD
+
+// Parallel input/output (PTG)
+// range      0x0006 0x0006 1 ReadWrite                                // PORT_PTGD
+
+// Parallel input/output (PTH)
+// range      0x0007 0x0007 1 ReadWrite                                // PORT_PTHD
+
+// Touch sense input (TSI)
+// range      0x0008 0x0008 1 ReadWrite                                // TSI_CS0
+// range      0x0009 0x0009 1 ReadWrite                                // TSI_CS1
+// range      0x000A 0x000A 1 ReadWrite                                // TSI_CS2
+// range      0x000B 0x000B 1 ReadWrite                                // TSI_CS3
+// range      0x000C 0x000C 1 ReadWrite                                // TSI_PEN0
+// range      0x000D 0x000D 1 ReadWrite                                // TSI_PEN1
+range      0x000E 0x000E 1 Read                                        // TSI_CNTH
+range      0x000F 0x000F 1 Read                                        // TSI_CNTL
+
+// Analog-to-digital converter (ADC)
+// range      0x0010 0x0010 1 ReadWrite                                // ADC_SC1
+// range      0x0011 0x0011 1 ReadWrite                                // ADC_SC2
+// range      0x0012 0x0012 1 ReadWrite                                // ADC_SC3
+// range      0x0013 0x0013 1 ReadWrite                                // ADC_SC4
+range      0x0014 0x0014 1 Read                                        // ADC_RH
+range      0x0015 0x0015 1 Read                                        // ADC_RL
+// range      0x0016 0x0016 1 ReadWrite                                // ADC_CVH
+// range      0x0017 0x0017 1 ReadWrite                                // ADC_CVL
+
+// 8-Bit Modulo Timer (MTIM0)
+// range      0x0018 0x0018 1 ReadWrite                                // MTIM0_SC
+// range      0x0019 0x0019 1 ReadWrite                                // MTIM0_CLK
+range      0x001A 0x001A 1 Read                                        // MTIM0_CNT
+// range      0x001B 0x001B 1 ReadWrite                                // MTIM0_MOD
+
+// 8-Bit Modulo Timer (MTIM1)
+// range      0x001C 0x001C 1 ReadWrite                                // MTIM1_SC
+// range      0x001D 0x001D 1 ReadWrite                                // MTIM1_CLK
+range      0x001E 0x001E 1 Read                                        // MTIM1_CNT
+// range      0x001F 0x001F 1 ReadWrite                                // MTIM1_MOD
+
+// FlexTimer Module (FTM0)
+// range      0x0020 0x0020 1 ReadWrite                                // FTM0_SC
+// range      0x0021 0x0021 1 ReadWrite                                // FTM0_CNTH
+// range      0x0022 0x0022 1 ReadWrite                                // FTM0_CNTL
+// range      0x0023 0x0023 1 ReadWrite                                // FTM0_MODH
+// range      0x0024 0x0024 1 ReadWrite                                // FTM0_MODL
+// range      0x0025 0x0025 1 ReadWrite                                // FTM0_C0SC
+// range      0x0026 0x0026 1 ReadWrite                                // FTM0_C0VH
+// range      0x0027 0x0027 1 ReadWrite                                // FTM0_C0VL
+// range      0x0028 0x0028 1 ReadWrite                                // FTM0_C1SC
+// range      0x0029 0x0029 1 ReadWrite                                // FTM0_C1VH
+// range      0x002A 0x002A 1 ReadWrite                                // FTM0_C1VL
+reserved   0x002B 0x002B
+
+// Analog comparator (ACMP)
+// range      0x002C 0x002C 1 ReadWrite                                // ACMP_CS
+// range      0x002D 0x002D 1 ReadWrite                                // ACMP_C0
+// range      0x002E 0x002E 1 ReadWrite                                // ACMP_C1
+// range      0x002F 0x002F 1 ReadWrite                                // ACMP_C2
+
+// FlexTimer Module (FTM1)
+// range      0x0030 0x0030 1 ReadWrite                                // FTM1_SC
+// range      0x0031 0x0031 1 ReadWrite                                // FTM1_CNTH
+// range      0x0032 0x0032 1 ReadWrite                                // FTM1_CNTL
+// range      0x0033 0x0033 1 ReadWrite                                // FTM1_MODH
+// range      0x0034 0x0034 1 ReadWrite                                // FTM1_MODL
+// range      0x0035 0x0035 1 ReadWrite                                // FTM1_C0SC
+// range      0x0036 0x0036 1 ReadWrite                                // FTM1_C0VH
+// range      0x0037 0x0037 1 ReadWrite                                // FTM1_C0VL
+// range      0x0038 0x0038 1 ReadWrite                                // FTM1_C1SC
+// range      0x0039 0x0039 1 ReadWrite                                // FTM1_C1VH
+// range      0x003A 0x003A 1 ReadWrite                                // FTM1_C1VL
+
+// Interrupt (IRQ)
+// range      0x003B 0x003B 1 ReadWrite                                // IRQ_SC
+
+// Keyboard interrupts (KBI0)
+// range      0x003C 0x003C 1 ReadWrite                                // KBI0_SC
+
+// Keyboard interrupts (KBI1)
+// range      0x003D 0x003D 1 ReadWrite                                // KBI1_SC
+
+// Interrupt (IPC)
+// range      0x003E 0x003E 1 ReadWrite                                // IPC_SC
+range      0x003F 0x003F 1 Read                                        // IPC_IPMPS
+
+// RAM
+range      0x0040 0x103F 1 ReadWrite
+
+// FLASH
+range      0x1040 0x2FFF 1 ReadWrite
+
+// System control (SYS)
+range      0x3000 0x3000 1 Read                                        // SYS_SRS
+range      0x3001 0x3001 1 Write                                       // SYS_SBDFR
+range      0x3002 0x3002 1 Read                                        // SYS_SDIDH
+range      0x3003 0x3003 1 Read                                        // SYS_SDIDL
+// range      0x3004 0x3004 1 ReadWrite                                // SYS_SOPT1
+// range      0x3005 0x3005 1 ReadWrite                                // SYS_SOPT2
+// range      0x3006 0x3006 1 ReadWrite                                // SYS_SOPT3
+// range      0x3007 0x3007 1 ReadWrite                                // SYS_SOPT4
+reserved   0x3008 0x300B
+
+// System clock gating (SCG)
+// range      0x300C 0x300C 1 ReadWrite                                // SCG_C1
+// range      0x300D 0x300D 1 ReadWrite                                // SCG_C2
+// range      0x300E 0x300E 1 ReadWrite                                // SCG_C3
+// range      0x300F 0x300F 1 ReadWrite                                // SCG_C4
+
+// Debug module (DBG)
+// range      0x3010 0x3010 1 ReadWrite                                // DBG_CAH
+// range      0x3011 0x3011 1 ReadWrite                                // DBG_CAL
+// range      0x3012 0x3012 1 ReadWrite                                // DBG_CBH
+// range      0x3013 0x3013 1 ReadWrite                                // DBG_CBL
+// range      0x3014 0x3014 1 ReadWrite                                // DBG_CCH
+// range      0x3015 0x3015 1 ReadWrite                                // DBG_CCL
+range      0x3016 0x3016 1 Read                                        // DBG_FH
+range      0x3017 0x3017 1 Read                                        // DBG_FL
+// range      0x3018 0x3018 1 ReadWrite                                // DBG_CAX
+// range      0x3019 0x3019 1 ReadWrite                                // DBG_CBX
+// range      0x301A 0x301A 1 ReadWrite                                // DBG_CCX
+range      0x301B 0x301B 1 Read                                        // DBG_FX
+// range      0x301C 0x301C 1 ReadWrite                                // DBG_C
+// range      0x301D 0x301D 1 ReadWrite                                // DBG_T
+range      0x301E 0x301E 1 Read                                        // DBG_S
+range      0x301F 0x301F 1 Read                                        // DBG_CNT
+
+// Memory (NVM)
+// range      0x3020 0x3020 1 ReadWrite                                // NVM_FCLKDIV
+range      0x3021 0x3021 1 Read                                        // NVM_FSEC
+// range      0x3022 0x3022 1 ReadWrite                                // NVM_FCCOBIX
+reserved   0x3023 0x3023
+// range      0x3024 0x3024 1 ReadWrite                                // NVM_FCNFG
+// range      0x3025 0x3025 1 ReadWrite                                // NVM_FERCNFG
+// range      0x3026 0x3026 1 ReadWrite                                // NVM_FSTAT
+// range      0x3027 0x3027 1 ReadWrite                                // NVM_FERSTAT
+// range      0x3028 0x3028 1 ReadWrite                                // NVM_FPROT
+// range      0x3029 0x3029 1 ReadWrite                                // NVM_EEPROT
+// range      0x302A 0x302A 1 ReadWrite                                // NVM_FCCOBHI
+// range      0x302B 0x302B 1 ReadWrite                                // NVM_FCCOBLO
+range      0x302C 0x302C 1 Read                                        // NVM_FOPT
+reserved   0x302D 0x302F
+
+// Watchdog timer (WDOG)
+// range      0x3030 0x3030 1 ReadWrite                                // WDOG_CS1
+// range      0x3031 0x3031 1 ReadWrite                                // WDOG_CS2
+range      0x3032 0x3032 1 Read                                        // WDOG_CNTH
+range      0x3033 0x3033 1 Read                                        // WDOG_CNTL
+// range      0x3034 0x3034 1 ReadWrite                                // WDOG_TOVALH
+// range      0x3035 0x3035 1 ReadWrite                                // WDOG_TOVALL
+// range      0x3036 0x3036 1 ReadWrite                                // WDOG_WINH
+// range      0x3037 0x3037 1 ReadWrite                                // WDOG_WINL
+
+// Clock management (ICS)
+// range      0x3038 0x3038 1 ReadWrite                                // ICS_C1
+// range      0x3039 0x3039 1 ReadWrite                                // ICS_C2
+// range      0x303A 0x303A 1 ReadWrite                                // ICS_C3
+// range      0x303B 0x303B 1 ReadWrite                                // ICS_C4
+range      0x303C 0x303C 1 Read                                        // ICS_S
+reserved   0x303D 0x303D
+// range      0x303E 0x303E 1 ReadWrite                                // ICS_OSCSC
+reserved   0x303F 0x303F
+
+// Power management (PMC)
+// range      0x3040 0x3040 1 ReadWrite                                // PMC_SPMSC1
+// range      0x3041 0x3041 1 ReadWrite                                // PMC_SPMSC2
+reserved   0x3042 0x3049
+
+// System control (SYS)
+range      0x304A 0x304A 1 Read                                        // SYS_ILLAH
+range      0x304B 0x304B 1 Read                                        // SYS_ILLAL
+reserved   0x304C 0x304F
+
+// Interrupt (IPC)
+// range      0x3050 0x3050 1 ReadWrite                                // IPC_ILRS0
+// range      0x3051 0x3051 1 ReadWrite                                // IPC_ILRS1
+// range      0x3052 0x3052 1 ReadWrite                                // IPC_ILRS2
+// range      0x3053 0x3053 1 ReadWrite                                // IPC_ILRS3
+// range      0x3054 0x3054 1 ReadWrite                                // IPC_ILRS4
+// range      0x3055 0x3055 1 ReadWrite                                // IPC_ILRS5
+// range      0x3056 0x3056 1 ReadWrite                                // IPC_ILRS6
+// range      0x3057 0x3057 1 ReadWrite                                // IPC_ILRS7
+// range      0x3058 0x3058 1 ReadWrite                                // IPC_ILRS8
+// range      0x3059 0x3059 1 ReadWrite                                // IPC_ILRS9
+reserved   0x305A 0x305F
+
+// Cyclic Redundancy Check (CRC) Registers
+// range      0x3060 0x3060 1 ReadWrite                                // CRC_D0
+// range      0x3061 0x3061 1 ReadWrite                                // CRC_D1
+// range      0x3062 0x3062 1 ReadWrite                                // CRC_D2
+// range      0x3063 0x3063 1 ReadWrite                                // CRC_D3
+// range      0x3064 0x3064 1 ReadWrite                                // CRC_P0
+// range      0x3065 0x3065 1 ReadWrite                                // CRC_P1
+// range      0x3066 0x3066 1 ReadWrite                                // CRC_P2
+// range      0x3067 0x3067 1 ReadWrite                                // CRC_P3
+// range      0x3068 0x3068 1 ReadWrite                                // CRC_CTRL
+reserved   0x3069 0x3069
+
+// Real-time counter (RTC)
+// range      0x306A 0x306A 1 ReadWrite                                // RTC_SC1
+// range      0x306B 0x306B 1 ReadWrite                                // RTC_SC2
+// range      0x306C 0x306C 1 ReadWrite                                // RTC_MODH
+// range      0x306D 0x306D 1 ReadWrite                                // RTC_MODL
+range      0x306E 0x306E 1 Read                                        // RTC_CNTH
+range      0x306F 0x306F 1 Read                                        // RTC_CNTL
+
+// Inter-Integrated Circuit (I2C)
+// range      0x3070 0x3070 1 ReadWrite                                // I2C_A1
+// range      0x3071 0x3071 1 ReadWrite                                // I2C_F
+// range      0x3072 0x3072 1 ReadWrite                                // I2C_C1
+// range      0x3073 0x3073 1 ReadWrite                                // I2C_S
+// range      0x3074 0x3074 1 ReadWrite                                // I2C_D
+// range      0x3075 0x3075 1 ReadWrite                                // I2C_C2
+// range      0x3076 0x3076 1 ReadWrite                                // I2C_FLT
+// range      0x3077 0x3077 1 ReadWrite                                // I2C_RA
+// range      0x3078 0x3078 1 ReadWrite                                // I2C_SMB
+// range      0x3079 0x3079 1 ReadWrite                                // I2C_A2
+// range      0x307A 0x307A 1 ReadWrite                                // I2C_SLTH
+// range      0x307B 0x307B 1 ReadWrite                                // I2C_SLTL
+
+// Keyboard interrupts (KBI0)
+// range      0x307C 0x307C 1 ReadWrite                                // KBI0_PE
+// range      0x307D 0x307D 1 ReadWrite                                // KBI0_ES
+
+// Keyboard interrupts (KBI1)
+// range      0x307E 0x307E 1 ReadWrite                                // KBI1_PE
+// range      0x307F 0x307F 1 ReadWrite                                // KBI1_ES
+
+// Serial communications interface (SCI0)
+// range      0x3080 0x3080 1 ReadWrite                                // SCI0_BDH
+// range      0x3081 0x3081 1 ReadWrite                                // SCI0_BDL
+// range      0x3082 0x3082 1 ReadWrite                                // SCI0_C1
+// range      0x3083 0x3083 1 ReadWrite                                // SCI0_C2
+range      0x3084 0x3084 1 Read                                        // SCI0_S1
+// range      0x3085 0x3085 1 ReadWrite                                // SCI0_S2
+// range      0x3086 0x3086 1 ReadWrite                                // SCI0_C3
+// range      0x3087 0x3087 1 ReadWrite                                // SCI0_D
+
+// Serial communications interface (SCI1)
+// range      0x3088 0x3088 1 ReadWrite                                // SCI1_BDH
+// range      0x3089 0x3089 1 ReadWrite                                // SCI1_BDL
+// range      0x308A 0x308A 1 ReadWrite                                // SCI1_C1
+// range      0x308B 0x308B 1 ReadWrite                                // SCI1_C2
+range      0x308C 0x308C 1 Read                                        // SCI1_S1
+// range      0x308D 0x308D 1 ReadWrite                                // SCI1_S2
+// range      0x308E 0x308E 1 ReadWrite                                // SCI1_C3
+// range      0x308F 0x308F 1 ReadWrite                                // SCI1_D
+
+// Serial communications interface (SCI2)
+// range      0x3090 0x3090 1 ReadWrite                                // SCI2_BDH
+// range      0x3091 0x3091 1 ReadWrite                                // SCI2_BDL
+// range      0x3092 0x3092 1 ReadWrite                                // SCI2_C1
+// range      0x3093 0x3093 1 ReadWrite                                // SCI2_C2
+range      0x3094 0x3094 1 Read                                        // SCI2_S1
+// range      0x3095 0x3095 1 ReadWrite                                // SCI2_S2
+// range      0x3096 0x3096 1 ReadWrite                                // SCI2_C3
+// range      0x3097 0x3097 1 ReadWrite                                // SCI2_D
+
+// Serial Peripheral Interface (SPI0)
+// range      0x3098 0x3098 1 ReadWrite                                // SPI0_C1
+// range      0x3099 0x3099 1 ReadWrite                                // SPI0_C2
+// range      0x309A 0x309A 1 ReadWrite                                // SPI0_BR
+range      0x309B 0x309B 1 Read                                        // SPI0_S
+reserved   0x309C 0x309C
+// range      0x309D 0x309D 1 ReadWrite                                // SPI0_D
+reserved   0x309E 0x309E
+// range      0x309F 0x309F 1 ReadWrite                                // SPI0_M
+
+// Serial Peripheral Interface (SPI1)
+// range      0x30A0 0x30A0 1 ReadWrite                                // SPI1_C1
+// range      0x30A1 0x30A1 1 ReadWrite                                // SPI1_C2
+// range      0x30A2 0x30A2 1 ReadWrite                                // SPI1_BR
+range      0x30A3 0x30A3 1 Read                                        // SPI1_S
+// range      0x30A4 0x30A4 1 ReadWrite                                // SPI1_DH
+// range      0x30A5 0x30A5 1 ReadWrite                                // SPI1_DL
+// range      0x30A6 0x30A6 1 ReadWrite                                // SPI1_MH
+// range      0x30A7 0x30A7 1 ReadWrite                                // SPI1_ML
+// range      0x30A8 0x30A8 1 ReadWrite                                // SPI1_C3
+// range      0x30A9 0x30A9 1 ReadWrite                                // SPI1_CI
+reserved   0x30AA 0x30AB
+
+// Analog-to-digital converter (ADC)
+// range      0x30AC 0x30AC 1 ReadWrite                                // ADC_APCTL1
+// range      0x30AD 0x30AD 1 ReadWrite                                // ADC_APCTL2
+reserved   0x30AE 0x30AE
+
+// Parallel input/output (PORT)
+// range      0x30AF 0x30AF 1 ReadWrite                                // PORT_HDRVE
+
+// Parallel input/output (PTA)
+// range      0x30B0 0x30B0 1 ReadWrite                                // PORT_PTAOE
+
+// Parallel input/output (PTB)
+// range      0x30B1 0x30B1 1 ReadWrite                                // PORT_PTBOE
+
+// Parallel input/output (PTC)
+// range      0x30B2 0x30B2 1 ReadWrite                                // PORT_PTCOE
+
+// Parallel input/output (PTD)
+// range      0x30B3 0x30B3 1 ReadWrite                                // PORT_PTDOE
+
+// Parallel input/output (PTE)
+// range      0x30B4 0x30B4 1 ReadWrite                                // PORT_PTEOE
+
+// Parallel input/output (PTF)
+// range      0x30B5 0x30B5 1 ReadWrite                                // PORT_PTFOE
+
+// Parallel input/output (PTG)
+// range      0x30B6 0x30B6 1 ReadWrite                                // PORT_PTGOE
+
+// Parallel input/output (PTH)
+// range      0x30B7 0x30B7 1 ReadWrite                                // PORT_PTHOE
+
+// Parallel input/output (PTA)
+// range      0x30B8 0x30B8 1 ReadWrite                                // PORT_PTAIE
+
+// Parallel input/output (PTB)
+// range      0x30B9 0x30B9 1 ReadWrite                                // PORT_PTBIE
+
+// Parallel input/output (PTC)
+// range      0x30BA 0x30BA 1 ReadWrite                                // PORT_PTCIE
+
+// Parallel input/output (PTD)
+// range      0x30BB 0x30BB 1 ReadWrite                                // PORT_PTDIE
+
+// Parallel input/output (PTE)
+// range      0x30BC 0x30BC 1 ReadWrite                                // PORT_PTEIE
+
+// Parallel input/output (PTF)
+// range      0x30BD 0x30BD 1 ReadWrite                                // PORT_PTFIE
+
+// Parallel input/output (PTG)
+// range      0x30BE 0x30BE 1 ReadWrite                                // PORT_PTGIE
+
+// Parallel input/output (PTH)
+// range      0x30BF 0x30BF 1 ReadWrite                                // PORT_PTHIE
+
+// FlexTimer Module (FTM2)
+// range      0x30C0 0x30C0 1 ReadWrite                                // FTM2_SC
+// range      0x30C1 0x30C1 1 ReadWrite                                // FTM2_CNTH
+// range      0x30C2 0x30C2 1 ReadWrite                                // FTM2_CNTL
+// range      0x30C3 0x30C3 1 ReadWrite                                // FTM2_MODH
+// range      0x30C4 0x30C4 1 ReadWrite                                // FTM2_MODL
+// range      0x30C5 0x30C5 1 ReadWrite                                // FTM2_C0SC
+// range      0x30C6 0x30C6 1 ReadWrite                                // FTM2_C0VH
+// range      0x30C7 0x30C7 1 ReadWrite                                // FTM2_C0VL
+// range      0x30C8 0x30C8 1 ReadWrite                                // FTM2_C1SC
+// range      0x30C9 0x30C9 1 ReadWrite                                // FTM2_C1VH
+// range      0x30CA 0x30CA 1 ReadWrite                                // FTM2_C1VL
+// range      0x30CB 0x30CB 1 ReadWrite                                // FTM2_C2SC
+// range      0x30CC 0x30CC 1 ReadWrite                                // FTM2_C2VH
+// range      0x30CD 0x30CD 1 ReadWrite                                // FTM2_C2VL
+// range      0x30CE 0x30CE 1 ReadWrite                                // FTM2_C3SC
+// range      0x30CF 0x30CF 1 ReadWrite                                // FTM2_C3VH
+// range      0x30D0 0x30D0 1 ReadWrite                                // FTM2_C3VL
+// range      0x30D1 0x30D1 1 ReadWrite                                // FTM2_C4SC
+// range      0x30D2 0x30D2 1 ReadWrite                                // FTM2_C4VH
+// range      0x30D3 0x30D3 1 ReadWrite                                // FTM2_C4VL
+// range      0x30D4 0x30D4 1 ReadWrite                                // FTM2_C5SC
+// range      0x30D5 0x30D5 1 ReadWrite                                // FTM2_C5VH
+// range      0x30D6 0x30D6 1 ReadWrite                                // FTM2_C5VL
+// range      0x30D7 0x30D7 1 ReadWrite                                // FTM2_CNTINH
+// range      0x30D8 0x30D8 1 ReadWrite                                // FTM2_CNTINL
+range      0x30D9 0x30D9 1 Read                                        // FTM2_STATUS
+// range      0x30DA 0x30DA 1 ReadWrite                                // FTM2_MODE
+// range      0x30DB 0x30DB 1 ReadWrite                                // FTM2_SYNC
+// range      0x30DC 0x30DC 1 ReadWrite                                // FTM2_OUTINIT
+// range      0x30DD 0x30DD 1 ReadWrite                                // FTM2_OUTMASK
+// range      0x30DE 0x30DE 1 ReadWrite                                // FTM2_COMBINE0
+// range      0x30DF 0x30DF 1 ReadWrite                                // FTM2_COMBINE1
+// range      0x30E0 0x30E0 1 ReadWrite                                // FTM2_COMBINE2
+reserved   0x30E1 0x30E1
+// range      0x30E2 0x30E2 1 ReadWrite                                // FTM2_DEADTIME
+// range      0x30E3 0x30E3 1 ReadWrite                                // FTM2_EXTTRIG
+// range      0x30E4 0x30E4 1 ReadWrite                                // FTM2_POL
+// range      0x30E5 0x30E5 1 ReadWrite                                // FTM2_FMS
+// range      0x30E6 0x30E6 1 ReadWrite                                // FTM2_FILTER0
+// range      0x30E7 0x30E7 1 ReadWrite                                // FTM2_FILTER1
+// range      0x30E8 0x30E8 1 ReadWrite                                // FTM2_FLTFILTER
+// range      0x30E9 0x30E9 1 ReadWrite                                // FTM2_FLTCTRL
+reserved   0x30EA 0x30EB
+
+// Parallel input/output (PORT)
+// range      0x30EC 0x30EC 1 ReadWrite                                // PORT_IOFLT0
+// range      0x30ED 0x30ED 1 ReadWrite                                // PORT_IOFLT1
+// range      0x30EE 0x30EE 1 ReadWrite                                // PORT_IOFLT2
+// range      0x30EF 0x30EF 1 ReadWrite                                // PORT_FCLKDIV
+
+// Parallel input/output (PTA)
+// range      0x30F0 0x30F0 1 ReadWrite                                // PORT_PTAPE
+
+// Parallel input/output (PTB)
+// range      0x30F1 0x30F1 1 ReadWrite                                // PORT_PTBPE
+
+// Parallel input/output (PTC)
+// range      0x30F2 0x30F2 1 ReadWrite                                // PORT_PTCPE
+
+// Parallel input/output (PTD)
+// range      0x30F3 0x30F3 1 ReadWrite                                // PORT_PTDPE
+
+// Parallel input/output (PTE)
+// range      0x30F4 0x30F4 1 ReadWrite                                // PORT_PTEPE
+
+// Parallel input/output (PTF)
+// range      0x30F5 0x30F5 1 ReadWrite                                // PORT_PTFPE
+
+// Parallel input/output (PTG)
+// range      0x30F6 0x30F6 1 ReadWrite                                // PORT_PTGPE
+
+// Parallel input/output (PTH)
+// range      0x30F7 0x30F7 1 ReadWrite                                // PORT_PTHPE
+
+// System control (SYS)
+range      0x30F8 0x30F8 1 Read                                        // SYS_UUID1
+range      0x30F9 0x30F9 1 Read                                        // SYS_UUID2
+range      0x30FA 0x30FA 1 Read                                        // SYS_UUID3
+range      0x30FB 0x30FB 1 Read                                        // SYS_UUID4
+range      0x30FC 0x30FC 1 Read                                        // SYS_UUID5
+range      0x30FD 0x30FD 1 Read                                        // SYS_UUID6
+range      0x30FE 0x30FE 1 Read                                        // SYS_UUID7
+range      0x30FF 0x30FF 1 Read                                        // SYS_UUID8
+
+//EEPROM
+range      0x3100 0x31FF 1 ReadWrite
+
+// FLASH
+range      0x3200 0xFFFF 1 ReadWrite
+
+// All reserved ranges read back 0xBABA... 
+reservedchar 0xBA
