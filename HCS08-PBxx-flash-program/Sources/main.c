@@ -194,7 +194,7 @@ const FlashProgramHeader_t gFlashProgramHeader = {
      /* loadAddress   */  (uint16_t)&headerPtr,  // load address of image
      /* entry         */  asm_entry,             // entry point for code
      /* capabilities  */  CAP_BLANK_CHECK_RANGE|CAP_ERASE_RANGE|CAP_ERASE_BLOCK|
-                          CAP_PROGRAM_RANGE|CAP_VERIFY_RANGE|
+                          CAP_PROGRAM_RANGE| //CAP_VERIFY_RANGE|
                           CAP_DATA_FIXED,
      /* clockFactor   */  0,
      /* flashData     */  &gFlashData,
